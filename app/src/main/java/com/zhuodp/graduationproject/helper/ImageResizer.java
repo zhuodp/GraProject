@@ -1,5 +1,4 @@
-package com.example.a74021.project1.helper;
-
+package com.zhuodp.graduationproject.helper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

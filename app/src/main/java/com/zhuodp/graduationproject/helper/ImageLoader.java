@@ -1,4 +1,4 @@
-package com.example.a74021.project1.helper;
+package com.zhuodp.graduationproject.helper;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,8 +15,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
 
-import com.example.a74021.project1.DiskLruCaChe.DiskLruCache;
-import com.example.a74021.project1.R;
+import com.zhuodp.graduationproject.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -30,7 +29,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;

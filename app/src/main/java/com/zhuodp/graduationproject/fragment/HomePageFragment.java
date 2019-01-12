@@ -47,7 +47,6 @@ public class HomePageFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initTabFragments();
-
         mHomePageTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -67,10 +66,9 @@ public class HomePageFragment extends Fragment {
         mTablayoutFragmentPagerAdapter = new TablayoutFragmentPagerAdapter(getActivity().getSupportFragmentManager(),mTabsFragments);
         mHomePageTabViewPager.setAdapter(mTablayoutFragmentPagerAdapter);
         mHomePageTabLayout.setupWithViewPager(mHomePageTabViewPager);
+        //必须在setupWithViewPager之后添加标签，否则标签内容会被内部方法清除掉
+        addTabs();
 
-        mHomePageTabLayout.getTabAt(0).setText("热门");
-        mHomePageTabLayout.getTabAt(1).setText("剧集");
-        mHomePageTabLayout.getTabAt(2).setText("电影");
     }
 
     private void initTabFragments(){
@@ -78,6 +76,12 @@ public class HomePageFragment extends Fragment {
         mTabsFragments.add(new CollectionFragment());
         mTabsFragments.add(new HotPiontFragment());
         mTabsFragments.add(new MovieFragment());
+    }
+
+    private void addTabs(){
+        mHomePageTabLayout.getTabAt(0).setText("热门");
+        mHomePageTabLayout.getTabAt(1).setText("剧集");
+        mHomePageTabLayout.getTabAt(2).setText("电影");
     }
 
 

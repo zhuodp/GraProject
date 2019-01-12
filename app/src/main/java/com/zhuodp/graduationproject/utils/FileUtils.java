@@ -1,5 +1,4 @@
-package com.example.a74021.project1.Utils;
-
+package com.zhuodp.graduationproject.utils;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
