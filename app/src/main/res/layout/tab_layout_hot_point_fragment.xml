@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="hahah2"/>
+        android:layout_height="180dp">
+
+        <com.zhuodp.graduationproject.utils.LoopViewPager
+            android:id="@+id/home_page_loop_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+        </com.zhuodp.graduationproject.utils.LoopViewPager>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
