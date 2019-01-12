@@ -1,8 +1,10 @@
-package com.zhuodp.graduationproject;
+package com.zhuodp.graduationproject.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
+import com.zhuodp.graduationproject.fragment.HomePageFragment;
+import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +27,10 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private HomePageFragment mHomePageFragment;
+    private SettingPageFragment mSettingPageFragment;
+    private DiscoverPageFragment mDiscoverPageFragment;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -37,6 +49,15 @@ public class MainActivity extends AppCompatActivity
                 .setAction("Action", null).show();
     }
 
+    @BindView(R.id.btn_fragment_home_page)
+    Button mBtnFragmentHomePage;
+
+    @BindView(R.id.btn_fragment_discover_page)
+    Button mBtnFragmentDiscoverPage;
+
+    @BindView(R.id.btn_fragment_settings_page)
+    Button mBtnFragmentSettingsPage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +65,80 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
+
     }
+
+
+    @OnClick(R.id.btn_fragment_home_page)
+    public void onSwitchToHomePage(){
+        initFragments(0);
+    }
+
+    @OnClick(R.id.btn_fragment_discover_page)
+    public void onSwitchToDisCoverPage(){
+        initFragments(1);
+    }
+
+    @OnClick(R.id.btn_fragment_settings_page)
+    public void onSwitchToSettingsPage(){
+        initFragments(2);
+    }
+
+
+    private void initFragments(int btnId){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        hideFragment(transaction);
+        switch (btnId){
+            case 0:
+                if (mHomePageFragment==null){
+                    mHomePageFragment = new HomePageFragment();
+                    transaction.add(R.id.content_main_for_each_fragment,mHomePageFragment);
+                }else{
+                    transaction.show(mHomePageFragment);
+                }
+                break;
+            case 1:
+                if (mDiscoverPageFragment==null){
+                    mDiscoverPageFragment = new DiscoverPageFragment();
+                    transaction.add(R.id.content_main_for_each_fragment,mDiscoverPageFragment);
+                }else{
+                    transaction.show(mDiscoverPageFragment);
+                }
+                break;
+            case 2:
+                if (mSettingPageFragment==null){
+                    mSettingPageFragment = new SettingPageFragment();
+                    transaction.add(R.id.content_main_for_each_fragment,mSettingPageFragment);
+                }else{
+                    transaction.show(mSettingPageFragment);
+                }
+                break;
+            default:
+                break;
+        }
+        //提交事务
+        transaction.commit();
+    }
+
+    private void hideFragment(FragmentTransaction transaction){
+        if (mHomePageFragment!=null){
+            transaction.hide(mHomePageFragment);
+        }
+        if (mDiscoverPageFragment!=null){
+            transaction.hide(mDiscoverPageFragment);
+        }
+        if(mSettingPageFragment!=null){
+            transaction.hide(mSettingPageFragment);
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {
