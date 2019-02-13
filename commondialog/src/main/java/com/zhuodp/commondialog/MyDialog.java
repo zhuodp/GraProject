@@ -49,7 +49,6 @@ public class MyDialog extends BaseDialog {
     }
 
 
-
     public MyDialog(Context context) {
         super(context);
         initData();

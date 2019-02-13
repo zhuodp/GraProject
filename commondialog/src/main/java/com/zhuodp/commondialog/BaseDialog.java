@@ -22,7 +22,6 @@ public abstract class BaseDialog extends Dialog implements View.OnClickListener 
     public abstract void onDialogClick(View v);
 
     public void showToast(String text){
-
     }
 
     @Override
