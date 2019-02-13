@@ -1,6 +1,8 @@
 package com.zhuodp.graduationproject.fragment.hot_tab_fragment;
 
+import android.icu.util.Measure;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.utils.LoopViewPager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,12 +27,12 @@ import butterknife.ButterKnife;
 public class HotPiontFragment extends Fragment {
 
     private int[] mBannerPics;
-
+/*
     @BindView(R.id.home_page_loop_view_pager)
     LoopViewPager mLoopViewPager;
 
     @BindView(R.id.home_page_loop_view_pager_image_view)
-    ImageView mImageViewBanner;
+    ImageView mImageViewBanner;*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -34,11 +40,10 @@ public class HotPiontFragment extends Fragment {
         ButterKnife.bind(this,view);
         return view;
     }
-
+    /*
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         mBannerPics[0] = R.drawable.ic_menu_camera;
         mBannerPics[1] = R.drawable.ic_menu_gallery;
         mBannerPics[2] = R.drawable.ic_menu_manage;
@@ -60,6 +65,7 @@ public class HotPiontFragment extends Fragment {
         });
         mLoopViewPager.autoLoop(true);
     }
+
 
     private class MyAdapter extends PagerAdapter {
 
@@ -85,5 +91,5 @@ public class HotPiontFragment extends Fragment {
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View)object);
         }
-    }
+    }*/
 }
