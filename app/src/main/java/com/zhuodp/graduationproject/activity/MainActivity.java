@@ -69,19 +69,15 @@ public class MainActivity extends AppBaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         //默认显示第一个fragment
         initFragments(0);
-
-        //初始化Bomb
-        Bmob.initialize(this,"badb1f749a06652383ab72d20a5e2eff");
-
 
         Person p2 = new Person();
         p2.setName("lucky");
