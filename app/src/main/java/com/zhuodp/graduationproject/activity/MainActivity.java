@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.bmob.Person;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
@@ -24,8 +27,11 @@ import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private HomePageFragment mHomePageFragment;
@@ -70,7 +76,26 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //默认显示第一个fragment
+        initFragments(0);
 
+        //初始化Bomb
+        Bmob.initialize(this,"badb1f749a06652383ab72d20a5e2eff");
+
+
+        Person p2 = new Person();
+        p2.setName("lucky");
+        p2.setAddress("北京海淀");
+        p2.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId,BmobException e) {
+                if(e==null){
+                    Log.e("zhuodp", "添加数据成功，返回objectId为："+objectId);
+                }else{
+                    Log.e("zhuodp","创建数据失败：" + e.getMessage());
+                }
+            }
+        });
     }
 
 
@@ -126,6 +151,7 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
+    //隐藏fragment
     private void hideFragment(FragmentTransaction transaction){
         if (mHomePageFragment!=null){
             transaction.hide(mHomePageFragment);

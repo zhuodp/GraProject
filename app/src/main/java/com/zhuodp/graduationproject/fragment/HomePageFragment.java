@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.fragment.hot_tab_fragment.CollectionFragment;
-import com.zhuodp.graduationproject.fragment.hot_tab_fragment.HotPiontFragment;
-import com.zhuodp.graduationproject.fragment.hot_tab_fragment.MovieFragment;
+import com.zhuodp.graduationproject.fragment.tab_fragment.CollectionFragment;
+import com.zhuodp.graduationproject.fragment.tab_fragment.HotPiontFragment;
+import com.zhuodp.graduationproject.fragment.tab_fragment.MovieFragment;
 
 import java.util.ArrayList;
 import java.util.List;
