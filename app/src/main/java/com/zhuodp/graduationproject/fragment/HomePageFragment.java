@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.fragment.tab_fragment.CollectionFragment;
@@ -21,7 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomePageFragment extends Fragment {
+public class HomePageFragment extends AppBaseFragment {
 
     private List<Fragment> mTabsFragments;
 
@@ -38,7 +39,6 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.fragment_home_page,container,false);
-        ButterKnife.bind(this,view);
         return view;
     }
 

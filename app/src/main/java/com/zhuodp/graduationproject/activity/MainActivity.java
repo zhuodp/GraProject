@@ -40,6 +40,7 @@ public class MainActivity extends AppBaseActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.fab)
     FloatingActionButton fab;
 

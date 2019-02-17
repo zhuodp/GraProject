@@ -6,17 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 
 import butterknife.ButterKnife;
 
 
-public class HotPiontFragment extends Fragment {
+public class HotPiontFragment extends AppBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.tab_layout_hot_point_fragment,container,false);
-        ButterKnife.bind(this,view);
         return view;
     }
 

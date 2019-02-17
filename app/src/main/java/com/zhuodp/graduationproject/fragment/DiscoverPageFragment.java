@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 
-public class DiscoverPageFragment extends Fragment {
+public class DiscoverPageFragment extends AppBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle saveInstanceState){
