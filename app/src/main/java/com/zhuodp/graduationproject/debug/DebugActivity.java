@@ -18,7 +18,7 @@ public class DebugActivity extends AppBaseActivity {
 
     @OnClick(R.id.btn_debug_activity)
     public void onTestButtonClick(){
-        Intent intent = new Intent(DebugActivity.this,)
+        Intent intent = new Intent(DebugActivity.this,DebugActivity.class);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

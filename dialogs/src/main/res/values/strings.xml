@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CommonDialog</string>
+    <string name="dialog_style_1_loading_now">正在搜索中，请耐心等待 也可能网络不稳定，导致加载时间过长</string>
+    <string name="dialog_style_2_result_not_found">可能照片模糊，角都不当，或题型暂不支持\n目前初高中理科效果最佳</string>
+    <string name="dialog_style_3_net_out_of_time">可能网络连接有问题\n请确认网络连接是否正常</string>
+</resources>

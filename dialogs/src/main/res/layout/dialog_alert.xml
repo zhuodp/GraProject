@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="@dimen/app_15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="@dimen/app_335dp"
+        android:layout_height="@dimen/app_165dp">
+
+        <com.youdao.lib.widget.RoundAngleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/dialog_style_1_background"
+            app:radius="@dimen/app_15dp" />
+
+            <TextView
+                android:id="@+id/alert_dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_20dp"
+                android:layout_marginTop="@dimen/app_30dp"
+                android:text="正在搜索中，确定返回？"
+                android:textColor="@color/color_36404A"
+                android:textSize="@dimen/app_font_size_20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/alert_dialog_content"
+                android:layout_width="@dimen/app_283dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/alert_dialog_title"
+                android:layout_marginLeft="@dimen/app_20dp"
+                android:layout_marginTop="@dimen/app_9dp"
+                android:text="@string/dialog_style_1_loading_now"
+                android:textColor="@color/color_36404A"
+                android:textSize="@dimen/app_font_size_14" />
+
+            <Button
+                android:onClick="onClick4PosButton"
+                android:id="@+id/alert_dialog_positive_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_20dp"
+                android:layout_marginBottom="@dimen/app_20dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_transparent"
+                android:text="确定返回"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/color_36404A"
+                android:textSize="@dimen/app_font_size_14" />
+
+            <Button
+                android:onClick="onClick4NegButton"
+                android:id="@+id/alert_dialog_negative_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/app_20dp"
+                android:layout_marginBottom="@dimen/app_20dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_transparent"
+                android:text="取消"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/app_font_size_14" />
+    </RelativeLayout>
+
+</RelativeLayout>

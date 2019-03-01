@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_FFFFFF">
+
+        <TextView
+            android:id="@+id/tv_output_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_200dp"
+            android:layout_marginLeft="@dimen/app_30dp"
+            android:text="题目导出"
+            android:textColor="@color/color_36404A"
+            android:textStyle="bold"
+            android:textSize="@dimen/app_font_size_22"
+            />
+
+        <TextView
+            android:id="@+id/tv_output_dialog_file_type"
+            android:layout_below="@id/tv_output_dialog_title"
+            android:layout_width="@dimen/app_32dp"
+            android:layout_height="@dimen/app_18dp"
+            android:layout_marginTop="@dimen/app_30dp"
+            android:layout_marginLeft="@dimen/app_30dp"
+            android:textColor="@color/color_848A90"
+            android:textSize="@dimen/app_font_size_15"
+            android:gravity="center"
+            android:background="@drawable/ic_output_dialog_file_type"/>
+
+        <TextView
+            android:id="@+id/tv_output_dialog_file_name"
+            android:layout_width="@dimen/app_230dp"
+            android:layout_height="wrap_content"
+            android:text="文件简写------------------------------------"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/color_AAB0B6"
+            android:textSize="@dimen/app_font_size_15"
+            android:layout_alignBottom="@id/tv_output_dialog_file_type"
+            android:layout_marginLeft="@dimen/app_65dp"/>
+
+
+        <Button
+            android:id="@+id/btn_output_dialog_qq"
+            android:layout_toLeftOf="@id/btn_output_dialog_wechat"
+            android:layout_alignBottom="@id/btn_output_dialog_wechat"
+            android:layout_marginRight="@dimen/app_80dp"
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="@dimen/app_45dp"
+            android:onClick="onPlatformChoosed"
+            android:background="@drawable/ic_output_dialog_qq" />
+
+        <Button
+            android:id="@+id/btn_output_dialog_wechat"
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="@dimen/app_45dp"
+            android:layout_below="@id/tv_output_dialog_file_type"
+            android:layout_marginTop="@dimen/app_60dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="onPlatformChoosed"
+            android:background="@drawable/ic_output_dialog_wechat" />
+
+        <Button
+            android:id="@+id/btn_output_dialog_email"
+            android:layout_toRightOf="@id/btn_output_dialog_wechat"
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="@dimen/app_45dp"
+            android:layout_marginLeft="@dimen/app_80dp"
+            android:onClick="onPlatformChoosed"
+            android:layout_alignBottom="@id/btn_output_dialog_wechat"
+            android:background="@drawable/ic_output_dialog_email" />
+
+
+        <TextView
+            android:text="QQ"
+            android:layout_below="@id/btn_output_dialog_qq"
+            android:layout_alignLeft="@id/btn_output_dialog_qq"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/app_15dp"
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_font_size_12"
+            android:textColor="@color/color_36404A"
+            />
+
+        <TextView
+            android:text="微信"
+            android:layout_below="@id/btn_output_dialog_wechat"
+            android:layout_alignLeft="@id/btn_output_dialog_wechat"
+            android:layout_marginTop="@dimen/app_15dp"
+            android:textSize="@dimen/app_font_size_12"
+            android:gravity="center"
+            android:textColor="@color/color_36404A"
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="@dimen/app_45dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_output_dialog_email"
+            android:layout_alignLeft="@id/btn_output_dialog_email"
+            android:layout_marginTop="@dimen/app_15dp"
+            android:gravity="center"
+            android:text="邮箱"
+            android:textColor="@color/color_36404A"
+            android:textSize="@dimen/app_font_size_12" />
+
+
+        <Button
+            android:id="@+id/btn_output_dialog_cancel"
+            android:layout_width="@dimen/app_300dp"
+            android:layout_height="@dimen/app_48dp"
+            android:background="@drawable/ic_blue_radius_24_bg"
+            android:text="取消"
+            android:onClick="onCanceled"
+            android:textSize="@dimen/app_font_size_15"
+            android:textColor="@color/color_FFFFFF"
+            android:layout_below="@id/btn_output_dialog_wechat"
+            android:layout_marginTop="@dimen/app_100dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

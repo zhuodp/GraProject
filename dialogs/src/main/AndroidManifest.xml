@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.youdao.lib.dialogs" >
+    <application>
+        <activity android:name=".activity.AlertDialogActivity"
+            android:theme="@style/style_dialog_activity"/>
+
+        <activity android:name=".activity.ExportDialogActivity"
+            android:theme="@style/style_dialog_activity"
+            />
+
+        <activity android:name=".activity.DataSetttingDialogActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/style_dialog_activity"/>
+
+        <activity android:name=".activity.GradeChooseDialogActivity"
+            android:theme="@style/style_dialog_activity"/>
+
+        <activity android:name=".activity.CameraTipDialog"
+            android:theme="@style/style_dialog_activity"/>
+
+        <activity android:name=".activity.FeedBackDialog"
+            android:theme="@style/style_dialog_activity"/>
+
+
+    </application>
+
+
+</manifest>

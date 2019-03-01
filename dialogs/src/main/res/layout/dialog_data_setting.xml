@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="@dimen/app_315dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_white_radius_17_bg"
+        android:layout_alignParentTop="true">
+
+
+        <EditText
+            android:id="@+id/data_setting_dialog_edit_text"
+            android:background="@drawable/dialog_output_edit_text_style"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_60dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:layout_marginRight="@dimen/app_20dp"
+            android:gravity="center"
+            android:hint="请输入邮箱地址"
+            android:textAlignment="center"
+            android:textColor="@color/color_848A90"
+            android:textSize="@dimen/app_font_size_15"
+            android:textCursorDrawable="@drawable/dialog_output_edit_text_cursor"/>
+
+        <TextView
+            android:background="@color/color_EBECED"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_1dp"
+            android:id="@+id/custom_dialog_email_decor_line"
+            android:layout_below="@id/data_setting_dialog_edit_text" />
+
+        <Button
+            android:id="@+id/data_setting_dialog_submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_60dp"
+            android:background="@color/color_transparent"
+            android:layout_below="@id/custom_dialog_email_decor_line"
+            android:layout_centerHorizontal="true"
+            android:text="发送"
+            android:onClick="onSubmit"
+            android:textStyle="bold"
+            android:textColor="@color/color_4371FF"
+            android:textSize="@dimen/app_font_size_16" />
+
+    </RelativeLayout>
+
+</LinearLayout>

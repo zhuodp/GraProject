@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="@dimen/app_302dp"
+    android:layout_height="@dimen/app_448dp"
+    android:background="@color/color_transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.youdao.lib.widget.RoundAngleImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_333dp"
+            app:radius="@dimen/app_20dp"
+            android:background="@drawable/pic_feedback_dialog_bg"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喜欢有道作业宝吗？"
+            android:textSize="@dimen/app_font_size_19"
+            android:textColor="@color/color_36404A"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/app_82dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喜欢就鼓励我们吧"
+            android:textSize="@dimen/app_font_size_15"
+            android:textColor="@color/color_848A90"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/app_114dp"
+            />
+
+        <Button
+            android:id="@+id/btn_feedback_dialog_good"
+            android:onClick="onGoodFeedBack"
+            android:layout_width="@dimen/app_180dp"
+            android:layout_height="@dimen/app_48dp"
+            android:text="给个好评"
+            android:textSize="@dimen/app_font_size_16"
+            android:textColor="@color/color_FFFFFF"
+            android:background="@drawable/ic_blue_radius_24_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/app_180dp"
+            />
+
+        <Button
+            android:id="@+id/btn_feedback_dialog_bad"
+            android:onClick="onBadFeedBack"
+            android:layout_width="@dimen/app_180dp"
+            android:layout_height="@dimen/app_48dp"
+            android:text="我要吐槽"
+            android:textSize="@dimen/app_font_size_16"
+            android:textColor="@color/color_4371FF"
+            android:background="@drawable/ic_blue_trans_8_radius_24"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btn_feedback_dialog_good"
+            android:layout_marginTop="@dimen/app_23dp"
+            />
+
+        <Button
+            android:layout_below="@id/btn_feedback_dialog_bad"
+            android:onClick="onCancel"
+            android:id="@+id/btn_feedback_dialog_cancel"
+            android:layout_width="@dimen/app_25dp"
+            android:layout_height="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_106dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_feedback_dialog_cancel"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_half_corners_radius_8_bg">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_44dp">
+
+        <Button
+            android:id="@+id/btn_user_info_page_positive"
+            android:layout_width="@dimen/app_80dp"
+            android:layout_height="44dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/app_10dp"
+            android:background="@color/color_transparent"
+            android:onClick="onSubmit"
+            android:text="确认"
+            android:textColor="@color/color_4371FF"
+            android:textSize="@dimen/app_font_size_17" />
+
+        <Button
+            android:id="@+id/btn_user_info_page_negative"
+            android:layout_width="@dimen/app_80dp"
+            android:layout_height="@dimen/app_44dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/app_10dp"
+            android:text="取消"
+            android:textSize="@dimen/app_font_size_17"
+            android:onClick="onCancel"
+            android:background="@color/color_transparent"
+            android:textColor="@color/color_36404A"/>
+
+        <TextView
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_1dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/user_info_grid_view_grade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_75dp"
+        android:gravity="center_horizontal"
+        android:numColumns="3"
+        android:verticalSpacing="@dimen/app_30dp"/>
+
+
+</RelativeLayout>

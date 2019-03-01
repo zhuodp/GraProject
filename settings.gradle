@@ -1,1 +1,1 @@
-include ':app', ':commondialog'
+include ':app',"dialogs"
