@@ -2,15 +2,28 @@ package com.zhuodp.graduationproject.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.adapter.SettingListAdapter;
+import com.zhuodp.graduationproject.entry.SettingItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 public class SettingPageFragment extends AppBaseFragment {
+
+    private List<SettingItem> mSettingItems = new ArrayList<SettingItem>();
+    private SettingListAdapter mSettingListAdapter;
+
+    @BindView(R.id.lv_fragment_setting)
+    ListView mSettingListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -20,5 +33,22 @@ public class SettingPageFragment extends AppBaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();//初始化设置列表数据
+        initSettings();
+    }
+
+
+    private void initData(){
+        mSettingItems.add(new SettingItem("使用帮助",R.drawable.ic_menu_camera));
+        mSettingItems.add(new SettingItem("关于应用",R.drawable.ic_menu_camera));
+        mSettingItems.add(new SettingItem("意见反馈",R.drawable.ic_menu_camera));
+        mSettingItems.add(new SettingItem("更多应用",R.drawable.ic_menu_camera));
+        mSettingItems.add(new SettingItem("其他设置",R.drawable.ic_menu_camera));
+
+    }
+
+    private void initSettings(){
+        mSettingListAdapter =new SettingListAdapter(getActivity(),mSettingItems);
+        mSettingListView.setAdapter(mSettingListAdapter);
     }
 }
