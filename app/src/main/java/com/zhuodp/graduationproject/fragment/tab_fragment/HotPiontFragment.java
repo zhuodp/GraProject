@@ -11,7 +11,7 @@ import com.zhuodp.graduationproject.R;
 
 import butterknife.ButterKnife;
 
-
+//TODO Banner实现
 public class HotPiontFragment extends AppBaseFragment {
 
     @Override

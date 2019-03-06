@@ -20,6 +20,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
+// TODO  1.设置页面UI优化   2.用户登陆部分的逻辑 （是否能通过bmob实现用户信息存储）
+
 public class SettingPageFragment extends AppBaseFragment {
 
     private List<SettingItem> mSettingItems = new ArrayList<SettingItem>();
