@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.youdao.lib.widget.RoundAngleImageView
+        <com.youdao.lib.dialogs.util.RoundAngleImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_333dp"
             app:radius="@dimen/app_20dp"
