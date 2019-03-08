@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<<<<<<< Updated upstream
-=======
+
         <ImageView
             android:layout_width="@dimen/app_25dp"
             android:layout_height="@dimen/app_25dp"
@@ -20,24 +19,15 @@
             android:layout_marginLeft="@dimen/app_5dp"
             />
 
->>>>>>> Stashed changes
         <TextView
             android:layout_width="wrap_content"
-<<<<<<< Updated upstream
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="热门影视"
-            android:textColor="#000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"/>
-=======
+
             android:layout_height="@dimen/app_25dp"
             android:text="近期热点"
             android:textSize="@dimen/app_font_size_15"
             android:layout_marginLeft="@dimen/app_35dp"
             android:gravity="center_vertical"/>
->>>>>>> Stashed changes
+
 
 
         <TextView

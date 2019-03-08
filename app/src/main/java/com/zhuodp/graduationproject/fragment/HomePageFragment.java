@@ -106,8 +106,8 @@ public class HomePageFragment extends AppBaseFragment {
 
     private void initTabFragments(){
         mTabsFragments = new ArrayList<Fragment>();
-        mTabsFragments.add(new CollectionFragment());
         mTabsFragments.add(new HotPiontFragment());
+        mTabsFragments.add(new CollectionFragment());
         mTabsFragments.add(new MovieFragment());
 
         mHomePageTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
