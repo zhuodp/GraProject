@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.fragment.tab_fragment;
+package com.zhuodp.graduationproject.fragment.tab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,9 @@ import android.widget.Toast;
 
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.helper.GlideImageLoader;
 
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //TODO Banner实现

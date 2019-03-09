@@ -1,7 +1,6 @@
-package com.zhuodp.graduationproject.fragment.tab_fragment;
+package com.zhuodp.graduationproject.fragment.tab;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.utils;
+package com.zhuodp.graduationproject.helper;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

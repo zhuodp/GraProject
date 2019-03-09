@@ -3,79 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
-
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <ImageView
-            android:layout_width="@dimen/app_25dp"
-            android:layout_height="@dimen/app_25dp"
-            android:background="@color/color_0D000000"
-            android:layout_marginLeft="@dimen/app_5dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-
-            android:layout_height="@dimen/app_25dp"
-            android:text="近期热点"
-            android:textSize="@dimen/app_font_size_15"
-            android:layout_marginLeft="@dimen/app_35dp"
-            android:gravity="center_vertical"/>
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/app_25dp"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/app_font_size_15"
-            android:text="更多热点"
-            android:layout_marginRight="@dimen/app_30dp"
-            android:gravity="center_vertical"
-            android:onClick="onClick4MoreHotPiont"/>
-
-        <ImageView
-            android:layout_width="@dimen/app_25dp"
-            android:layout_height="@dimen/app_25dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_shortcut_arrow_forward"
-            android:onClick="onClick4MoreHotPiont"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_150dp"
-            android:layout_marginTop="@dimen/app_30dp"
-            android:text="表格或者其他布局"/>
-
-
-        <ImageView
-            android:layout_width="@dimen/app_25dp"
-            android:layout_height="@dimen/app_25dp"
-            android:background="@color/color_0D000000"
-            android:layout_marginLeft="@dimen/app_5dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/app_25dp"
-            android:text="近期热点"
-            android:textSize="@dimen/app_font_size_15"
-            android:layout_marginLeft="@dimen/app_35dp"
-            android:gravity="center_vertical"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/lv_tab_more_hot_point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/area_tab_hot_point_hot_point"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="@dimen/app_25dp"
+                android:layout_height="@dimen/app_25dp"
+                android:background="@color/color_0D000000"
+                android:layout_marginLeft="@dimen/app_5dp"
+                />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/app_25dp"
+                android:text="近期热点"
+                android:textSize="@dimen/app_font_size_15"
+                android:layout_marginLeft="@dimen/app_35dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/lv_tab_more_hot_point"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
@@ -93,7 +50,108 @@
                 android:onClick="onClick4MoreHotPiont"
                 />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_150dp"
+                android:layout_marginTop="@dimen/app_30dp"
+                android:text="表格或者其他布局"/>
         </RelativeLayout>
 
+
+        <RelativeLayout
+        android:id="@+id/area_tab_hot_point_recommand"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="@dimen/app_25dp"
+            android:layout_height="@dimen/app_25dp"
+            android:background="@color/color_0D000000"
+            android:layout_marginLeft="@dimen/app_5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/app_25dp"
+            android:text="最近更新"
+            android:textSize="@dimen/app_font_size_15"
+            android:layout_marginLeft="@dimen/app_35dp"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/app_25dp"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/app_font_size_15"
+            android:text="更多音乐"
+            android:layout_marginRight="@dimen/app_30dp"
+            android:gravity="center_vertical"
+            android:onClick="onClick4MoreHotPiont"/>
+
+        <ImageView
+            android:layout_width="@dimen/app_25dp"
+            android:layout_height="@dimen/app_25dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_shortcut_arrow_forward"
+            android:onClick="onClick4MoreHotPiont"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_150dp"
+            android:layout_marginTop="@dimen/app_30dp"
+            android:text="表格或者其他布局"/>
     </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/area_tab_hot_point_guess"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="@dimen/app_25dp"
+                android:layout_height="@dimen/app_25dp"
+                android:background="@color/color_0D000000"
+                android:layout_marginLeft="@dimen/app_5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/app_25dp"
+                android:text="猜你喜欢"
+                android:textSize="@dimen/app_font_size_15"
+                android:layout_marginLeft="@dimen/app_35dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/app_25dp"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/app_font_size_15"
+                android:text="更多音乐"
+                android:layout_marginRight="@dimen/app_30dp"
+                android:gravity="center_vertical"
+                android:onClick="onClick4MoreHotPiont"/>
+
+            <ImageView
+                android:layout_width="@dimen/app_25dp"
+                android:layout_height="@dimen/app_25dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_shortcut_arrow_forward"
+                android:onClick="onClick4MoreHotPiont"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_150dp"
+                android:layout_marginTop="@dimen/app_30dp"
+                android:text="表格或者其他布局"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
 </ScrollView>

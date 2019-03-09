@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.helper;
+package com.zhuodp.graduationproject.utils.LruCache;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
