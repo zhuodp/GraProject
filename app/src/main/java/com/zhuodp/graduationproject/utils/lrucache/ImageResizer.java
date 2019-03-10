@@ -1,8 +1,7 @@
-package com.zhuodp.graduationproject.utils.LruCache;
+package com.zhuodp.graduationproject.utils.lrucache;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.LocaleDisplayNames;
 import android.util.Log;
 
 import java.io.FileDescriptor;

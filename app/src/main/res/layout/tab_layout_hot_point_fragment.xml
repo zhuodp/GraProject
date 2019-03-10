@@ -32,7 +32,7 @@
                 android:gravity="center_vertical"/>
 
             <TextView
-                android:id="@+id/lv_tab_more_hot_point"
+                android:id="@+id/tv_tab_more_hot_point"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"

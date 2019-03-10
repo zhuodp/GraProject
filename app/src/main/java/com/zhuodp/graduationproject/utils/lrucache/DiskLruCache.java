@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.utils.LruCache;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 /**
  * Created by 74021 on 2018/5/22.

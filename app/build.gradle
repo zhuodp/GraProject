@@ -54,6 +54,18 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
+    //ijkplayer
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
 
+    //以下为ijkPlayer为支持更多视频文件格式，可选的导入项
+    //Other ABIs: optional
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+
+    //ExoPlayer as IMediaPlayer: optional, experimental
+    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
 
 }

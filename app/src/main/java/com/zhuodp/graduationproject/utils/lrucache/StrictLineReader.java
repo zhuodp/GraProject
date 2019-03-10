@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.utils.LruCache;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 /**
  * Created by 74021 on 2018/5/22.
@@ -19,8 +19,6 @@ package com.zhuodp.graduationproject.utils.LruCache;
  * limitations under the License.
  */
 
-
-import com.zhuodp.graduationproject.utils.LruCache.DiskLruCacheFileUtil;
 
 import java.io.EOFException;
 import java.io.ByteArrayOutputStream;

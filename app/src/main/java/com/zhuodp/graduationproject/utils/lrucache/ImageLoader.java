@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.utils.LruCache;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 import android.annotation.TargetApi;
 import android.content.Context;

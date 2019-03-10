@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
@@ -18,8 +19,8 @@ import butterknife.OnClick;
 public class HotPiontFragment extends AppBaseFragment {
 
 
-    @BindView(R.id.lv_tab_more_hot_point)
-    RelativeLayout mClickAreaForMoreHotPoint;
+    @BindView(R.id.tv_tab_more_hot_point)
+    TextView mClickAreaForMoreHotPoint;
 
 
     @Override
@@ -33,7 +34,7 @@ public class HotPiontFragment extends AppBaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @OnClick(R.id.lv_tab_more_hot_point)
+    @OnClick(R.id.tv_tab_more_hot_point)
     public void onClick4MoreHotPoint(){
         Toast.makeText(getContext(),"查看更多热点",Toast.LENGTH_SHORT).show();
     }
