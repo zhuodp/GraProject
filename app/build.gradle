@@ -68,4 +68,7 @@ dependencies {
     //ExoPlayer as IMediaPlayer: optional, experimental
     implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
 
+
+    //基于ijk的封装库
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.0-beta1'
 }

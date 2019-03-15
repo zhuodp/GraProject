@@ -8,13 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试"
+        android:visibility="gone"
         android:id="@+id/btn_debug_dialog"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="视频播放"
-        android:onClick="onClick4PlayVideo"/>
 
 
 
@@ -23,24 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3">
-        <SurfaceView
-            android:id="@+id/viedo_surface"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
 
-        <Button
-            android:id="@+id/start"
-            android:layout_alignBottom="@+id/viedo_surface"
-            android:text="播放"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:layout_alignParentRight="true"
-            android:id="@+id/pause"
-            android:layout_alignBottom="@+id/viedo_surface"
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+            android:id="@+id/video_dubug_activity"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_200dp" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
