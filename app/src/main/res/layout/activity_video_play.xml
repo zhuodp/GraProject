@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_10dp"
-                android:text="标题:<Notebook>"
+                android:text="标题:Notebook"
                 android:textSize="@dimen/app_font_size_20"
                 android:textStyle="bold"
                 />
@@ -128,7 +128,6 @@
 
         </RelativeLayout>
     </ScrollView>
-
 
 </RelativeLayout>
 
