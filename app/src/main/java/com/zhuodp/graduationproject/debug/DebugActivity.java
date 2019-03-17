@@ -86,7 +86,7 @@ public class DebugActivity extends AppBaseActivity {
                 .setAutoFullWithSize(true)
                 .setShowFullAnimation(false)
                 .setNeedLockFull(true)
-                //.setUrl()
+                .setUrl("http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4")
                 .setCacheWithPlay(false)
                 .setVideoTitle("测试视频")
                 .setVideoAllCallBack(new GSYSampleCallBack(){
