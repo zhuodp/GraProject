@@ -1,14 +1,8 @@
-package com.zhuodp.graduationproject.debug;
+package com.zhuodp.graduationproject.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
@@ -17,68 +11,27 @@ import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
-import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
-
-import java.io.IOException;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-public class DebugActivity extends AppBaseActivity {
+public class VideoPlayerActivity extends AppBaseActivity {
 
     private OrientationUtils orientationUtils;
     private boolean isPause =false;
     private boolean isPlay = false;
 
-    @BindView(R.id.video_dubug_activity)
+    @BindView(R.id.video_player_activity)
     StandardGSYVideoPlayer mVideoPlayer;
-
-    @BindView(R.id.btn_debug_dialog)
-    Button mDialogTestBtn;
-
-    @OnClick(R.id.btn_debug_dialog)
-    public void onTestButtonClick(){
-        //以下用于测试Dialog库是否可用
-        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
-        customDialogManager.setDialogDismissOnTouchOutside(true);
-        customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
-        customDialogManager.setAlertDialogPosText("确认");
-        customDialogManager.setAlertDialogNegText("取消");
-        customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_NEGATIVE, new CustomDialogManager.AlertDialogListener() {
-            @Override
-            public void onAlertDialogClick() {
-                Toast.makeText(getApplicationContext(),"点击了取消按钮",Toast.LENGTH_SHORT).show();
-            }
-        });
-        customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {
-            @Override
-            public void onAlertDialogClick() {
-                Toast.makeText(getApplicationContext(),"点击了确认",Toast.LENGTH_SHORT).show();
-            }
-        });
-        customDialogManager.showDialog(getBaseContext());
-
-    }
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_debug);
+        setContentView(R.layout.activity_video_player);
         initVideo();
-        mVideoPlayer.startPlayLogic();
 
-    }
-
-    public void onEnterVideoPlayerPage(View view){
-        Intent intent = new Intent(DebugActivity.this,VideoPlayerActivity.class);
-        startActivity(intent);
     }
 
     private void initVideo(){
@@ -99,20 +52,30 @@ public class DebugActivity extends AppBaseActivity {
                 .setVideoAllCallBack(new GSYSampleCallBack(){
                     @Override
                     public void onPrepared(String url,Object... objects){
+
                         super.onPrepared(url,objects);
                         //开始播放了才能旋转和全屏
                         orientationUtils.setEnable(true);
                         isPlay = true;
+
                     }
 
                     @Override
                     public void onQuitFullscreen(String url,Object... objects){
+
                         super.onQuitFullscreen(url,objects);
                         Debuger.printfError("***** onQuitFullscreen **** " + objects[0]);//title
                         Debuger.printfError("***** onQuitFullscreen **** " + objects[1]);//当前非全屏player
                         if (orientationUtils != null) {
                             orientationUtils.backToProtVideo();
                         }
+
+                    }
+
+                    @Override
+                    public void onClickBlank(String url, Object... objects) {
+                        super.onClickBlank(url, objects);
+                        onBackPressed();
                     }
                 })
                 .setLockClickListener(new LockClickListener() {
@@ -133,7 +96,7 @@ public class DebugActivity extends AppBaseActivity {
                 orientationUtils.resolveByClick();
 
                 //第一个true是否需要隐藏actionbar。第二个true是否需要隐藏statusbar
-                mVideoPlayer.startWindowFullscreen(DebugActivity.this,true,true);
+                mVideoPlayer.startWindowFullscreen(VideoPlayerActivity.this,true,true);
             }
         });
 
@@ -186,4 +149,5 @@ public class DebugActivity extends AppBaseActivity {
             mVideoPlayer.onConfigurationChanged(this,newConfig,orientationUtils,true,true);
         }
     }
+
 }

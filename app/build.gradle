@@ -43,6 +43,7 @@ dependencies {
     //butterKnife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     //TabLayout
     implementation 'com.android.support:design:28.0.0-alpha1'
 
@@ -60,23 +61,7 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
-/*
-    //ijkplayer
-    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
-
-    //以下为ijkPlayer为支持更多视频文件格式，可选的导入项
-    //Other ABIs: optional
-    implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
-
-    //ExoPlayer as IMediaPlayer: optional, experimental
-    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
-
-*/
-
     //基于ijk的封装库
     implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
+
 }
