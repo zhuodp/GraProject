@@ -60,8 +60,7 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-
-    //基于ijk的封装库
+    //基于ijkPlayer的封装库
     implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
 
 }

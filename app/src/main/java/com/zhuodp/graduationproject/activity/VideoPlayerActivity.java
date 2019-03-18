@@ -12,7 +12,6 @@ import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
-import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
@@ -22,14 +21,16 @@ import butterknife.BindView;
 
 public class VideoPlayerActivity extends AppBaseActivity {
 
-    private OrientationUtils orientationUtils;
-    private ImageView mMovieCutImage;
-    private String mMovieUrl= "http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4";
-    private GSYVideoType mVideoType;
+    //视频播放相关的成员
+    private OrientationUtils orientationUtils;//帮助屏幕旋转
+    private ImageView mMovieCutImage;//视频封面
+    private String mMovieUrl= "http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4";//视频链接
+    private String mMovieTitle = "测试视频";
 
+
+    //用于标识当前视频播放状态
     private boolean isPause =false;
     private boolean isPlay = false;
-
 
     @BindView(R.id.video_player_activity)
     StandardGSYVideoPlayer mVideoPlayer;
@@ -49,7 +50,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
         orientationUtils = new OrientationUtils(this,mVideoPlayer);
         //初始化不打开外部的旋转
         orientationUtils.setEnable(false);
-
         //利用Builder初始化mVideoPlayer
         GSYVideoOptionBuilder gsyVideoOptionBuilder = new GSYVideoOptionBuilder();
         gsyVideoOptionBuilder
@@ -62,7 +62,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
             .setNeedLockFull(true)
             .setUrl(mMovieUrl)
             .setCacheWithPlay(false)
-            .setVideoTitle("测试视频")
+            .setVideoTitle(mMovieTitle)
             .setVideoAllCallBack(new GSYSampleCallBack(){
                 @Override
                 public void onPrepared(String url,Object... objects){
@@ -92,7 +92,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
                 }
             })
             .build(mVideoPlayer);
-
         //设置全屏按钮的监听
         mVideoPlayer.getFullscreenButton().setOnClickListener(v -> {
             //直接横屏
@@ -102,7 +101,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
         });
         //设置返回按钮的监听
         mVideoPlayer.getBackButton().setOnClickListener(v -> onBackPressed());
-
         //以下添加mViewPlayer的其他设置
     }
 
@@ -114,9 +112,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
 
 
 
-
-
-    //以下，debugActivity的生命周期，与video进行同步————————————————————
+    //****************************************以下，debugActivity的生命周期，与video进行同步*********************************************
     @Override
     public void onBackPressed(){
         if (orientationUtils != null){
