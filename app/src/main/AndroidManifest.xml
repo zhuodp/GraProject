@@ -47,7 +47,11 @@
 
         <activity android:name=".debug.DebugActivity"/>
 
-        <activity android:name=".activity.VideoPlayerActivity"/>
+        <activity
+            android:name=".activity.VideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
     </application>
 
