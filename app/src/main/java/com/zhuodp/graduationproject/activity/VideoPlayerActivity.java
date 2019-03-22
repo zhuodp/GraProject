@@ -100,7 +100,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
             mVideoPlayer.startWindowFullscreen(VideoPlayerActivity.this,false,true);
         });
         //设置返回按钮的监听
-        mVideoPlayer.getBackButton().setOnClickListener(v -> onBackPressed());
+        mVideoPlayer.getBackButton().setOnClickListener(v ->finish());
         //以下添加mViewPlayer的其他设置
     }
 
