@@ -77,7 +77,7 @@ public class MainActivity extends AppBaseActivity
         //默认显示第一个fragment
         initFragments(0);
 
-        User p2 = new User();
+        /*User p2 = new User();
         p2.setUserName("lucky");
         p2.setAddress("北京海淀");
         p2.save(new SaveListener<String>() {
@@ -89,7 +89,7 @@ public class MainActivity extends AppBaseActivity
                     Log.e("zhuodp","创建数据失败：" + e.getMessage());
                 }
             }
-        });
+        });*/
     }
 
 
