@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.utils;
+package com.zhuodp.graduationproject.helper;
 
 
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.zhuodp.graduationproject.helper.LoopPagerAdapterWrapper;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;

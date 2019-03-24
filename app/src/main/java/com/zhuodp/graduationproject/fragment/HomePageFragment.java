@@ -15,17 +15,16 @@ import com.youth.banner.Transformer;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.fragment.tab_fragment.CollectionFragment;
-import com.zhuodp.graduationproject.fragment.tab_fragment.HotPiontFragment;
-import com.zhuodp.graduationproject.fragment.tab_fragment.MovieFragment;
-import com.zhuodp.graduationproject.helper.GlideImageLoader;
+import com.zhuodp.graduationproject.fragment.tab.CollectionFragment;
+import com.zhuodp.graduationproject.fragment.tab.HotPiontFragment;
+import com.zhuodp.graduationproject.fragment.tab.MovieFragment;
+import com.zhuodp.graduationproject.utils.GlideImageLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HomePageFragment extends AppBaseFragment {
 
