@@ -13,7 +13,7 @@ import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.adapter.SettingListAdapter;
 import com.zhuodp.graduationproject.debug.DebugActivity;
-import com.zhuodp.graduationproject.entry.SettingItem;
+import com.zhuodp.graduationproject.entity.SettingItem;
 
 import java.util.ArrayList;
 import java.util.List;

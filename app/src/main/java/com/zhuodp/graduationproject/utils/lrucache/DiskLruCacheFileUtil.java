@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.helper;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 /**
  * Created by 74021 on 2018/5/22.
@@ -26,13 +26,18 @@ import java.io.Closeable;
         import java.io.Reader;
         import java.io.StringWriter;
         import java.nio.charset.Charset;
+/**
+ *   zhuodp 2019/3/9  重命名为DiskLruCacheFileUtil
+ *   这个类在DiskLruCache中使用到
+ *
+ */
 
 /** Junk drawer of utility methods. */
-final class Util {
+final class DiskLruCacheFileUtil {
     static final Charset US_ASCII = Charset.forName("US-ASCII");
     static final Charset UTF_8 = Charset.forName("UTF-8");
 
-    private Util() {
+    private DiskLruCacheFileUtil() {
     }
 
     static String readFully(Reader reader) throws IOException {

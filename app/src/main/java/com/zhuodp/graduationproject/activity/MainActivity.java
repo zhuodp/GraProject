@@ -11,24 +11,20 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.bmob.Person;
+import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -81,8 +77,8 @@ public class MainActivity extends AppBaseActivity
         //默认显示第一个fragment
         initFragments(0);
 
-        Person p2 = new Person();
-        p2.setName("lucky");
+        /*User p2 = new User();
+        p2.setUserName("lucky");
         p2.setAddress("北京海淀");
         p2.save(new SaveListener<String>() {
             @Override
@@ -93,7 +89,7 @@ public class MainActivity extends AppBaseActivity
                     Log.e("zhuodp","创建数据失败：" + e.getMessage());
                 }
             }
-        });
+        });*/
     }
 
 

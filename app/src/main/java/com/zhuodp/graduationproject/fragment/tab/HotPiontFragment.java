@@ -1,23 +1,26 @@
-package com.zhuodp.graduationproject.fragment.tab_fragment;
+package com.zhuodp.graduationproject.fragment.tab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.helper.GlideImageLoader;
 
-import java.util.Arrays;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 //TODO Banner实现
 public class HotPiontFragment extends AppBaseFragment {
+
+
+    @BindView(R.id.tv_tab_more_hot_point)
+    TextView mClickAreaForMoreHotPoint;
 
 
     @Override
@@ -31,6 +34,10 @@ public class HotPiontFragment extends AppBaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @OnClick(R.id.tv_tab_more_hot_point)
+    public void onClick4MoreHotPoint(){
+        Toast.makeText(getContext(),"查看更多热点",Toast.LENGTH_SHORT).show();
+    }
 
 
 
