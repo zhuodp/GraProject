@@ -39,15 +39,13 @@
                 android:textSize="@dimen/app_font_size_15"
                 android:text="更多热点"
                 android:layout_marginRight="@dimen/app_30dp"
-                android:gravity="center_vertical"
-                android:onClick="onClick4MoreHotPiont"/>
+                android:gravity="center_vertical"/>
 
             <ImageView
                 android:layout_width="@dimen/app_25dp"
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/ic_shortcut_arrow_forward"
-                android:onClick="onClick4MoreHotPiont"
                 />
 
             <Button
@@ -80,21 +78,20 @@
             android:gravity="center_vertical"/>
 
         <TextView
+            android:id="@+id/tv_tab_more_music"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/app_25dp"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/app_font_size_15"
             android:text="更多音乐"
             android:layout_marginRight="@dimen/app_30dp"
-            android:gravity="center_vertical"
-            android:onClick="onClick4MoreHotPiont"/>
+            android:gravity="center_vertical"/>
 
         <ImageView
             android:layout_width="@dimen/app_25dp"
             android:layout_height="@dimen/app_25dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/ic_shortcut_arrow_forward"
-            android:onClick="onClick4MoreHotPiont"
             />
 
         <Button
@@ -127,21 +124,20 @@
                 android:gravity="center_vertical"/>
 
             <TextView
+                android:id="@+id/tv_tab_more"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/app_font_size_15"
-                android:text="更多音乐"
+                android:text="更多其他"
                 android:layout_marginRight="@dimen/app_30dp"
-                android:gravity="center_vertical"
-                android:onClick="onClick4MoreHotPiont"/>
+                android:gravity="center_vertical"/>
 
             <ImageView
                 android:layout_width="@dimen/app_25dp"
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/ic_shortcut_arrow_forward"
-                android:onClick="onClick4MoreHotPiont"
                 />
 
             <Button

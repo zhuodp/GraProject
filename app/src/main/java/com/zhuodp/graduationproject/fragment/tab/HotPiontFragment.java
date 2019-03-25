@@ -39,6 +39,18 @@ public class HotPiontFragment extends AppBaseFragment {
         Toast.makeText(getContext(),"查看更多热点",Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.tv_tab_more_music)
+    public void onClick4Music(){
+        Toast.makeText(getContext(),"查看更多音乐",Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.tv_tab_more)
+    public void onClick4More(){
+        Toast.makeText(getContext(),"查看更多...",Toast.LENGTH_SHORT).show();
+    }
+
+
+
 
 
 
