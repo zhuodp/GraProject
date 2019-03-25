@@ -1,18 +1,12 @@
 package com.zhuodp.graduationproject.Base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zhuodp.graduationproject.bmob.Person;
-
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 public class AppBaseActivity extends AppCompatActivity {
     @Override

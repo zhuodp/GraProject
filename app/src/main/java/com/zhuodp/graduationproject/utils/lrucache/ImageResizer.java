@@ -1,8 +1,7 @@
-package com.zhuodp.graduationproject.helper;
+package com.zhuodp.graduationproject.utils.lrucache;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.LocaleDisplayNames;
 import android.util.Log;
 
 import java.io.FileDescriptor;
@@ -16,6 +15,7 @@ public class ImageResizer {
     public ImageResizer(){
 
     }
+
     //从资源加载
     public Bitmap decodeSampleBitmapFromResource(Resources res,int resId ,int reqWidth,int reqHeight){
         //设置inJustedDecodeBounds = true 表示先不加载图片
@@ -24,7 +24,6 @@ public class ImageResizer {
         BitmapFactory.decodeResource(res,resId,options);
         //调用方法计算合适的inSampleSize
         options.inSampleSize = calculateInSampleSize(options,reqWidth,reqHeight);
-
         //inJustedDecodeBounds设置为false时真正开始加载图片
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res,resId,options);

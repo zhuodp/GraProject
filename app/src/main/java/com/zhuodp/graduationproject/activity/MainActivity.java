@@ -11,40 +11,40 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.youdao.lib.dialogs.manager.CustomDialogManager;
+import com.youdao.lib.dialogs.util.RoundAngleImageView;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.bmob.Person;
+import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-public class MainActivity extends AppBaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private HomePageFragment mHomePageFragment;
     private SettingPageFragment mSettingPageFragment;
     private DiscoverPageFragment mDiscoverPageFragment;
+    View mDrawerHeaderView;
+    RoundAngleImageView mUserImage;
 
+    //顶部栏
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    //邮箱形状悬浮按钮
     @BindView(R.id.fab)
     FloatingActionButton fab;
-
+    //左侧弹出菜单
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
@@ -66,37 +66,6 @@ public class MainActivity extends AppBaseActivity
     @BindView(R.id.btn_fragment_settings_page)
     Button mBtnFragmentSettingsPage;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //默认显示第一个fragment
-        initFragments(0);
-
-        Person p2 = new Person();
-        p2.setName("lucky");
-        p2.setAddress("北京海淀");
-        p2.save(new SaveListener<String>() {
-            @Override
-            public void done(String objectId,BmobException e) {
-                if(e==null){
-                    Log.e("zhuodp", "添加数据成功，返回objectId为："+objectId);
-                }else{
-                    Log.e("zhuodp","创建数据失败：" + e.getMessage());
-                }
-            }
-        });
-    }
-
-
     @OnClick(R.id.btn_fragment_home_page)
     public void onSwitchToHomePage(){
         initFragments(0);
@@ -112,7 +81,88 @@ public class MainActivity extends AppBaseActivity
         initFragments(2);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //初始化菜单栏等控件
+        initSettings();
+        //默认显示第一个fragment
+        initFragments(0);
+        //初始化无法用butterknige找到的view
+        initViewAndListener();
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    //创建抽屉菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    //右上方菜单监听
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    //抽屉菜单监听
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    //初始化菜单栏等组件
+    private void initSettings(){
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+    }
+    //初始化Fragments
     private void initFragments(int btnId){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -148,7 +198,6 @@ public class MainActivity extends AppBaseActivity
         //提交事务
         transaction.commit();
     }
-
     //隐藏fragment
     private void hideFragment(FragmentTransaction transaction){
         if (mHomePageFragment!=null){
@@ -161,61 +210,16 @@ public class MainActivity extends AppBaseActivity
             transaction.hide(mSettingPageFragment);
         }
     }
-
-
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    //初始化无法用butterKnife找到的View
+    private void initViewAndListener(){
+        mDrawerHeaderView =navigationView.inflateHeaderView(R.layout.nav_header_main);
+        mUserImage = (RoundAngleImageView)mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
+        mUserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入登陆页面
+                Toast.makeText(getApplicationContext(),"点击了头像",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

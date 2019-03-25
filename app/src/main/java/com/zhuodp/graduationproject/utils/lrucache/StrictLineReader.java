@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.helper;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 /**
  * Created by 74021 on 2018/5/22.
@@ -23,7 +23,6 @@ package com.zhuodp.graduationproject.helper;
 import java.io.EOFException;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -95,7 +94,7 @@ class StrictLineReader implements Closeable {
         if (capacity < 0) {
             throw new IllegalArgumentException("capacity <= 0");
         }
-        if (!(charset.equals(Util.US_ASCII))) {
+        if (!(charset.equals(DiskLruCacheFileUtil.US_ASCII))) {
             throw new IllegalArgumentException("Unsupported encoding");
         }
 

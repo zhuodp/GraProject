@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.helper;
+package com.zhuodp.graduationproject.utils.lrucache;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -56,18 +56,17 @@ public class ImageLoader {
 
     //当前CPU的核心线程数
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    //线程池THREAD_POOL_EXCUTOR 的实现
+    //线程池相关参数
     private static final int CORE_POOL_SIZE = CPU_COUNT +1 ; //核心线程数为当前设备的CPU核心数+1
     private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 +1;//最大容量为CPU核心数的2倍加1
     private static final long KEEP_ALIVE = 10L; //线程闲置超时时长为10秒
 
     private static final int TAG_KEY_URI = R.id.imageloader_uri; //待补充
-    private static final int DISK_CACHE_SIZE = 1024*1024*50;
+    private static final int DISK_CACHE_SIZE = 1024*1024*50;    //磁盘缓存大小
     private static final int IO_BUFFER_SIZE = 8*2014;
     private static final int DISK_CACHE_INDEX = 0;
     private boolean mIsDiskLruCacheCreated = false;
 
-    //定义一个线程池变量用于异步加载图片
     //采用线程池的原因：如果用普通的线程，列表下拉时会产生大量的线程，不利于效率提升
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger();
@@ -77,13 +76,11 @@ public class ImageLoader {
         }
     };
 
-
     //Executor接口-----ThreadPooExecutor(核心线程数，最大线程数，非核心线程保活事件，组塞队列，线程工厂)；
     public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE,MAXIMUM_POOL_SIZE,
                     KEEP_ALIVE, TimeUnit.SECONDS,
                     new LinkedBlockingDeque<Runnable>(),
                     sThreadFactory);
-
 
     //Handler ，用于在主线程收集异步加载图片的结果
     private Handler mMainHandler = new Handler(Looper.getMainLooper()){
@@ -107,18 +104,18 @@ public class ImageLoader {
     private DiskLruCache mDiskLruCache;             //磁盘缓存
 
     //**********************************************************构造函数***************************************************************************
-    //创建磁盘缓存 （创建前判断磁盘缓存是否已满）
     private ImageLoader(Context context){
         mContext = context.getApplicationContext();
         int maxMemory = (int )(Runtime.getRuntime().maxMemory()/1024);  //最大磁盘缓存
         int cacheSize = maxMemory/8;                                    //最大内存缓存  ，磁盘缓存的容量为50MB ，内存缓存为其1/8
-        //获取侧畔缓存对象
-        mMemoryCache = new LruCache<String,Bitmap>(cacheSize){      //用LruCache<String,Bitmap> 来构建内存缓存mMemoryCache
+        // 初始化内存缓存对象
+        mMemoryCache = new LruCache<String,Bitmap>(cacheSize){
             @Override
             protected int sizeOf(String key,Bitmap bitmap){
                 return bitmap.getRowBytes() * bitmap.getHeight()/1024;
             }
         };
+        //初始化磁盘缓存对象
         File diskCacheDir = getDiskCacheDir(mContext , "bitmap");
         if(!diskCacheDir.exists()){                                 //磁盘缓存用的文件夹不存在则创建文件夹
             diskCacheDir.mkdirs();
@@ -131,17 +128,14 @@ public class ImageLoader {
                 e.printStackTrace();
             }
         }
-
     }
+    //简单的builder模式
     public static ImageLoader build (Context context){
         return new ImageLoader(context);
-    }                                                               //简单的builder模式
-
-//**************************************************************************************************************************************
+    }
 
 
-
-//********************************************内存缓存的添加和获取*****************************************************************************
+    //*****************************************************中间方法：内存缓存的添加和获取*****************************************************************************
     private void addBitmapToMemoryCache(String key,Bitmap bitmap){   //添加内存缓存，key和bitmap类型， 判断不存在该缓存后使用LruCache的put函数
         if (getBitmapFromMemCache(key) == null){
             mMemoryCache.put(key, bitmap);
@@ -150,15 +144,25 @@ public class ImageLoader {
     private Bitmap getBitmapFromMemCache(String key){
         return mMemoryCache.get(key);
     }
-//**************************************************************************************************************************************************
-
 
 
 //*****************************************************异步加载图片**************************************************************************
+
+    /**
+     * 默认requestWidth 和 reqHeight 为 0
+     * @param uri  图片uri
+     * @param imageView  载入的imageView对象
+     */
     public void bindBitmap(final String uri,final ImageView imageView){
         bindBitmap(uri,imageView,0,0);
     }
 
+    /**
+     * @param uri
+     * @param imageView
+     * @param reqWidth 压缩后的图片宽度
+     * @param reqHeight 压缩后的图片高度
+     */
     public void bindBitmap(final String uri, final  ImageView imageView, final int reqWidth, final int reqHeight){
 
         imageView.setTag(uri);
@@ -182,8 +186,6 @@ public class ImageLoader {
 
         THREAD_POOL_EXECUTOR.execute(loadBitmapTask);
     }
-//*********************************************************************************************************************************
-
 
 //***************************************同步加载图片*************************************************************
     //依次尝试从 内存、 磁盘、和网络中拉取已经存在的缓存
@@ -267,7 +269,7 @@ public class ImageLoader {
     }
 
     // 将图片从网络中下载到磁盘
-    public boolean downloadUrlToStream(String urlString, OutputStream outputStream) throws IOException {
+    private boolean downloadUrlToStream(String urlString, OutputStream outputStream) throws IOException {
         HttpURLConnection urlConnection = null;
         BufferedOutputStream out = null;
         BufferedInputStream in = null;
@@ -299,15 +301,10 @@ public class ImageLoader {
         return false;
     }
 
-
-
-
-
     private Bitmap downloadBitmapFromUrl(String urlString) throws IOException {
         Bitmap bitmap= null;
         HttpURLConnection urlConnection = null;
         BufferedInputStream in = null;
-
         try{
             final URL url = new URL(urlString);
             urlConnection = (HttpURLConnection)url.openConnection();
@@ -353,7 +350,7 @@ public class ImageLoader {
         return sb.toString();
     }
 
-    public File getDiskCacheDir(Context context, String uniqueName){
+    private File getDiskCacheDir(Context context, String uniqueName){
         boolean externalStorageAvailable = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
         final String cachePath;
         if (externalStorageAvailable){
@@ -364,13 +361,8 @@ public class ImageLoader {
         return new File(cachePath +File.separator + uniqueName);
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     private  long  getUsableSpace(File path){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD){
-            return path.getUsableSpace();
-        }
-        final StatFs stats = new StatFs(path.getPath());
-        return (long)stats.getBlockCountLong() *(Long)stats.getAvailableBlocksLong();
+        return path.getUsableSpace();
     }
 
     private static class LoaderResult{
