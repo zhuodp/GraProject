@@ -1,8 +1,10 @@
 package com.zhuodp.graduationproject.bmob;
 
+import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.zhuodp.graduationproject.entity.User;
 
@@ -21,12 +23,14 @@ import cn.bmob.v3.listener.UpdateListener;
  *  6.登出 logout
  *
  */
-public class BombUtil {
+public class BmobUtil {
+
+    private static boolean isLoginSuccess = false;//标注登陆是否成功
 
     /**
      * 账号密码注册
      */
-    private void signUp(final View view) {
+    public static void signUp(final View view) {
         final User user = new User();
         user.setUserName("" + System.currentTimeMillis());
         user.setUserPassword("" + System.currentTimeMillis());
@@ -45,29 +49,30 @@ public class BombUtil {
     /**
      * 账号密码登录
      */
-    private void login(final View view) {
+    public static boolean login(String account, String password) {
         final User user = new User();
         //此处替换为你的用户名
-        user.setUsername("username");
+        user.setUsername(account);
         //此处替换为你的密码
-        user.setPassword("password");
+        user.setPassword(password);
         user.login(new SaveListener<User>() {
             @Override
             public void done(User bmobUser, BmobException e) {
                 if (e == null) {
                     User user = BmobUser.getCurrentUser(User.class);
-                    Snackbar.make(view, "登录成功：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
+                    isLoginSuccess = true;
                 } else {
-                    Snackbar.make(view, "登录失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    isLoginSuccess = false;
                 }
             }
         });
+        return isLoginSuccess;
     }
 
     /**
      * 账号密码登录
      */
-    private void loginByAccount(final View view) {
+    public static void loginByAccount(final View view) {
         //此处替换为你的用户名密码
         BmobUser.loginByAccount("username", "password", new LogInListener<User>() {
             @Override
@@ -85,7 +90,7 @@ public class BombUtil {
     /**
      *  判断当前是否有用户登陆
      */
-    private boolean isLogin(){
+    public static boolean isLogin(){
         if (BmobUser.isLogin()) {
             //User user = BmobUser.getCurrentUser(User.class);
             //Snackbar.make(ge, "已经登录：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
@@ -99,7 +104,7 @@ public class BombUtil {
     /**
      * 获取当前用户以及用户属性
      */
-    private void getCurrentUserCache(){
+    public static void getCurrentUserCache(){
         /*if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);
             Snackbar.make(, "当前用户：" + user.getUsername() + "-" + user.getAge(), Snackbar.LENGTH_LONG).show();
@@ -114,7 +119,7 @@ public class BombUtil {
     /**
      * 更新用户操作并同步更新本地的用户信息
      */
-    private void updateUser(final View view) {
+    public static void updateUser(final View view) {
         final User user = BmobUser.getCurrentUser(User.class);
         user.update(new UpdateListener() {
             @Override
@@ -132,7 +137,7 @@ public class BombUtil {
     /**
      * 提供旧密码修改密码
      */
-    private void updatePassword(final View view){
+    public static void updatePassword(final View view){
         //TODO 此处替换为你的旧密码和新密码
         BmobUser.updateCurrentUserPassword("oldPwd", "newPwd", new UpdateListener() {
             @Override
@@ -149,7 +154,7 @@ public class BombUtil {
     /**
      * 用户退出登陆
      */
-    private void logout(){
+    public static void logout(){
         BmobUser.logOut();
     }
 

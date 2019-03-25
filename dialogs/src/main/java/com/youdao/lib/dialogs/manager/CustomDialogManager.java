@@ -224,9 +224,9 @@ public class CustomDialogManager{
         }
     }
 
-    public void performAskForLoginDialogListener(String tag){
+    public void performAskForLoginDialogListener(String tag,String account,String password){
         if (mAskForLoginDialogListeners.get(tag)!=null){
-            mAskForLoginDialogListeners.get(tag).onAskForLoginClick();
+            mAskForLoginDialogListeners.get(tag).onAskForLoginClick(account,password);
         }
     }
 
@@ -253,7 +253,7 @@ public class CustomDialogManager{
     }
 
     public interface OnAskForLoginDialogListener{
-        void onAskForLoginClick();
+        void onAskForLoginClick(String account,String password);
     }
 
 
