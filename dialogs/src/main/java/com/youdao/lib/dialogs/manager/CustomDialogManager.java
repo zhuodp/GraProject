@@ -361,4 +361,5 @@ public class CustomDialogManager{
             mAskForLoginDialogListeners.clear();
         }
     }
+
 }

@@ -1,11 +1,17 @@
 package com.zhuodp.graduationproject.bmob;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.activity.MainActivity;
+import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.entity.User;
 
 import cn.bmob.v3.BmobUser;
@@ -26,30 +32,32 @@ import cn.bmob.v3.listener.UpdateListener;
 public class BmobUtil {
 
     private static boolean isLoginSuccess = false;//标注登陆是否成功
-
+    private static boolean isSignUpSuccess = false;//标注注册是否成功
     /**
      * 账号密码注册
      */
-    public static void signUp(final View view) {
+    public static void signUp(Context context,String account, String password){
         final User user = new User();
-        user.setUserName("" + System.currentTimeMillis());
-        user.setUserPassword("" + System.currentTimeMillis());
+        user.setUsername(account);
+        user.setPassword(password);
         user.signUp(new SaveListener<User>() {
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
-                    Snackbar.make(view, "注册成功", Snackbar.LENGTH_LONG).show();
+                    isSignUpSuccess = true;
+                    Toast.makeText(context,"注册成功，请返回进行登陆",Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(view, "尚未失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    isSignUpSuccess = false;
+                    Toast.makeText(context,"注册失败："+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     /**
-     * 账号密码登录
+     * 账号密码登录（参数定制版，用于即使在界面上更新UI）
      */
-    public static boolean login(String account, String password) {
+    public static void login(Context context, String account, String password) {
         final User user = new User();
         //此处替换为你的用户名
         user.setUsername(account);
@@ -59,14 +67,14 @@ public class BmobUtil {
             @Override
             public void done(User bmobUser, BmobException e) {
                 if (e == null) {
-                    User user = BmobUser.getCurrentUser(User.class);
-                    isLoginSuccess = true;
+                    User user = BmobUser.getCurrentUser(User.class); //利用此对象来获取头像等；
+                    Toast.makeText(context,"登陆成功",Toast.LENGTH_SHORT).show();
+
                 } else {
-                    isLoginSuccess = false;
+                    Toast.makeText(context,"登陆失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        return isLoginSuccess;
     }
 
     /**
@@ -158,6 +166,25 @@ public class BmobUtil {
         BmobUser.logOut();
     }
 
+
+    /**
+     *
+     * 添加一个在电影表中添加一个电影项
+     */
+    public static void addMovie(Context context,Movie movie){
+        movie.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                if (e == null) {
+                    movie.setObjectId(objectId);
+                    Toast.makeText(context,"添加成功",Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("BMOB", e.toString());
+                    Toast.makeText(context,"添加失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 
 

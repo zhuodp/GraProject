@@ -5,10 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.entity.Movie;
+import com.zhuodp.graduationproject.global.Constant;
+
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
 
 public class AppBaseActivity extends AppCompatActivity {
+
+    String[] actors = new String[]{"娜塔莉·波特曼","XXX","王尼玛"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +26,7 @@ public class AppBaseActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         ButterKnife.bind(this);
+
     }
 
     @Override

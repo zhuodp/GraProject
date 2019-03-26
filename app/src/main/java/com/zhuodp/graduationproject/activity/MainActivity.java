@@ -1,6 +1,11 @@
 package com.zhuodp.graduationproject.activity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -15,24 +20,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.youdao.lib.dialogs.manager.CustomDialogManager;
+import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.util.RoundAngleImageView;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
-import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
+import com.zhuodp.graduationproject.global.Constant;
+import com.zhuodp.graduationproject.utils.BaseHandler;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends AppBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +44,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     private SettingPageFragment mSettingPageFragment;
     private DiscoverPageFragment mDiscoverPageFragment;
     View mDrawerHeaderView;
-    RoundAngleImageView mUserImage;
+    RoundAngleImageView mUserPic;
+    TextView mUserName;
 
     //顶部栏
     @BindView(R.id.toolbar)
@@ -156,6 +161,23 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         return false;
     }
 
+    //用于接收从登录页等Activity返回的信息
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            // 从LoginActivity返回的用户数据，在此更新UI
+            case Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO :
+                Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).into(mUserPic);
+                mUserName.setText(data.getStringExtra(Constant.DATA_USER_NAME));
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
     //初始化菜单栏等组件
     private void initSettings(){
         setSupportActionBar(toolbar);
@@ -216,55 +238,33 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     //初始化无法用butterKnife找到的View
     private void initViewAndListener(){
         mDrawerHeaderView =navigationView.inflateHeaderView(R.layout.nav_header_main);
-        mUserImage = (RoundAngleImageView)mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
-        mUserImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("MainActivity","点击了Drawer中的头像");
-                if (BmobUtil.isLogin()){
-                    //TODO 跳转到用户详情页
-                }else{
-                    //弹出登陆窗口
-                    showLoginDialog();
-                }
+        mUserPic = (RoundAngleImageView)mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
+        mUserName = (TextView)mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
+        mUserPic.setOnClickListener(v -> {
+            Log.d("MainActivity","点击了Drawer中的头像");
+            if (BmobUtil.isLogin()){
+                //TODO 跳转到用户个人页面
+                Toast.makeText(getBaseContext(),"个人页面待开发，当前点击头像为登出账号",Toast.LENGTH_SHORT).show();
+                BmobUtil.logout();
+                mUserName.setText("未登录");
+                mUserPic.setBackgroundColor(getBaseContext().getResources().getColor(R.color.B2_20_trans));
+            }else{
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivityForResult(intent, Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
             }
         });
     }
 
-    //调起登陆对话框
-    private void showLoginDialog(){
+    static class MyHandler extends BaseHandler{
 
-        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
-        customDialogManager.setDialogType(CustomDialogManager.TYPE_ASK_FOR_LOGIN);
-        customDialogManager.setDialogDismissOnTouchOutside(true);
-        //取消按钮监听
-        customDialogManager.setOnAskForLoginDialogListener(CustomDialogManager.TAG_ASK_FOR_LOGIN_DIALOG_CANCEL,new CustomDialogManager.OnAskForLoginDialogListener(){
-            @Override
-            public void onAskForLoginClick(String account, String password) {
-                onBackPressed();
+        public MyHandler(Activity activity){
+            super(activity);
+        }
+        @Override
+        public void handleMessage(Message msg, int what) {
+            switch (what){
             }
-        });
-        //直接登陆监听
-        customDialogManager.setOnAskForLoginDialogListener(CustomDialogManager.TAG_ASK_FOR_LOGIN_DIALOG_LOGIN, new CustomDialogManager.OnAskForLoginDialogListener() {
-            @Override
-            public void onAskForLoginClick(String account,String password) {
-                //TODO 尝试进行登陆
-                if (BmobUtil.login(account,password)){
-                    Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getApplicationContext(),"登陆失败",Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(getApplicationContext(),"点击了直接登陆",Toast.LENGTH_SHORT).show();
-            }
-        });
-        //用户注册监听
-        customDialogManager.setOnAskForLoginDialogListener(CustomDialogManager.TAG_ASK_FOR_LOGIN_DIALOG_SIGN_UP, new CustomDialogManager.OnAskForLoginDialogListener() {
-            @Override
-            public void onAskForLoginClick(String account, String password) {
-                Toast.makeText(getApplicationContext(),"点击了注册",Toast.LENGTH_SHORT).show();
-                //TODO 跳转到注册页面
-            }
-        });
-        customDialogManager.showDialog(getBaseContext());
+        }
     }
+
 }

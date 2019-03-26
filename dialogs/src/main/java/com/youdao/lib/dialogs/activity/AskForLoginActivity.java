@@ -1,6 +1,7 @@
 package com.youdao.lib.dialogs.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +17,7 @@ public class AskForLoginActivity extends BaseDialogActivity {
     CustomDialogManager mCustomDialogManager = CustomDialogManager.getInstance();
     EditText mAccountEditText;
     EditText mPasswordEditText;
+    EditText mConfirmPasswordEditText;
 
 
     @Override
@@ -23,7 +25,7 @@ public class AskForLoginActivity extends BaseDialogActivity {
         super.onCreate(savedInstanceState);
         //重设入场动画
         overridePendingTransition(R.anim.slide_in_bottom,R.anim.slide_out_bottom);
-        setContentView(R.layout.dialog_ask_for_login);
+        setContentView(R.layout.ask_for_login);
         findview();
     }
 
@@ -69,13 +71,35 @@ public class AskForLoginActivity extends BaseDialogActivity {
 
     }
 
+    public void onClick4EnterSignUpPage(View view){
+        //TODO 将页面转化为注册页
+        setContentView(R.layout.dialog_user_sign_up);
+        findview();
+        Toast.makeText(getBaseContext(),"跳转到了注册页面",Toast.LENGTH_SHORT).show();
+    }
+
     public void onClick4SignUp(View view){
-        mCustomDialogManager.performAskForLoginDialogListener(CustomDialogManager.TAG_ASK_FOR_LOGIN_DIALOG_SIGN_UP,null,null);
+        if (mConfirmPasswordEditText.getText().toString().equals(mPasswordEditText.getText().toString())){
+            mCustomDialogManager.performAskForLoginDialogListener(CustomDialogManager.TAG_ASK_FOR_LOGIN_DIALOG_SIGN_UP,
+                    mAccountEditText.getText().toString(),
+                    mPasswordEditText.getText().toString());
+            Log.e("AskForLoginActvitiy",mAccountEditText.getText().toString());
+            Log.e("AskForLoginActvitiy",mPasswordEditText.getText().toString());
+            Log.e("AskForLoginActvitiy",mConfirmPasswordEditText.getText().toString());
+        }else{
+            Toast.makeText(getBaseContext(),"两次输入密码不相同，请再次确认",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onClick4Back(View view){
+        setContentView(R.layout.ask_for_login);
+        findview();
     }
 
     private void findview(){
         mAccountEditText = (EditText)findViewById(R.id.et_user_account);
         mPasswordEditText =(EditText)findViewById(R.id.et_user_password);
+        mConfirmPasswordEditText = (EditText)findViewById(R.id.et_user_password_confirm);
     }
 
 

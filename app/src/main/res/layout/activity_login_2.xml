@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <ImageView
+        android:onClick="onClick4Back"
+        android:layout_width="@dimen/app_40dp"
+        android:layout_height="@dimen/app_40dp"
+        android:layout_marginTop="@dimen/app_25dp"
+        android:layout_marginLeft="@dimen/app_20dp"
+        android:background="@color/blue_4ea0e5"
+        />
+
+    <TextView
+        android:id="@+id/tv_havent_login_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/app_33dp"
+        android:text="创建您的账号"
+        android:textColor="@color/color_36404A"
+        android:textSize="@dimen/app_font_size_20"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_40dp"
+        android:text="账号:"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_36404A"
+        android:textSize="@dimen/app_font_size_19"
+        android:layout_alignBottom="@id/et_user_account"
+        android:layout_marginLeft="@dimen/app_20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_40dp"
+        android:gravity="center_vertical"
+        android:text="密码:"
+        android:textColor="@color/color_36404A"
+        android:textSize="@dimen/app_font_size_19"
+        android:layout_alignBottom="@id/et_user_password"
+        android:layout_marginLeft="@dimen/app_20dp"
+        />
+
+
+    <EditText
+        android:id="@+id/et_user_account"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_40dp"
+        android:layout_marginLeft="@dimen/app_100dp"
+        android:layout_marginRight="@dimen/app_40dp"
+        android:layout_below="@id/tv_havent_login_tip"
+        android:layout_marginTop="@dimen/app_30dp"/>
+
+    <EditText
+        android:id="@+id/et_user_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_40dp"
+        android:layout_marginLeft="@dimen/app_100dp"
+        android:layout_marginRight="@dimen/app_40dp"
+        android:layout_below="@id/et_user_account"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_40dp"
+        android:gravity="center_vertical"
+        android:text="确认密码:"
+        android:textSize="@dimen/app_font_size_19"
+        android:textColor="@color/color_36404A"
+        android:layout_alignBottom="@id/et_user_password_confirm"
+        android:layout_marginLeft="@dimen/app_20dp"/>
+
+    <EditText
+        android:id="@+id/et_user_password_confirm"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_40dp"
+        android:layout_marginLeft="@dimen/app_100dp"
+        android:layout_marginRight="@dimen/app_40dp"
+        android:layout_below="@id/et_user_password"/>
+
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_50dp"
+        android:layout_below="@id/et_user_password_confirm"
+        android:layout_marginTop="@dimen/app_25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="@dimen/app_30dp"
+        android:background="@drawable/ic_blue_trans_8_radius_24"
+        android:onClick="onClick4SignUp"
+        android:text="立即注册"
+        android:textColor="@color/color_4371FF"
+        android:textSize="@dimen/app_font_size_16" />
+
+    <TextView
+        android:id="@+id/output_dialog_decor_line"
+        android:layout_below="@id/btn_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_1dp"
+        android:layout_marginTop="@dimen/app_20dp"
+        android:background="@color/color_EBECED" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_55dp"
+        android:layout_below="@id/output_dialog_decor_line"
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_transparent"
+        android:onClick="onCanceled"
+        android:text="取消"
+        android:textColor="@color/color_36404A"
+        android:textSize="@dimen/app_font_size_15" />
+
+</RelativeLayout>
