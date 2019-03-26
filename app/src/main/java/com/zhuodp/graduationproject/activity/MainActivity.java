@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -33,6 +34,7 @@ import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.utils.BaseHandler;
+import com.zhuodp.graduationproject.utils.view.GraphicView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,13 +69,13 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     }
 
     @BindView(R.id.btn_fragment_home_page)
-    Button mBtnFragmentHomePage;
+    GraphicView mBtnFragmentHomePage;
 
     @BindView(R.id.btn_fragment_discover_page)
-    Button mBtnFragmentDiscoverPage;
+    GraphicView mBtnFragmentDiscoverPage;
 
     @BindView(R.id.btn_fragment_settings_page)
-    Button mBtnFragmentSettingsPage;
+    GraphicView mBtnFragmentSettingsPage;
 
     @OnClick(R.id.btn_fragment_home_page)
     public void onSwitchToHomePage(){
@@ -139,7 +141,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     //抽屉菜单监听
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -238,8 +240,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     //初始化无法用butterKnife找到的View
     private void initViewAndListener(){
         mDrawerHeaderView =navigationView.inflateHeaderView(R.layout.nav_header_main);
-        mUserPic = (RoundAngleImageView)mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
-        mUserName = (TextView)mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
+        mUserPic = mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
+        mUserName = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
         mUserPic.setOnClickListener(v -> {
             Log.d("MainActivity","点击了Drawer中的头像");
             if (BmobUtil.isLogin()){
@@ -262,8 +264,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         }
         @Override
         public void handleMessage(Message msg, int what) {
-            switch (what){
-            }
         }
     }
 

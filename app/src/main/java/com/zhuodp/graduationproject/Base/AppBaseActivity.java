@@ -26,7 +26,16 @@ public class AppBaseActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         ButterKnife.bind(this);
-
+        //TODO 删掉测试例子
+        /*Movie movie = new Movie("哈哈",
+                actors,"2018",
+                "没有介绍",
+                Constant.MOVIE_URL_TEST);
+        movie.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+            }
+        });*/
     }
 
     @Override
