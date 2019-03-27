@@ -20,6 +20,7 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 
 import java.io.IOException;
@@ -66,6 +67,11 @@ public class DebugActivity extends AppBaseActivity {
 
     public void onEnterVideoPlayerPage(View view){
         Intent intent = new Intent(DebugActivity.this,VideoPlayerActivity.class);
+        startActivity(intent);
+    }
+
+    public void onEnterMovieList(View view){
+        Intent intent = new Intent(DebugActivity.this, MovieListActivity.class);
         startActivity(intent);
     }
 

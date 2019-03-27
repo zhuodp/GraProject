@@ -1,4 +1,4 @@
-package com.zhuodp.graduationproject.entity;
+package com.zhuodp.graduationproject.entity.item;
 
 /**
  *   实体类

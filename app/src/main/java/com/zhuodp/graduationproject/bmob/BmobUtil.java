@@ -1,6 +1,7 @@
 package com.zhuodp.graduationproject.bmob;
 
 import android.app.ActivityManager;
+import android.app.Person;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -14,9 +15,14 @@ import com.zhuodp.graduationproject.activity.MainActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.entity.User;
 
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 

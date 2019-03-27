@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
@@ -59,7 +60,6 @@ public class HomePageFragment extends AppBaseFragment {
         return view;
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -98,8 +98,18 @@ public class HomePageFragment extends AppBaseFragment {
         mBanner.setDelayTime(2000);
         //设置指示器位置
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
+        //设置Banner的点击事件
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
+
+
         //开始banner展示
         mBanner.start();
+
 
     }
 

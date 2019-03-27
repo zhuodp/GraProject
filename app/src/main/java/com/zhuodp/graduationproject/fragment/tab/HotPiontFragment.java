@@ -1,5 +1,6 @@
 package com.zhuodp.graduationproject.fragment.tab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.global.Constant;
 
 
@@ -57,6 +59,9 @@ public class HotPiontFragment extends AppBaseFragment {
 
     @OnClick(R.id.tv_tab_more_hot_point)
     public void onClick4MoreHotPoint(){
+        //TODO 利用intent携带分类数据
+        Intent intent = new Intent(getActivity(), MovieListActivity.class);
+        startActivity(intent);
         Toast.makeText(getContext(),"查看更多热点",Toast.LENGTH_SHORT).show();
     }
 

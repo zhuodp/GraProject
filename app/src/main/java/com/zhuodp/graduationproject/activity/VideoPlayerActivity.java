@@ -112,7 +112,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
 
 
 
-    //****************************************以下，debugActivity的生命周期，与video进行同步*********************************************
+    //****************************************以下，VideoActivity的生命周期，与video进行同步*********************************************
     @Override
     public void onBackPressed(){
         if (orientationUtils != null){
