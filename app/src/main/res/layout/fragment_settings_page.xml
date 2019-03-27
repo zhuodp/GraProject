@@ -9,8 +9,16 @@
     <RelativeLayout
         android:id="@+id/rl_login_fragment_user_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/app_200dp">
 
+        <com.zhuodp.graduationproject.utils.view.CircleImageView
+            android:layout_width="@dimen/app_100dp"
+            android:layout_height="@dimen/app_100dp"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:layout_marginTop="@dimen/app_20dp"
+            android:src="@drawable/test_image"
+            android:scaleType="fitXY"
+            />
 
     </RelativeLayout>
 
