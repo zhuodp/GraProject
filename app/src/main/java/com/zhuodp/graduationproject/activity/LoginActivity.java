@@ -19,6 +19,10 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
+/**
+ *  登陆界面的Activiy
+ *  包含了注册和登录等与Bmob有关的逻辑
+ */
 public class LoginActivity extends AppBaseActivity {
 
     CustomDialogManager mCustomDialogManager = CustomDialogManager.getInstance();

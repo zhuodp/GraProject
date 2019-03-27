@@ -9,17 +9,35 @@
     <RelativeLayout
         android:id="@+id/rl_login_fragment_user_area"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_200dp">
+        android:layout_height="@dimen/app_150dp">
 
         <com.zhuodp.graduationproject.utils.view.CircleImageView
-            android:layout_width="@dimen/app_100dp"
-            android:layout_height="@dimen/app_100dp"
+            android:id="@+id/circle_iv_user_pic"
+            android:layout_width="@dimen/app_90dp"
+            android:layout_height="@dimen/app_90dp"
             android:layout_marginLeft="@dimen/app_20dp"
             android:layout_marginTop="@dimen/app_20dp"
-            android:src="@drawable/test_image"
+            android:layout_centerVertical="true"
+            android:src="@color/blue_E0F0FF"
             android:scaleType="fitXY"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/circle_iv_user_pic"
+            android:text="您尚未进行登陆"
+            android:textSize="@dimen/app_font_size_19"
+            android:layout_marginTop="@dimen/app_50dp"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_1dp"
+            android:background="@drawable/black_background"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <ListView
