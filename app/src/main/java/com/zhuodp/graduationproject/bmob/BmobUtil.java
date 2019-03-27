@@ -112,16 +112,20 @@ public class BmobUtil {
     /**
      * 获取当前用户以及用户属性
      */
-    public static void getCurrentUserCache(){
-        /*if (BmobUser.isLogin()) {
-            User user = BmobUser.getCurrentUser(User.class);
-            Snackbar.make(, "当前用户：" + user.getUsername() + "-" + user.getAge(), Snackbar.LENGTH_LONG).show();
+    public static User getCurrentUserCache() {
+        if (BmobUser.isLogin()) {
+            return BmobUser.getCurrentUser(User.class);
+            /*Snackbar.make(, "当前用户：" + user.getUsername() + "-" + user.getAge(), Snackbar.LENGTH_LONG).show();
+
             String username = (String) BmobUser.getObjectByKey("username");
             Integer age = (Integer) BmobUser.getObjectByKey("age");
             Snackbar.make(view, "当前用户属性：" + username + "-" + age, Snackbar.LENGTH_LONG).show();
         } else {
             Snackbar.make(view, "尚未登录，请先登录", Snackbar.LENGTH_LONG).show();
         }*/
+        }else{
+           return null;
+        }
     }
 
     /**

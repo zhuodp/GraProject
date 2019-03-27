@@ -17,7 +17,8 @@
         android:id="@+id/iv_drawer_user_pic"
         android:layout_width="@dimen/app_80dp"
         android:layout_height="@dimen/app_80dp"
-        android:src="@color/blue_4ea0e5"
+        android:src="@drawable/black_background"
+        android:onClick="onUserPicClick"
         app:radius="@dimen/app_20dp" />
 
     <TextView

@@ -1,10 +1,8 @@
 package com.zhuodp.graduationproject.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,7 +18,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,20 +31,20 @@ import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.utils.BaseHandler;
+import com.zhuodp.graduationproject.utils.view.CircleImageView;
 import com.zhuodp.graduationproject.utils.view.GraphicView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 
 public class MainActivity extends AppBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private HomePageFragment mHomePageFragment;
     private SettingPageFragment mSettingPageFragment;
     private DiscoverPageFragment mDiscoverPageFragment;
-    View mDrawerHeaderView;
-    RoundAngleImageView mUserPic;
-    TextView mUserName;
+    View mDrawerHeaderView;//抽屉头部View
+    RoundAngleImageView mUserPicInDrawer;//抽屉中的用户头像
+    TextView mUserName; //抽屉中的用户名
 
     //顶部栏
     @BindView(R.id.toolbar)
@@ -96,12 +93,12 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //绑定控件并初始化
+        initViews();
         //初始化菜单栏等控件
         initSettings();
         //默认显示第一个fragment
         initFragments(0);
-        //初始化无法用butterknige找到的view
-        initViewAndListener();
     }
 
     @Override
@@ -128,12 +125,10 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -144,21 +139,14 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
         } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_send) {
-
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return false;
     }
@@ -170,7 +158,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         switch (resultCode){
             // 从LoginActivity返回的用户数据，在此更新UI
             case Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO :
-                Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).into(mUserPic);
+                //更新抽屉中的UI
+                Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).into(mUserPicInDrawer);
                 mUserName.setText(data.getStringExtra(Constant.DATA_USER_NAME));
                 break;
             default:
@@ -178,7 +167,21 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         }
     }
 
-
+    //用户头像点击事件
+    public void onUserPicClick(View view){
+        if (BmobUtil.isLogin()){
+            Toast.makeText(getBaseContext(),"当前点击操作为退出登陆",Toast.LENGTH_SHORT).show();
+            //TODO 跳转到用户个人页面
+            BmobUtil.logout();
+            if (mSettingPageFragment!=null){
+                mSettingPageFragment.recoverUserInfo(); //设置也如果已经被加载了，就对其用户部分进行初始化，统一两处的UI
+            }
+            recoverUserInfo(); //初始化抽屉中的用户UI
+        }else{
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivityForResult(intent, Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
+        }
+    }
 
     //初始化菜单栏等组件
     private void initSettings(){
@@ -189,6 +192,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     //初始化Fragments
     private void initFragments(int btnId){
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -237,24 +241,16 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             transaction.hide(mSettingPageFragment);
         }
     }
-    //初始化无法用butterKnife找到的View
-    private void initViewAndListener(){
+
+    private void initViews(){
         mDrawerHeaderView =navigationView.inflateHeaderView(R.layout.nav_header_main);
-        mUserPic = mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
+        mUserPicInDrawer = mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
         mUserName = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
-        mUserPic.setOnClickListener(v -> {
-            Log.d("MainActivity","点击了Drawer中的头像");
-            if (BmobUtil.isLogin()){
-                //TODO 跳转到用户个人页面
-                Toast.makeText(getBaseContext(),"个人页面待开发，当前点击头像为登出账号",Toast.LENGTH_SHORT).show();
-                BmobUtil.logout();
-                mUserName.setText("未登录");
-                mUserPic.setBackgroundColor(getBaseContext().getResources().getColor(R.color.B2_20_trans));
-            }else{
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivityForResult(intent, Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
-            }
-        });
+    }
+
+    public void recoverUserInfo(){
+        mUserName.setText("未登录");
+        mUserPicInDrawer.setImageResource(R.drawable.black_background);
     }
 
     static class MyHandler extends BaseHandler{
