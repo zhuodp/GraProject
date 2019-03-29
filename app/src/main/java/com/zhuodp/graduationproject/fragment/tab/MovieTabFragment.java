@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 
-public class CollectionFragment extends AppBaseFragment {
+public class MovieTabFragment extends AppBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        return inflater.inflate(R.layout.tab_layout_collection_fragment,container,false);
+        return inflater.inflate(R.layout.tab_layout_movie_fragmemt,container,false);
     }
 
 }

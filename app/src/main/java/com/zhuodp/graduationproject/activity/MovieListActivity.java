@@ -37,7 +37,7 @@ public class MovieListActivity extends AppBaseActivity {
     private MovieListAdapter mMovieListAdapter;
     private List<Movie> mTestMovieList;
 
-    private String mSelectionType="";
+    private String mSelectionType=Constant.DATA_MOVIE_TYPE_NONE;
 
     private String mTestPicUrl = "https://b-ssl.duitang.com/uploads/item/201605/11/20160511103527_yzHMj.jpeg";
 
@@ -69,7 +69,7 @@ public class MovieListActivity extends AppBaseActivity {
     //查找电影列表
     public void getMovie(Context context) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
-        if (!mSelectionType.equals("none")){
+        if (!mSelectionType.equals(Constant.DATA_MOVIE_TYPE_NONE)){
             bmobQuery.addWhereEqualTo("selectType",mSelectionType);
         }
         bmobQuery.findObjects(new FindListener<Movie>() {

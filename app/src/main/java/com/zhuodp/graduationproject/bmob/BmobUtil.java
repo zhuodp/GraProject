@@ -27,13 +27,15 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
+ *   zhuodp 2019/3/29
+ *
  *  1.根据账号密码注册signUp
  *  2.根据账号密码登陆login
  *  3.判断当前是否有用户登陆
  *  4.获取用户属性
  *  5.提供旧密码设置新密码 updatePassword
  *  6.登出 logout
- *
+ *  7.继承其他定制(只适用于本项目特定场景)方法
  */
 public class BmobUtil {
 

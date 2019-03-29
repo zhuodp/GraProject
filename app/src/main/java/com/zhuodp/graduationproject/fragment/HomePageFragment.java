@@ -16,9 +16,9 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.fragment.tab.CollectionFragment;
-import com.zhuodp.graduationproject.fragment.tab.HotPiontFragment;
-import com.zhuodp.graduationproject.fragment.tab.MovieFragment;
+import com.zhuodp.graduationproject.fragment.tab.CollectionTabFragment;
+import com.zhuodp.graduationproject.fragment.tab.HotPiontTabFragment;
+import com.zhuodp.graduationproject.fragment.tab.MovieTabFragment;
 import com.zhuodp.graduationproject.utils.GlideImageLoader;
 
 import java.util.ArrayList;
@@ -115,9 +115,9 @@ public class HomePageFragment extends AppBaseFragment {
 
     private void initTabFragments(){
         mTabsFragments = new ArrayList<Fragment>();
-        mTabsFragments.add(new HotPiontFragment());
-        mTabsFragments.add(new CollectionFragment());
-        mTabsFragments.add(new MovieFragment());
+        mTabsFragments.add(new HotPiontTabFragment());
+        mTabsFragments.add(new CollectionTabFragment());
+        mTabsFragments.add(new MovieTabFragment());
 
         mHomePageTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

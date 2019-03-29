@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 //TODO Banner实现
-public class HotPiontFragment extends AppBaseFragment {
+public class HotPiontTabFragment extends AppBaseFragment {
 
 
     @BindView(R.id.tv_tab_more_hot_point)

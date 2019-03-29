@@ -70,18 +70,18 @@ public class DebugActivity extends AppBaseActivity {
         setContentView(R.layout.activity_debug);
         mResultMovieList = new ArrayList<>();
     }
-
+    //进入视频详情页
     public void onEnterVideoPlayerPage(View view){
         Intent intent = new Intent(DebugActivity.this,VideoPlayerActivity.class);
         startActivity(intent);
     }
-
+    //进入视频列表
     public void onEnterMovieList(View view){
         Intent intent = new Intent(DebugActivity.this, MovieListActivity.class);
-        intent.putExtra(Constant.KEY_MOVIE_SELECT,"none");
+        intent.putExtra(Constant.KEY_MOVIE_SELECT,Constant.DATA_MOVIE_TYPE_NONE);
         startActivity(intent);
     }
-
+    //更新Bmob上的视频表
     public void onMovieListUpdate(View view){
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
         bmobQuery.findObjects(new FindListener<Movie>() {
@@ -107,6 +107,23 @@ public class DebugActivity extends AppBaseActivity {
             }
         });
     }
+    //弹出个性签名设置的弹窗
+    public void onSetUserSignature(View view){
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_DATA_SETTING_DIALOG);
+        customDialogManager.setDialogDismissOnTouchOutside(true);
+        customDialogManager.setDataSettingButtonText("确认修改");
+        customDialogManager.setOnDataSettingDialogListener(CustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM,new CustomDialogManager.OnDataSettingDialogListener() {
+            @Override
+            public void onDataSettingDialogClick(String data) {
+                //确认按钮
+                //TODO 更新UI
+                Toast.makeText(getApplicationContext(),"个性签名："+data,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 
     private void upDate(){

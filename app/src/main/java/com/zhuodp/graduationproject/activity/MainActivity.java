@@ -43,7 +43,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     private SettingPageFragment mSettingPageFragment;
     private DiscoverPageFragment mDiscoverPageFragment;
     View mDrawerHeaderView;//抽屉头部View
-    RoundAngleImageView mUserPicInDrawer;//抽屉中的用户头像
+    CircleImageView mUserPicInDrawer;//抽屉中的用户头像
     TextView mUserName; //抽屉中的用户名
 
     //顶部栏
@@ -159,7 +159,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             // 从LoginActivity返回的用户数据，在此更新UI
             case Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO :
                 //更新抽屉中的UI
-                Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).into(mUserPicInDrawer);
+                Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).asBitmap().into(mUserPicInDrawer);
                 mUserName.setText(data.getStringExtra(Constant.DATA_USER_NAME));
                 break;
             default:
@@ -250,7 +250,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
     public void recoverUserInfo(){
         mUserName.setText("未登录");
-        mUserPicInDrawer.setImageResource(R.drawable.black_background);
+        Glide.with(getBaseContext()).load(R.drawable.user_pic_test).asBitmap().into(mUserPicInDrawer);
     }
 
     static class MyHandler extends BaseHandler{

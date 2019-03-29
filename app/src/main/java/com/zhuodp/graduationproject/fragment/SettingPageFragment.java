@@ -40,7 +40,7 @@ public class SettingPageFragment extends AppBaseFragment {
     ListView mSettingListView;
 
     @BindView(R.id.circle_iv_user_pic)
-    CircleImageView mUserPic;
+    CircleImageView mSettingPageUserPic;
 
     @BindView(R.id.tv_setting_page_user_name)
     TextView mUserName;
@@ -48,7 +48,7 @@ public class SettingPageFragment extends AppBaseFragment {
     @BindView(R.id.tv_setting_page_user_signature)
     TextView mUserSignature;
     //抽屉中的用户头像
-    RoundAngleImageView mDrawerUserPic;
+    CircleImageView mDrawerUserPic;
     //抽屉中的用户名
     TextView mDrawerUserName;
 
@@ -72,10 +72,10 @@ public class SettingPageFragment extends AppBaseFragment {
         //如果已经登陆，则更新用户信息，否则初始化
         if (BmobUtil.isLogin()){
             User currentUser = BmobUtil.getCurrentUserCache();
-            Glide.with(getContext()).load(currentUser.getUserPicUrl()).into(mUserPic);
+            Glide.with(getContext()).load(currentUser.getUserPicUrl()).asBitmap().into(mSettingPageUserPic);
             mUserName.setText(currentUser.getUsername());
             //TODO 加入签名设置的逻辑
-            mUserSignature.setText("");
+            mUserSignature.setText("未设置个性签名");
         }else{
             recoverUserInfo();
         }
@@ -123,8 +123,10 @@ public class SettingPageFragment extends AppBaseFragment {
 
     //初始化用户信息（若在抽屉中推出，）
     public void recoverUserInfo(){
-        mUserPic.setImageResource(R.drawable.black_background);
-        mDrawerUserPic.setImageResource(R.drawable.black_background);
+        //mSettingPageUserPic.setImageResource(R.drawable.user_pic_test);
+        //mDrawerUserPic.setImageResource(R.drawable.user_pic_test);
+        Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mSettingPageUserPic);
+        Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mDrawerUserPic);
         mUserName.setText(R.string.not_login_tip_1);
         mUserSignature.setText(R.string.not_login_tip_2);
         mDrawerUserName.setText(R.string.not_login_tip_1);
