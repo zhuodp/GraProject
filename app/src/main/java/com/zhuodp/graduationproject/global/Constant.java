@@ -15,6 +15,10 @@ public class Constant {
     public static final String DATA_USER_PIC_URL = "DATA_USER_PIC_URL";
     public static final String DATA_USER_NAME = "DATA_USER_NAME";
 
+    //用于开启MovieListActivity时，进行影片筛选的字段
+    public static final String KEY_MOVIE_SELECT ="KEY_MOVIE_SELECT";
+    public static final String DATA_MOVIE_SELECT_HOT_PIONT = "DATA_MOVIE_SELECT_HOT_PIONT";//热点
+    public static final String DATA_MOVIE_TYPE_LATEST = "DATA_MOVIE_TYPE_LATEST";//最近更新
 
     public static final String MOVIE_URL_TEST ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553631228268&di=b84e3a506622b15090d174fe6e77c98d&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2Fn1%2Fg7%2FM03%2F08%2F12%2FrBEHZlB2PdsIAAAAAAA-q-MimnwAABrKQOArdYAAD7D526.jpg";
 

@@ -1,9 +1,11 @@
 package com.zhuodp.graduationproject.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -11,6 +13,7 @@ import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.adapter.MovieListAdapter;
 import com.zhuodp.graduationproject.entity.Movie;
+import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.helper.StaggeredDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -32,9 +35,9 @@ public class MovieListActivity extends AppBaseActivity {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private MovieListAdapter mMovieListAdapter;
-
-
     private List<Movie> mTestMovieList;
+
+    private String mSelectionType="";
 
     private String mTestPicUrl = "https://b-ssl.duitang.com/uploads/item/201605/11/20160511103527_yzHMj.jpeg";
 
@@ -43,7 +46,13 @@ public class MovieListActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
         mTestMovieList = new ArrayList<Movie>();
+
+        if (getIntent().getStringExtra(Constant.KEY_MOVIE_SELECT)!=null){
+            mSelectionType =getIntent().getStringExtra(Constant.KEY_MOVIE_SELECT);
+        };
+        Log.e("debug",mSelectionType);
         getMovie(this);
+
     }
 
     //初始化列表
@@ -60,6 +69,9 @@ public class MovieListActivity extends AppBaseActivity {
     //查找电影列表
     public void getMovie(Context context) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
+        if (!mSelectionType.equals("none")){
+            bmobQuery.addWhereEqualTo("selectType",mSelectionType);
+        }
         bmobQuery.findObjects(new FindListener<Movie>() {
             @Override
             public void done(List<Movie> list, BmobException e) {

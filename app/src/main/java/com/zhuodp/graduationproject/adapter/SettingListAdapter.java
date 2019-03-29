@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.entity.item.SettingItem;
+import com.zhuodp.graduationproject.entity.SettingItem;
 
 import java.util.List;
 

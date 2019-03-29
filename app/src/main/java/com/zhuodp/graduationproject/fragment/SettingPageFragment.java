@@ -18,7 +18,7 @@ import com.zhuodp.graduationproject.activity.LoginActivity;
 import com.zhuodp.graduationproject.adapter.SettingListAdapter;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
 import com.zhuodp.graduationproject.debug.DebugActivity;
-import com.zhuodp.graduationproject.entity.item.SettingItem;
+import com.zhuodp.graduationproject.entity.SettingItem;
 import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.utils.view.CircleImageView;
