@@ -54,7 +54,7 @@ public class SettingListAdapter extends BaseAdapter {
         viewHolder viewHolder;
         if (view == null)
         {
-            convertView= LayoutInflater.from(context).inflate(R.layout.fragment_settings_page_lv_item,null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.item_lv_fragment_settings_list,null);
             viewHolder=new viewHolder();
             viewHolder.itemName =(TextView)convertView.findViewById(R.id.tv_fragment_setting_item);
             viewHolder.itemImageId =(ImageView)convertView.findViewById(R.id.iv_fragment_setting_item);

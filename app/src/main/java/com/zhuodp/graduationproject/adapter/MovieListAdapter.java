@@ -62,5 +62,13 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
             moviePic = itemView.findViewById(R.id.iv_movie_pic_movie_list);
             movieName = itemView.findViewById(R.id.tv_movie_name_movie_list);
         }
+
+        public RoundAngleImageView getMoviePic() {
+            return moviePic;
+        }
+
+        public TextView getMovieName() {
+            return movieName;
+        }
     }
 }

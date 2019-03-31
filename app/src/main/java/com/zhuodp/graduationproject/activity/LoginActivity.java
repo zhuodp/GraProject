@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.bmob.BmobUtil;
 import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.global.Constant;
 
@@ -128,7 +127,7 @@ public class LoginActivity extends AppBaseActivity {
         final User user = new User();
         user.setUsername(account);
         user.setPassword(password);
-        user.setUserPicUrl(Constant.MOVIE_URL_TEST);
+        user.setUserPicUrl(Constant.MOVIE_PIC_URL_TEST);
         user.signUp(new SaveListener<User>() {
             @Override
             public void done(User user, BmobException e) {

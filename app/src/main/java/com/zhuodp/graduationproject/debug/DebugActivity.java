@@ -2,7 +2,6 @@ package com.zhuodp.graduationproject.debug;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +14,12 @@ import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
-import com.zhuodp.graduationproject.utils.view.GraphicView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
@@ -30,8 +27,6 @@ import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 public class DebugActivity extends AppBaseActivity {
 
@@ -78,7 +73,7 @@ public class DebugActivity extends AppBaseActivity {
     //进入视频列表
     public void onEnterMovieList(View view){
         Intent intent = new Intent(DebugActivity.this, MovieListActivity.class);
-        intent.putExtra(Constant.KEY_MOVIE_SELECT,Constant.DATA_MOVIE_TYPE_NONE);
+        intent.putExtra(Constant.ACTION_MOVIE_SELECT,Constant.DATA_MOVIE_TYPE_NONE);
         startActivity(intent);
     }
     //更新Bmob上的视频表

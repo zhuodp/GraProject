@@ -30,7 +30,7 @@ public class AppBaseActivity extends AppCompatActivity {
         /*Movie movie = new Movie("哈哈",
                 actors,"2018",
                 "没有介绍",
-                Constant.MOVIE_URL_TEST);
+                Constant.MOVIE_PIC_URL_TEST);
         movie.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {

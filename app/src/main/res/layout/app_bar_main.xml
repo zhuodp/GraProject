@@ -15,24 +15,40 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_40dp"
-            android:background="#000000"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="@dimen/app_38dp"
+            android:background="@color/blue_3f78a8"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_toolbar_search_content"
+                    android:layout_width="@dimen/app_189dp"
+                    android:layout_height="@dimen/app_20dp"
+                    android:hint="输入电影名称进行搜索"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/app_5dp"
+                    android:textColor="#000"
+                    android:background="#fff" />
+
+                <Button
+                    android:id="@+id/btn_toolbar_search"
+                    android:layout_width="@dimen/app_30dp"
+                    android:layout_height="@dimen/app_34dp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <include
         android:id="@+id/include_content_main"
         layout="@layout/content_main"
         />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -2,7 +2,7 @@ package com.zhuodp.graduationproject.global;
 
 public class Constant {
 
-    //之时各种状态 1~100
+    //指示各种状态 1~100
     public static final int ACTIVITY_GONE = 1;
     public static final int FRAGMENT_GONE = 2;
 
@@ -15,13 +15,23 @@ public class Constant {
     public static final String DATA_USER_PIC_URL = "DATA_USER_PIC_URL";
     public static final String DATA_USER_NAME = "DATA_USER_NAME";
 
+    public static final String DATA_MOVIE_NAME = "DATA_MOVIE_NAME";
+    public static final String DATA_MOVIE_PIC_URL = "DATA_MOVIE_PIC_URL";
+    public static final String DATA_MOVIE_PUBLISH_DATE= "DATA_MOVIE_MOVIE_PUBLISH_DATE";
+    public static final String DATA_MOVIE_INTRO= "DATA_MOVIE_INTRO";
+    public static final String DATA_MOVIE_ACTORS= "DATA_MOVIE_ACTORS";
+    public static final String DATA_MOVIE_URL = "DATA_MOVIE_URL";
+
     //用于开启MovieListActivity时，进行影片筛选的字段
-    public static final String KEY_MOVIE_SELECT ="KEY_MOVIE_SELECT";
+    public static final String ACTION_MOVIE_SELECT ="ACTION_MOVIE_SELECT";
+    public static final String ACTION_MOVIE_SEARCH = "ACTION_MOVIE_SEARCH";
+
     public static final String DATA_MOVIE_SELECT_HOT_PIONT = "DATA_MOVIE_SELECT_HOT_PIONT";//热点
     public static final String DATA_MOVIE_TYPE_LATEST = "DATA_MOVIE_TYPE_LATEST";//最近更新
     public static final String DATA_MOVIE_TYPE_NONE = "DATA_MOVIE_TYPE_NONE"; //默认不属于任何标签
 
-    public static final String MOVIE_URL_TEST ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553631228268&di=b84e3a506622b15090d174fe6e77c98d&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2Fn1%2Fg7%2FM03%2F08%2F12%2FrBEHZlB2PdsIAAAAAAA-q-MimnwAABrKQOArdYAAD7D526.jpg";
+    public static final String MOVIE_PIC_URL_TEST ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553631228268&di=b84e3a506622b15090d174fe6e77c98d&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2Fn1%2Fg7%2FM03%2F08%2F12%2FrBEHZlB2PdsIAAAAAAA-q-MimnwAABrKQOArdYAAD7D526.jpg";
+    public static final String MOVIE_URL_TEST = "http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4";
 
     //测试用的电影封面url
     public static final String MOVIE_PIC_URL_1 = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2619168989,2132540114&fm=26&gp=0.jpg";

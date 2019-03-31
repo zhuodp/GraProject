@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,11 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.youdao.lib.dialogs.util.RoundAngleImageView;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
@@ -49,9 +47,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     //顶部栏
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    //邮箱形状悬浮按钮
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+
     //左侧弹出菜单
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -59,11 +55,11 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    @OnClick(R.id.fab)
-    public void onViewClicked(View view){
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
+    @BindView(R.id.et_toolbar_search_content)
+    EditText mEtSearchContent;
+
+    @BindView(R.id.btn_toolbar_search)
+    Button mBtnSearch;
 
     @BindView(R.id.btn_fragment_home_page)
     GraphicView mBtnFragmentHomePage;
@@ -73,6 +69,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
     @BindView(R.id.btn_fragment_settings_page)
     GraphicView mBtnFragmentSettingsPage;
+
 
     @OnClick(R.id.btn_fragment_home_page)
     public void onSwitchToHomePage(){
@@ -87,6 +84,14 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @OnClick(R.id.btn_fragment_settings_page)
     public void onSwitchToSettingsPage(){
         initFragments(2);
+    }
+
+    @OnClick(R.id.btn_toolbar_search)
+    public void onClick4SearchMovie(){
+        Toast.makeText(getBaseContext(),"搜索了"+mEtSearchContent.getText().toString(),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this,MovieListActivity.class);
+        intent.putExtra(Constant.ACTION_MOVIE_SEARCH,mEtSearchContent.getText().toString());
+        startActivity(intent);
     }
 
     @Override
@@ -109,6 +114,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             super.onBackPressed();
         }
     }
+
 
     //创建抽屉菜单
     @Override

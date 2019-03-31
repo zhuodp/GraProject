@@ -61,7 +61,7 @@ public class HotPiontTabFragment extends AppBaseFragment {
     public void onClick4MoreHotPoint(){
         //TODO 利用intent携带分类数据
         Intent intent = new Intent(getActivity(), MovieListActivity.class);
-        intent.putExtra(Constant.KEY_MOVIE_SELECT,Constant.DATA_MOVIE_SELECT_HOT_PIONT);
+        intent.putExtra(Constant.ACTION_MOVIE_SELECT,Constant.DATA_MOVIE_SELECT_HOT_PIONT);
         startActivity(intent);
         Toast.makeText(getContext(),"查看更多热点",Toast.LENGTH_SHORT).show();
     }

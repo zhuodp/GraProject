@@ -16,6 +16,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.fragment.tab.AminTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.CollectionTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.HotPiontTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.MovieTabFragment;
@@ -118,6 +119,8 @@ public class HomePageFragment extends AppBaseFragment {
         mTabsFragments.add(new HotPiontTabFragment());
         mTabsFragments.add(new CollectionTabFragment());
         mTabsFragments.add(new MovieTabFragment());
+        mTabsFragments.add(new AminTabFragment());
+
 
         mHomePageTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -146,6 +149,7 @@ public class HomePageFragment extends AppBaseFragment {
         mHomePageTabLayout.getTabAt(0).setText("热门");
         mHomePageTabLayout.getTabAt(1).setText("剧集");
         mHomePageTabLayout.getTabAt(2).setText("电影");
+        mHomePageTabLayout.getTabAt(3).setText("动漫");
     }
 
 
