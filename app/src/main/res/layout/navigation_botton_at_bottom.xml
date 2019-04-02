@@ -18,7 +18,7 @@
         graphic:selectedTextColor="@color/color_4371FF"
         graphic:selectedDrawableColor="@color/color_4371FF"
         graphic:textSize="@dimen/app_font_size_10"
-        graphic:textColor="@color/color_B6B9C1"
+        graphic:textColor="#8a8a8a"
         graphic:bottomText="发现"
         graphic:topDrawable="@drawable/pic_navigation_collection"
         />
@@ -36,7 +36,7 @@
         graphic:selectedTextColor="@color/color_4371FF"
         graphic:selectedDrawableColor="@color/color_4371FF"
         graphic:textSize="@dimen/app_font_size_10"
-        graphic:textColor="@color/color_B6B9C1"
+        graphic:textColor="#8a8a8a"
         graphic:topDrawable="@drawable/pic_navigation_home"
         />
 
@@ -53,7 +53,7 @@
         graphic:selectedDrawableColor="@color/color_4371FF"
         graphic:bottomText="设置"
         graphic:textSize="@dimen/app_font_size_10"
-        graphic:textColor="@color/color_B6B9C1"
+        graphic:textColor="#8a8a8a"
         graphic:topDrawable="@drawable/pic_navigation_setting"
         />
 

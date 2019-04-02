@@ -14,6 +14,7 @@ import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.MainActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.entity.User;
+import com.zhuodp.graduationproject.global.Constant;
 
 import java.util.List;
 
@@ -139,15 +140,17 @@ public class BmobUtil {
     /**
      * 更新用户操作并同步更新本地的用户信息
      */
-    public static void updateUser(final View view) {
+    public static void updateUser(Context context,String userSignature,TextView ui) {
         final User user = BmobUser.getCurrentUser(User.class);
+        user.setUserSignature(userSignature);
         user.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    Snackbar.make(view, "更新用户信息成功：" , Snackbar.LENGTH_LONG).show();
+                    ui.setText(userSignature);
+                    Toast.makeText(context,"个性签名更新成功",Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(view, "更新用户信息失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(context,"个性签名更新失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
                     Log.e("error", e.getMessage());
                 }
             }

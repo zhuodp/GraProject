@@ -11,6 +11,15 @@ import cn.bmob.v3.BmobUser;
 public class User extends BmobUser {
 
     private String userPicUrl = "";
+    private String userSignature = "个性签名未设置";
+
+    public String getUserSignature() {
+        return userSignature;
+    }
+
+    public void setUserSignature(String userSignature) {
+        this.userSignature = userSignature;
+    }
 
     public void setUserPicUrl(String userPicUrl) {
         this.userPicUrl = userPicUrl;

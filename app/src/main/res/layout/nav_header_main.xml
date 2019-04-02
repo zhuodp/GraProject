@@ -29,7 +29,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_drawer_user_signature"
         android:layout_below="@id/tv_drawer_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,5 +37,16 @@
         android:textSize="@dimen/app_font_size_13"
         android:gravity="center_vertical"
         android:text="个性签名未设置"/>
+
+    <Button
+        android:id="@+id/btn_drawer_edit"
+        android:layout_width="@dimen/app_22dp"
+        android:layout_height="@dimen/app_22dp"
+        android:background="@drawable/icon_edit_blue"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tv_drawer_user_signature"
+        android:layout_marginRight="@dimen/app_20dp"
+        android:layout_marginBottom="@dimen/app_5dp"
+        android:onClick="onEditUserSignature"/>
 
 </RelativeLayout>

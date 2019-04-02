@@ -1,9 +1,7 @@
 package com.zhuodp.graduationproject.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
@@ -28,7 +27,6 @@ import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
 import com.zhuodp.graduationproject.global.Constant;
-import com.zhuodp.graduationproject.utils.BaseHandler;
 import com.zhuodp.graduationproject.utils.view.CircleImageView;
 import com.zhuodp.graduationproject.utils.view.GraphicView;
 
@@ -40,9 +38,12 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     private HomePageFragment mHomePageFragment;
     private SettingPageFragment mSettingPageFragment;
     private DiscoverPageFragment mDiscoverPageFragment;
+
     View mDrawerHeaderView;//抽屉头部View
     CircleImageView mUserPicInDrawer;//抽屉中的用户头像
     TextView mUserName; //抽屉中的用户名
+    Button mBtnEditSignature;//编辑个性签名按钮
+    TextView mTvUserSignature;//用户个性签名展示
 
     //顶部栏
     @BindView(R.id.toolbar)
@@ -85,6 +86,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     public void onSwitchToSettingsPage(){
         initFragments(2);
     }
+
 
     @OnClick(R.id.btn_toolbar_search)
     public void onClick4SearchMovie(){
@@ -188,6 +190,24 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             startActivityForResult(intent, Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
         }
     }
+    //点击编辑用户签名
+    public void onEditUserSignature(View view){
+        //弹出个性签名修改弹窗
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_DATA_SETTING_DIALOG);
+        customDialogManager.setDialogDismissOnTouchOutside(true);
+        customDialogManager.setDataSettingButtonText("确认修改");
+        customDialogManager.setDataSettingHint("编辑新的个性签名");
+        customDialogManager.setOnDataSettingDialogListener(CustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM,new CustomDialogManager.OnDataSettingDialogListener() {
+            @Override
+            public void onDataSettingDialogClick(String userSignature) {
+                //确认按钮
+                //TODO 更新UI + 数据库
+                BmobUtil.updateUser(getBaseContext(),userSignature,mTvUserSignature);
+            }
+        });
+        customDialogManager.showDialog(getBaseContext());
+    }
 
     //初始化菜单栏等组件
     private void initSettings(){
@@ -206,6 +226,9 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         hideFragment(transaction);
         switch (btnId){
             case 0:
+                mBtnFragmentHomePage.setClick(true);
+                mBtnFragmentDiscoverPage.setClick(false);
+                mBtnFragmentSettingsPage.setClick(false);
                 if (mHomePageFragment==null){
                     mHomePageFragment = new HomePageFragment();
                     transaction.add(R.id.content_main_for_each_fragment,mHomePageFragment);
@@ -214,6 +237,9 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
                 }
                 break;
             case 1:
+                mBtnFragmentHomePage.setClick(false);
+                mBtnFragmentDiscoverPage.setClick(true);
+                mBtnFragmentSettingsPage.setClick(false);
                 if (mDiscoverPageFragment==null){
                     mDiscoverPageFragment = new DiscoverPageFragment();
                     transaction.add(R.id.content_main_for_each_fragment,mDiscoverPageFragment);
@@ -222,6 +248,9 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
                 }
                 break;
             case 2:
+                mBtnFragmentHomePage.setClick(false);
+                mBtnFragmentDiscoverPage.setClick(false);
+                mBtnFragmentSettingsPage.setClick(true);
                 if (mSettingPageFragment==null){
                     mSettingPageFragment = new SettingPageFragment();
                     transaction.add(R.id.content_main_for_each_fragment,mSettingPageFragment);
@@ -252,21 +281,13 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         mDrawerHeaderView =navigationView.inflateHeaderView(R.layout.nav_header_main);
         mUserPicInDrawer = mDrawerHeaderView.findViewById(R.id.iv_drawer_user_pic);
         mUserName = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
+        mBtnEditSignature = mDrawerHeaderView.findViewById(R.id.btn_drawer_edit);
+        mTvUserSignature = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_signature);
     }
 
     public void recoverUserInfo(){
         mUserName.setText("未登录");
         Glide.with(getBaseContext()).load(R.drawable.user_pic_test).asBitmap().into(mUserPicInDrawer);
-    }
-
-    static class MyHandler extends BaseHandler{
-
-        public MyHandler(Activity activity){
-            super(activity);
-        }
-        @Override
-        public void handleMessage(Message msg, int what) {
-        }
     }
 
 }

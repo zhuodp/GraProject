@@ -8,12 +8,21 @@ import cn.bmob.v3.BmobObject;
 public class Movie extends BmobObject {
 
 
-    private String movieName;
-    private String[] actors;
-    private String selectType;
-    private String introduction;
-    private String picUrl;
-    private String publishedDate;
+    private String movieName; //电影名
+    private String[] actors; //演员
+    private String selectType; //列表筛选标签
+    private String introduction; //简介
+    private String picUrl; //封面url
+    private String publishedDate; //上映日期
+    private boolean isFavor; //是否收藏
+
+    public boolean isFavor() {
+        return isFavor;
+    }
+
+    public void setFavor(boolean favor) {
+        isFavor = favor;
+    }
 
     public String getSelectType() {
         return selectType;
