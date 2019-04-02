@@ -109,7 +109,8 @@ public class LoginActivity extends AppBaseActivity {
                     Intent userInfo = new Intent();//返回给MainActivity
                     userInfo.putExtra(Constant.DATA_USER_PIC_URL,user.getUserPicUrl());
                     userInfo.putExtra(Constant.DATA_USER_NAME,user.getUsername());
-                    setResult(Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO,userInfo);
+                    userInfo.putExtra(Constant.DATA_USER_SIGNATURE,user.getUserSignature());
+                    setResult(Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO,userInfo);
                     finish();//推出登陆Activity，返回到MainActivity
                 } else {
                     Toast.makeText(context,"登陆失败"+e.getMessage(),Toast.LENGTH_SHORT).show();

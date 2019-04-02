@@ -201,6 +201,27 @@ public class BmobUtil {
         });
     }
 
+    //更新电影的是否为收藏的属性
+    public static void updateMovieFavorState(Context context,String movieObjectId,boolean isFavor){
+        BmobQuery<Movie> bmobQuery = new BmobQuery<>();
+        bmobQuery.getObject(movieObjectId, new QueryListener<Movie>() {
+            @Override
+            public void done(Movie movie, BmobException e) {
+                movie.setFavor(isFavor);
+                movie.update(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null){
+                            Toast.makeText(context,"更新成功",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context,"更新失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 
 
 }

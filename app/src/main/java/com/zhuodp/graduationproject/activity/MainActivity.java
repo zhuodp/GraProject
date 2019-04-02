@@ -165,10 +165,11 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode){
             // 从LoginActivity返回的用户数据，在此更新UI
-            case Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO :
+            case Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO:
                 //更新抽屉中的UI
                 Glide.with(getBaseContext()).load(data.getStringExtra(Constant.DATA_USER_PIC_URL)).asBitmap().into(mUserPicInDrawer);
                 mUserName.setText(data.getStringExtra(Constant.DATA_USER_NAME));
+                mTvUserSignature.setText(data.getStringExtra(Constant.DATA_USER_SIGNATURE));
                 break;
             default:
                 break;
@@ -187,7 +188,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             recoverUserInfo(); //初始化抽屉中的用户UI
         }else{
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivityForResult(intent, Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
+            startActivityForResult(intent, Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
         }
     }
     //点击编辑用户签名
@@ -285,8 +286,10 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         mTvUserSignature = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_signature);
     }
 
+    //初始化用户相关的UI
     public void recoverUserInfo(){
         mUserName.setText("未登录");
+        mTvUserSignature.setText("未设置个性签名");
         Glide.with(getBaseContext()).load(R.drawable.user_pic_test).asBitmap().into(mUserPicInDrawer);
     }
 

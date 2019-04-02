@@ -9,18 +9,21 @@ public class Constant {
     //MainActvitiy中Handler接收的消息 100~199
 
     //startActivityForResult时用到的requestCode
-    public static final int REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO = 200;
+    public static final int RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO = 200;
 
     //用于MainActivity接受到的Intent中的数据项名称 200~299
     public static final String DATA_USER_PIC_URL = "DATA_USER_PIC_URL";
     public static final String DATA_USER_NAME = "DATA_USER_NAME";
+    public static final String DATA_USER_SIGNATURE = "DATA_USER_SIGNATURE";
 
+    public static final String DATA_MOVIE_OBJECT_ID = "DATA_MOVIE_OBJECT_ID";
     public static final String DATA_MOVIE_NAME = "DATA_MOVIE_NAME";
     public static final String DATA_MOVIE_PIC_URL = "DATA_MOVIE_PIC_URL";
     public static final String DATA_MOVIE_PUBLISH_DATE= "DATA_MOVIE_MOVIE_PUBLISH_DATE";
     public static final String DATA_MOVIE_INTRO= "DATA_MOVIE_INTRO";
     public static final String DATA_MOVIE_ACTORS= "DATA_MOVIE_ACTORS";
     public static final String DATA_MOVIE_URL = "DATA_MOVIE_URL";
+    public static final String DATA_MOVIE_IS_FAVOR = "DATA_MOVIE_IS_FAVOR";
 
     //用于开启MovieListActivity时，进行影片筛选的字段
     public static final String ACTION_MOVIE_SELECT ="ACTION_MOVIE_SELECT";

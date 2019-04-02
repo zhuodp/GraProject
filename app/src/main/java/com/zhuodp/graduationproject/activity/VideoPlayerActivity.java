@@ -2,6 +2,7 @@ package com.zhuodp.graduationproject.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -20,22 +22,30 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class VideoPlayerActivity extends AppBaseActivity {
 
     //视频播放相关的成员
     private OrientationUtils orientationUtils;//帮助屏幕旋转
-    private ImageView mMovieCutImage;//视频封面
+    private String mMovieObjectId; //数据库中的为一表示
     private String mMovieUrl= "havent set";//视频链接
     private String mMovieName = "测试视频";
     private String mMoviePicUrl;
     private String mMovieIntro;
     private String[] mMovieActors;
     private String mMoviePublishDate;
+
+    private ImageView mMovieCutImage;//视频封面
 
     //用于标识当前视频播放状态
     private boolean isPause =false;
@@ -66,13 +76,16 @@ public class VideoPlayerActivity extends AppBaseActivity {
     public void onLikeMovie(){
         if (!isMyFavorMovie){
             isMyFavorMovie = true;
-            mIvLike.setBackgroundColor(R.color.B5);
+            mIvLike.setBackgroundColor(R.color.R1);
         }else {
             isMyFavorMovie = false;
             mIvLike.setBackgroundColor(R.color.blue_E0F0FF);
         }
         //TODO 转换喜欢按钮的UI
         //TODO 将喜欢的值更新到服务器中
+        BmobUtil.updateMovieFavorState(getBaseContext(),mMovieObjectId,isMyFavorMovie);
+
+
     }
 
 
@@ -90,6 +103,8 @@ public class VideoPlayerActivity extends AppBaseActivity {
 
     private void getIntentData(){
         Intent intent = getIntent();
+        if (intent.getExtras().get(Constant.DATA_MOVIE_OBJECT_ID)!=null) mMovieObjectId = intent.getExtras().getString(Constant.DATA_MOVIE_OBJECT_ID);
+        else Log.e("VideoPlayer","id is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_URL)!=null) mMovieUrl = intent.getExtras().getString(Constant.DATA_MOVIE_URL);
         else Log.e("VideoPlayer","movieName is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_NAME)!=null) mMovieName = intent.getExtras().getString(Constant.DATA_MOVIE_NAME);
@@ -102,6 +117,8 @@ public class VideoPlayerActivity extends AppBaseActivity {
         else Log.e("VideoPlayer","intro is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_PUBLISH_DATE)!=null) mMoviePublishDate = intent.getExtras().getString(Constant.DATA_MOVIE_PUBLISH_DATE);
         else Log.e("VideoPlayer","date is null");
+        if (intent.getExtras().get(Constant.DATA_MOVIE_IS_FAVOR)!=null) isMyFavorMovie = intent.getExtras().getBoolean(Constant.DATA_MOVIE_IS_FAVOR);
+        else Log.e("VideoPlayer","favor is null");
     }
 
     private void initVideo(){
@@ -163,6 +180,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
         //以下添加mViewPlayer的其他设置
     }
 
+    @SuppressLint("ResourceAsColor")
     private void initUI(){
         mMovieCutImage = new ImageView(this);
         //用Glide载入播放器的初始展示图片
@@ -181,6 +199,11 @@ public class VideoPlayerActivity extends AppBaseActivity {
             }
         }
         mTvMovieActors.setText(actors);
+        if (isMyFavorMovie){
+            mIvLike.setBackgroundColor(R.color.R1);
+        }else {
+            mIvLike.setBackgroundColor(R.color.blue_E0F0FF);
+        }
     }
 
 

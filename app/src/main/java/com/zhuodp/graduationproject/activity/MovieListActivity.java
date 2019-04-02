@@ -71,11 +71,13 @@ public class MovieListActivity extends AppBaseActivity {
         RecyclerViewItemClickSupport.addTo(mMovieRecyclerView).setOnItemClickListener(new RecyclerViewItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                String movieObjectId = mMovieList.get(position).getObjectId();
                 String movieName = mMovieList.get(position).getMovieName();
                 String moviePicUrl = mMovieList.get(position).getPicUrl();
                 String[] movieActors = mMovieList.get(position).getActors();
                 String moviePublishDate = mMovieList.get(position).getPublishedDate();
                 String movieIntro = mMovieList.get(position).getIntroduction();
+                boolean isFavorMovie = mMovieList.get(position).isFavor();
                 Log.e("MovieListAc",movieName);
                 Log.e("MovieListAc",moviePicUrl);
                 Log.e("MovieListAc",movieActors[0]);
@@ -84,12 +86,14 @@ public class MovieListActivity extends AppBaseActivity {
 
 
                 Intent intent = new Intent(MovieListActivity.this,VideoPlayerActivity.class);
+                intent.putExtra(Constant.DATA_MOVIE_OBJECT_ID,movieObjectId);
                 intent.putExtra(Constant.DATA_MOVIE_NAME,movieName);
                 intent.putExtra(Constant.DATA_MOVIE_URL,Constant.MOVIE_URL_TEST);//暂时固定死视频的URL TODO 在数据表中加入视频url连接
                 intent.putExtra(Constant.DATA_USER_PIC_URL,moviePicUrl);
                 intent.putExtra(Constant.DATA_MOVIE_ACTORS,movieActors);
                 intent.putExtra(Constant.DATA_MOVIE_PUBLISH_DATE,moviePublishDate);
                 intent.putExtra(Constant.DATA_MOVIE_INTRO,movieIntro);
+                intent.putExtra(Constant.DATA_MOVIE_IS_FAVOR,isFavorMovie);
 
                 startActivity(intent);
             }
@@ -121,6 +125,7 @@ public class MovieListActivity extends AppBaseActivity {
             }
         });
     }
+
 
 
 }

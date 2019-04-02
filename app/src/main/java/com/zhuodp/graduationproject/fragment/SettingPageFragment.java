@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.youdao.lib.dialogs.util.RoundAngleImageView;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.LoginActivity;
@@ -47,10 +46,14 @@ public class SettingPageFragment extends AppBaseFragment {
 
     @BindView(R.id.tv_setting_page_user_signature)
     TextView mUserSignature;
+
     //抽屉中的用户头像
     CircleImageView mDrawerUserPic;
     //抽屉中的用户名
     TextView mDrawerUserName;
+    //抽屉中的用户个性签名
+    TextView mDrawerUseSignature;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -75,7 +78,7 @@ public class SettingPageFragment extends AppBaseFragment {
             Glide.with(getContext()).load(currentUser.getUserPicUrl()).asBitmap().into(mSettingPageUserPic);
             mUserName.setText(currentUser.getUsername());
             //TODO 加入签名设置的逻辑
-            mUserSignature.setText("未设置个性签名");
+            mUserSignature.setText(currentUser.getUserSignature());
         }else{
             recoverUserInfo();
         }
@@ -85,7 +88,7 @@ public class SettingPageFragment extends AppBaseFragment {
     public void onUserPicClick(){
         if (!BmobUtil.isLogin()){
             Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivityForResult(intent,Constant.REQ_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
+            startActivityForResult(intent,Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
         }else{
             BmobUtil.logout();
             recoverUserInfo();
@@ -95,6 +98,7 @@ public class SettingPageFragment extends AppBaseFragment {
     private void initView(){
         mDrawerUserPic=getActivity().findViewById(R.id.iv_drawer_user_pic);
         mDrawerUserName =getActivity().findViewById(R.id.tv_drawer_user_name);
+        mDrawerUseSignature =getActivity().findViewById(R.id.tv_drawer_user_signature);
     }
 
     private void initData(){
@@ -123,13 +127,12 @@ public class SettingPageFragment extends AppBaseFragment {
 
     //初始化用户信息（若在抽屉中推出，）
     public void recoverUserInfo(){
-        //mSettingPageUserPic.setImageResource(R.drawable.user_pic_test);
-        //mDrawerUserPic.setImageResource(R.drawable.user_pic_test);
         Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mSettingPageUserPic);
         Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mDrawerUserPic);
         mUserName.setText(R.string.not_login_tip_1);
         mUserSignature.setText(R.string.not_login_tip_2);
         mDrawerUserName.setText(R.string.not_login_tip_1);
+        mDrawerUseSignature.setText(R.string.not_login_tip_2);
     }
 
 }
