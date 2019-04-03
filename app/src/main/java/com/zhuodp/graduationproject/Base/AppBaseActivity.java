@@ -70,4 +70,8 @@ public class AppBaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState); 将该回调设置为空实现，避免APP崩溃重启时，出现Fragment重叠的现象
+    }
 }
