@@ -42,7 +42,6 @@ public class MovieListActivity extends AppBaseActivity {
     private String mSelectionType=Constant.DATA_MOVIE_TYPE_NONE;
     private String mSearchKey = null;
 
-    private String mTestPicUrl = "https://b-ssl.duitang.com/uploads/item/201605/11/20160511103527_yzHMj.jpeg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

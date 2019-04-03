@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/app_10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_item_title_collection_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/app_font_size_20"
+        android:layout_marginLeft="@dimen/app_30dp"
+        android:text="瑞秋的电影"
+        android:textStyle="bold"/>
+
+    <com.youdao.lib.dialogs.util.RoundAngleImageView
+        android:id="@+id/iv_item_pic_collection_list"
+        android:layout_below="@id/tv_item_title_collection_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_150dp"
+        android:layout_marginLeft="@dimen/app_20dp"
+        android:layout_marginRight="@dimen/app_20dp"
+        android:elevation="@dimen/app_2dp"
+        app:radius="@dimen/app_15dp"
+        android:src="@drawable/test_image"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="@dimen/app_10dp"/>
+
+</RelativeLayout>

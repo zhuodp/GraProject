@@ -64,6 +64,9 @@
             android:theme="@style/Theme.Design.Light.NoActionBar"
             />
 
+        <activity android:name=".activity.CollectionActivity"
+            android:theme="@style/CollapsingTheme"/>
+
     </application>
 
 </manifest>
