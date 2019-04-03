@@ -137,6 +137,10 @@ public class BmobUtil {
         }
     }
 
+    public static User getCurrentUser(){
+        return BmobUser.getCurrentUser(User.class);
+    }
+
     /**
      * 更新用户操作并同步更新本地的用户信息
      */
@@ -201,8 +205,41 @@ public class BmobUtil {
         });
     }
 
+    public static void addUserFavor(Context context,String movieObjectId){
+        User user = BmobUser.getCurrentUser(User.class);
+        user.addFavor(movieObjectId);
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null){
+                    Toast.makeText(context,"添加喜欢成功",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"添加喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public static void removeUserFavor(Context context,String movieObjectId){
+        User user = BmobUser.getCurrentUser(User.class);
+        user.removeFavor(movieObjectId);
+        for (int i = 0;i<user.getFavorList().size();i++){
+            Log.e("favorlist"+i,user.getFavorList().get(i));
+        }
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null){
+                    Toast.makeText(context,"移除喜欢成功",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"移除喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     //更新电影的是否为收藏的属性
-    public static void updateMovieFavorState(Context context,String movieObjectId,boolean isFavor){
+    /*public static void updateMovieFavorState(Context context,String movieObjectId,boolean isFavor){
         BmobQuery<Movie> bmobQuery = new BmobQuery<>();
         bmobQuery.getObject(movieObjectId, new QueryListener<Movie>() {
             @Override
@@ -220,7 +257,7 @@ public class BmobUtil {
                 });
             }
         });
-    }
+    }*/
 
 
 

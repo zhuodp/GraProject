@@ -1,5 +1,9 @@
 package com.zhuodp.graduationproject.entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -12,6 +16,23 @@ public class User extends BmobUser {
 
     private String userPicUrl = "";
     private String userSignature = "个性签名未设置";
+    private List<String> favorList = new ArrayList<String>(); //用户收藏的电影列表
+
+    public List<String> getFavorList() {
+        return favorList;
+    }
+
+    public void setFavorList(String[] favorList) {
+        this.favorList = Arrays.asList(favorList);
+    }
+
+    public void addFavor(String objectId){
+        favorList.add(objectId);
+    }
+
+    public void removeFavor(String objectId){
+        favorList.remove(favorList.get(favorList.indexOf(objectId)));
+    }
 
     public String getUserSignature() {
         return userSignature;

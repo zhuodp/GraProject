@@ -77,7 +77,6 @@ public class MovieListActivity extends AppBaseActivity {
                 String[] movieActors = mMovieList.get(position).getActors();
                 String moviePublishDate = mMovieList.get(position).getPublishedDate();
                 String movieIntro = mMovieList.get(position).getIntroduction();
-                boolean isFavorMovie = mMovieList.get(position).isFavor();
                 Log.e("MovieListAc",movieName);
                 Log.e("MovieListAc",moviePicUrl);
                 Log.e("MovieListAc",movieActors[0]);
@@ -93,8 +92,6 @@ public class MovieListActivity extends AppBaseActivity {
                 intent.putExtra(Constant.DATA_MOVIE_ACTORS,movieActors);
                 intent.putExtra(Constant.DATA_MOVIE_PUBLISH_DATE,moviePublishDate);
                 intent.putExtra(Constant.DATA_MOVIE_INTRO,movieIntro);
-                intent.putExtra(Constant.DATA_MOVIE_IS_FAVOR,isFavorMovie);
-
                 startActivity(intent);
             }
         });

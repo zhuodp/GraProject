@@ -89,7 +89,7 @@ public class DebugActivity extends AppBaseActivity {
                         if (i%2==0){
                             movie.setSelectType(Constant.DATA_MOVIE_SELECT_HOT_PIONT);
                         }else {
-                            movie.setSelectType("none");
+                            movie.setSelectType(Constant.DATA_MOVIE_TYPE_NONE);
                         }
                         movie.setObjectId(list.get(i).getObjectId());
                         mResultMovieList.add(movie);

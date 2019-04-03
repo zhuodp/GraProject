@@ -2,7 +2,6 @@ package com.zhuodp.graduationproject.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,15 +22,11 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
-import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
-import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.Bmob;
 
 public class VideoPlayerActivity extends AppBaseActivity {
 
@@ -74,17 +69,22 @@ public class VideoPlayerActivity extends AppBaseActivity {
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.iv_player_video_like)
     public void onLikeMovie(){
-        if (!isMyFavorMovie){
-            isMyFavorMovie = true;
-            mIvLike.setBackgroundColor(R.color.R1);
-        }else {
-            isMyFavorMovie = false;
-            mIvLike.setBackgroundColor(R.color.blue_E0F0FF);
-        }
-        //TODO 转换喜欢按钮的UI
-        //TODO 将喜欢的值更新到服务器中
-        BmobUtil.updateMovieFavorState(getBaseContext(),mMovieObjectId,isMyFavorMovie);
+        if (BmobUtil.isLogin()){
+            if (!isMyFavorMovie){
+                isMyFavorMovie = true;
+                mIvLike.setBackgroundResource(R.drawable.icon_is_favor_movie);
+                //TODO 增加当前当前到数据库收藏中
+                BmobUtil.addUserFavor(getBaseContext(),mMovieObjectId);
+            }else {
+                isMyFavorMovie = false;
+                mIvLike.setBackgroundResource(R.drawable.icon_not_favor_movie);
+                BmobUtil.removeUserFavor(getBaseContext(),mMovieObjectId);
+                //TODO 删除当前电影到数据库收藏中
 
+            }
+        }else {
+            Toast.makeText(getBaseContext(),"登陆后才可开启收藏功能，请先登陆",Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -96,12 +96,12 @@ public class VideoPlayerActivity extends AppBaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video_player);
 
-        getIntentData();
+        initData();
         initUI();
         initVideo();
     }
 
-    private void getIntentData(){
+    private void initData(){
         Intent intent = getIntent();
         if (intent.getExtras().get(Constant.DATA_MOVIE_OBJECT_ID)!=null) mMovieObjectId = intent.getExtras().getString(Constant.DATA_MOVIE_OBJECT_ID);
         else Log.e("VideoPlayer","id is null");
@@ -117,8 +117,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
         else Log.e("VideoPlayer","intro is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_PUBLISH_DATE)!=null) mMoviePublishDate = intent.getExtras().getString(Constant.DATA_MOVIE_PUBLISH_DATE);
         else Log.e("VideoPlayer","date is null");
-        if (intent.getExtras().get(Constant.DATA_MOVIE_IS_FAVOR)!=null) isMyFavorMovie = intent.getExtras().getBoolean(Constant.DATA_MOVIE_IS_FAVOR);
-        else Log.e("VideoPlayer","favor is null");
     }
 
     private void initVideo(){
@@ -199,19 +197,16 @@ public class VideoPlayerActivity extends AppBaseActivity {
             }
         }
         mTvMovieActors.setText(actors);
-        if (isMyFavorMovie){
-            mIvLike.setBackgroundColor(R.color.R1);
+
+
+        if (!BmobUtil.isLogin()|| !BmobUtil.getCurrentUser().getFavorList().contains(mMovieObjectId)){
+            mIvLike.setBackgroundResource(R.drawable.icon_not_favor_movie);
         }else {
-            mIvLike.setBackgroundColor(R.color.blue_E0F0FF);
+            isMyFavorMovie = true;
+            mIvLike.setBackgroundResource(R.drawable.icon_is_favor_movie);
         }
+
     }
-
-
-
-
-
-
-
 
 
 

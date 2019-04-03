@@ -14,15 +14,9 @@ public class Movie extends BmobObject {
     private String introduction; //简介
     private String picUrl; //封面url
     private String publishedDate; //上映日期
-    private boolean isFavor; //是否收藏
 
-    public boolean isFavor() {
-        return isFavor;
-    }
 
-    public void setFavor(boolean favor) {
-        isFavor = favor;
-    }
+
 
     public String getSelectType() {
         return selectType;

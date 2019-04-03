@@ -7,17 +7,18 @@
 
     <ImageView
         android:onClick="onClick4Back"
-        android:layout_width="@dimen/app_40dp"
-        android:layout_height="@dimen/app_40dp"
-        android:layout_marginTop="@dimen/app_25dp"
+        android:layout_width="@dimen/app_25dp"
+        android:layout_height="@dimen/app_24dp"
+        android:layout_marginTop="@dimen/app_33dp"
         android:layout_marginLeft="@dimen/app_20dp"
-        android:background="@color/blue_4ea0e5"
+        android:background="@drawable/icon_trangle_back"
         />
 
     <TextView
         android:id="@+id/tv_havent_login_tip"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/app_30dp"
+        android:gravity="center_vertical"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/app_33dp"
         android:text="创建您的账号"
