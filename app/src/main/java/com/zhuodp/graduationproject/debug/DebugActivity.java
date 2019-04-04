@@ -73,7 +73,7 @@ public class DebugActivity extends AppBaseActivity {
     //进入视频列表
     public void onEnterMovieList(View view){
         Intent intent = new Intent(DebugActivity.this, MovieListActivity.class);
-        intent.putExtra(Constant.ACTION_MOVIE_SELECT,Constant.DATA_MOVIE_TYPE_NONE);
+        intent.putExtra(Constant.ACTION_MOVIE_SELECT,Constant.DATA_MOVIE_SELECT_NONE);
         startActivity(intent);
     }
     //更新Bmob上的视频表
@@ -89,7 +89,7 @@ public class DebugActivity extends AppBaseActivity {
                         if (i%2==0){
                             movie.setSelectType(Constant.DATA_MOVIE_SELECT_HOT_PIONT);
                         }else {
-                            movie.setSelectType(Constant.DATA_MOVIE_TYPE_NONE);
+                            movie.setSelectType(Constant.DATA_MOVIE_SELECT_NONE);
                         }
                         movie.setObjectId(list.get(i).getObjectId());
                         mResultMovieList.add(movie);

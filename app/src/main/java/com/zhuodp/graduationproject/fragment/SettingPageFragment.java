@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
@@ -90,8 +91,7 @@ public class SettingPageFragment extends AppBaseFragment {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivityForResult(intent,Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
         }else{
-            BmobUtil.logout();
-            recoverUserInfo();
+            Toast.makeText(getContext(),"跳转到个人用户页面",Toast.LENGTH_SHORT).show();
         }
     }
 

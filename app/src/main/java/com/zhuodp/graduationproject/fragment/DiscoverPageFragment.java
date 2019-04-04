@@ -7,13 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.CollectionActivity;
+import com.zhuodp.graduationproject.bmob.BmobUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.Bmob;
 
 public class DiscoverPageFragment extends AppBaseFragment {
 
@@ -22,8 +25,12 @@ public class DiscoverPageFragment extends AppBaseFragment {
 
     @OnClick(R.id.rl_collection_entry_collection_page)
     public void onEnterCollectionPage(){
-        Intent intent = new Intent(getActivity(), CollectionActivity.class);
-        startActivity(intent);
+        if (BmobUtil.isLogin()){
+            Intent intent = new Intent(getActivity(), CollectionActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getContext(),"请先进行登陆",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

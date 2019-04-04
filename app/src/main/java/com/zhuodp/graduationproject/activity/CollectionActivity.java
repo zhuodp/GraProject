@@ -89,7 +89,7 @@ public class CollectionActivity extends AppBaseActivity {
     //查找电影列表
     public void getMovie(Context context) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
-        User currentUser = BmobUtil.getCurrentUser();
+        User currentUser = BmobUtil.getCurrentUserCache();
         List<String> collectionList = currentUser.getFavorList();
         bmobQuery.addWhereContainedIn("objectId",collectionList);
         bmobQuery.findObjects(new FindListener<Movie>() {

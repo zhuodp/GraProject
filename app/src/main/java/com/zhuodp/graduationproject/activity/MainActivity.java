@@ -23,6 +23,7 @@ import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
 import com.zhuodp.graduationproject.fragment.SettingPageFragment;
@@ -153,7 +154,10 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         } else if (id == R.id.nav_slideshow) {
         } else if (id == R.id.nav_manage) {
         } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+            //退出登陆按钮
+            BmobUtil.logout();
+            recoverUserInfo();
         }
         drawer.closeDrawer(GravityCompat.START);
         return false;
@@ -179,12 +183,9 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     //用户头像点击事件
     public void onUserPicClick(View view){
         if (BmobUtil.isLogin()){
-            Toast.makeText(getBaseContext(),"当前点击操作为退出登陆",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(),"当前点击操作为跳转到个人页面",Toast.LENGTH_SHORT).show();
             //TODO 跳转到用户个人页面
-            BmobUtil.logout();
-            if (mSettingPageFragment!=null){
-                mSettingPageFragment.recoverUserInfo(); //设置也如果已经被加载了，就对其用户部分进行初始化，统一两处的UI
-            }
+
             recoverUserInfo(); //初始化抽屉中的用户UI
         }else{
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -284,6 +285,16 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         mUserName = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_name);
         mBtnEditSignature = mDrawerHeaderView.findViewById(R.id.btn_drawer_edit);
         mTvUserSignature = mDrawerHeaderView.findViewById(R.id.tv_drawer_user_signature);
+        //检测登陆状态，并同步到UI
+        if (BmobUtil.isLogin()){
+            User currentUser = BmobUtil.getCurrentUserCache();
+            Glide.with(getBaseContext()).load(currentUser.getUserPicUrl()).asBitmap().into(mUserPicInDrawer);
+            mUserName.setText(currentUser.getUsername());
+            //TODO 加入签名设置的逻辑
+            mTvUserSignature.setText(currentUser.getUserSignature());
+        }else{
+            recoverUserInfo();
+        }
     }
 
     //初始化用户相关的UI

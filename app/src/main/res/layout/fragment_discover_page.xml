@@ -9,7 +9,8 @@
         android:id="@+id/iv_header_discover_page"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_160dp"
-        android:src="@drawable/test_image"
+        android:background="@color/gray_dfe1e4"
+        android:src="@drawable/user_pic_test"
         android:scaleType="center"/>
 
     <RelativeLayout
@@ -19,9 +20,9 @@
         android:layout_height="@dimen/app_110dp"
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:background="@drawable/round_corner_pale_blue_5dp"
+        android:background="@drawable/round_corner_pale_green_5dp"
         android:layout_marginTop="@dimen/app_10dp"
-        android:elevation="@dimen/app_3dp">
+        android:elevation="@dimen/app_4dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
             android:text="我的收藏"
             android:textSize="@dimen/app_font_size_24"
             android:layout_marginLeft="@dimen/app_25dp"
-            android:layout_marginTop="@dimen/app_25dp" />
+            android:layout_marginTop="@dimen/app_25dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +46,7 @@
             android:layout_height="@dimen/app_50dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/user_pic_test"
+            android:src="@drawable/icon_is_favor_movie"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
@@ -55,22 +57,23 @@
         android:layout_height="@dimen/app_110dp"
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:background="@drawable/round_corner_pale_blue_5dp"
-        android:layout_marginTop="@dimen/app_20dp"
-        android:elevation="@dimen/app_3dp">
+        android:background="@drawable/round_corner_red_5dp"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:elevation="@dimen/app_4dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的喜欢"
+            android:text="本地下载"
             android:textSize="@dimen/app_font_size_24"
             android:layout_marginLeft="@dimen/app_25dp"
-            android:layout_marginTop="@dimen/app_25dp" />
+            android:layout_marginTop="@dimen/app_25dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您收藏的电影将放在这里"
+            android:text="您下载的电影将放在这里"
             android:textSize="@dimen/app_font_size_13"
             android:layout_marginTop="@dimen/app_59dp"
             android:layout_marginLeft="@dimen/app_25dp"/>
@@ -81,45 +84,46 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/app_40dp"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/user_pic_test"
+            android:src="@drawable/icon_user_download"
             android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/rl_temp1_entry_discover_page"
         android:id="@+id/rl_temp2_entry_discover_page"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_110dp"
+        android:layout_below="@id/rl_temp1_entry_discover_page"
         android:layout_marginLeft="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_10dp"
         android:layout_marginRight="@dimen/app_30dp"
         android:background="@drawable/round_corner_pale_blue_5dp"
-        android:layout_marginTop="@dimen/app_20dp"
-        android:elevation="@dimen/app_3dp">
+        android:elevation="@dimen/app_4dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_25dp"
             android:text="我的喜欢"
             android:textSize="@dimen/app_font_size_24"
-            android:layout_marginLeft="@dimen/app_25dp"
-            android:layout_marginTop="@dimen/app_25dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您收藏的电影将放在这里"
-            android:textSize="@dimen/app_font_size_13"
+            android:layout_marginLeft="@dimen/app_25dp"
             android:layout_marginTop="@dimen/app_59dp"
-            android:layout_marginLeft="@dimen/app_25dp"/>
+            android:text="您收藏的电影将放在这里"
+            android:textSize="@dimen/app_font_size_13" />
 
         <com.youdao.lib.dialogs.util.RoundAngleImageView
             android:layout_width="@dimen/app_50dp"
             android:layout_height="@dimen/app_50dp"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/user_pic_test"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/user_pic_test" />
 
     </RelativeLayout>
 

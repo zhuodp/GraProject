@@ -39,7 +39,7 @@ public class MovieListActivity extends AppBaseActivity {
     private MovieListAdapter mMovieListAdapter;
     private List<Movie> mMovieList;
 
-    private String mSelectionType=Constant.DATA_MOVIE_TYPE_NONE;
+    private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE;
     private String mSearchKey = null;
 
 
@@ -102,7 +102,7 @@ public class MovieListActivity extends AppBaseActivity {
     //查找电影列表
     public void getMovie(Context context) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
-        if (!mSelectionType.equals(Constant.DATA_MOVIE_TYPE_NONE)){
+        if (!mSelectionType.equals(Constant.DATA_MOVIE_SELECT_NONE)){
             bmobQuery.addWhereEqualTo("selectType",mSelectionType);
         }
         if (mSearchKey!=null){

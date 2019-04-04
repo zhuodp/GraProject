@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <!--板块1：近期热点-->
         <RelativeLayout
@@ -15,13 +17,15 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/app_14dp">
 
             <ImageView
-                android:layout_width="@dimen/app_25dp"
-                android:layout_height="@dimen/app_25dp"
-                android:background="@color/color_0D000000"
-                android:layout_marginLeft="@dimen/app_5dp"
+                android:layout_width="@dimen/app_18dp"
+                android:layout_height="@dimen/app_18dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_hot_piont"
+                android:layout_marginLeft="@dimen/app_10dp"
                 />
 
             <TextView
@@ -29,7 +33,7 @@
                 android:layout_height="@dimen/app_25dp"
                 android:text="近期热点"
                 android:textSize="@dimen/app_font_size_15"
-                android:layout_marginLeft="@dimen/app_35dp"
+                android:layout_marginLeft="@dimen/app_32dp"
                 android:gravity="center_vertical"/>
 
             <TextView
@@ -52,39 +56,45 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/app_10dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_155dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_10dp"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/app_5dp">
 
-            <ImageView
-                android:id="@+id/movie1"
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/hotpoint_movie_1"
                 android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY" />
+                android:onClick="onEnterVideoPlayerPage1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
 
-            <ImageView
-                android:id="@+id/movie2"
-                android:layout_weight="1"
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/hotpoint_movie_2"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
-                android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY"/>
-            <ImageView
-                android:id="@+id/movie3"
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
+
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/hotpoint_movie_3"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
-                android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
 
         </LinearLayout>
 
@@ -93,22 +103,25 @@
             android:layout_height="@dimen/app_30dp">
 
             <TextView
+                android:id="@+id/title_hot_movie_1"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影4"
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/title_hot_movie_2"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影5"
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/title_hot_movie_3"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影6"
                 android:gravity="center"/>
@@ -123,10 +136,11 @@
             android:layout_marginTop="@dimen/app_18dp">
 
         <ImageView
-            android:layout_width="@dimen/app_25dp"
-            android:layout_height="@dimen/app_25dp"
-            android:background="@color/color_0D000000"
-            android:layout_marginLeft="@dimen/app_5dp"
+            android:layout_width="@dimen/app_18dp"
+            android:layout_height="@dimen/app_18dp"
+            android:background="@drawable/icon_clock_latest_movie"
+            android:layout_marginLeft="@dimen/app_10dp"
+            android:layout_centerVertical="true"
             />
 
         <TextView
@@ -134,7 +148,7 @@
             android:layout_height="@dimen/app_25dp"
             android:text="最近更新"
             android:textSize="@dimen/app_font_size_15"
-            android:layout_marginLeft="@dimen/app_35dp"
+            android:layout_marginLeft="@dimen/app_32dp"
             android:gravity="center_vertical"/>
 
         <TextView
@@ -158,40 +172,44 @@
     </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/app_10dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_155dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_10dp"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/app_5dp">
 
-            <ImageView
-                android:id="@+id/movie4"
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/latest_movie_1"
                 android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
 
-            <ImageView
-                android:id="@+id/movie5"
-                android:layout_weight="1"
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/latest_movie_2"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
-                android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY"/>
-
-            <ImageView
-                android:id="@+id/movie6"
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
+
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/latest_movie_3"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
-                android:layout_width="@dimen/app_120dp"
-                android:layout_height="@dimen/app_135dp"
-                android:background="@color/blue_4ea0e5"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
 
         </LinearLayout>
 
@@ -200,22 +218,25 @@
             android:layout_height="@dimen/app_30dp">
 
             <TextView
+                android:id="@+id/title_latest_movie_1"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影1"
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/title_latest_movie_2"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影2"
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/title_latest_movie_3"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/app_0dp"
                 android:layout_height="match_parent"
                 android:text="电影3"
                 android:gravity="center"/>
@@ -230,18 +251,18 @@
             android:layout_marginTop="@dimen/app_20dp">
 
             <ImageView
-                android:layout_width="@dimen/app_25dp"
-                android:layout_height="@dimen/app_25dp"
-                android:background="@color/color_0D000000"
-                android:layout_marginLeft="@dimen/app_5dp"
-                />
+                android:layout_width="@dimen/app_18dp"
+                android:layout_height="@dimen/app_18dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/app_10dp"
+                android:src="@drawable/icon_guess_what_you_like" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/app_25dp"
                 android:text="猜你喜欢"
                 android:textSize="@dimen/app_font_size_15"
-                android:layout_marginLeft="@dimen/app_35dp"
+                android:layout_marginLeft="@dimen/app_32dp"
                 android:gravity="center_vertical"/>
 
             <TextView
@@ -262,7 +283,82 @@
                 />
         </RelativeLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/app_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/app_5dp"
+            android:orientation="horizontal">
 
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/guess_movie_1"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
+                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginRight="@dimen/app_10dp"
+                android:layout_weight="1"
+                android:src="@color/blue_4ea0e5"
+                android:scaleType="centerCrop"
+                app:radius="@dimen/app_8dp"/>
+
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/guess_movie_2"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginRight="@dimen/app_10dp"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
+                android:src="@color/blue_4ea0e5"
+                android:scaleType="centerCrop"
+                app:radius="@dimen/app_8dp"/>
+
+            <com.youdao.lib.dialogs.util.RoundAngleImageView
+                android:id="@+id/guess_movie_3"
+                android:layout_width="@dimen/app_120dp"
+                android:layout_height="@dimen/app_130dp"
+                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginRight="@dimen/app_10dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@color/blue_4ea0e5"
+                app:radius="@dimen/app_8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_30dp">
+
+            <TextView
+                android:id="@+id/title_guess_movie_1"
+                android:layout_weight="1"
+                android:layout_width="@dimen/app_0dp"
+                android:layout_height="match_parent"
+                android:text="电影1"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/title_guess_movie_2"
+                android:layout_weight="1"
+                android:layout_width="@dimen/app_0dp"
+                android:layout_height="match_parent"
+                android:text="电影2"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/title_guess_movie_3"
+                android:layout_weight="1"
+                android:layout_width="@dimen/app_0dp"
+                android:layout_height="match_parent"
+                android:text="电影3"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_150dp" />
+
+    </LinearLayout>
 
 </ScrollView>

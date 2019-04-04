@@ -30,19 +30,11 @@ public class Constant {
     public static final String ACTION_MOVIE_SEARCH = "ACTION_MOVIE_SEARCH";
 
     public static final String DATA_MOVIE_SELECT_HOT_PIONT = "DATA_MOVIE_SELECT_HOT_PIONT";//热点
-    public static final String DATA_MOVIE_TYPE_LATEST = "DATA_MOVIE_TYPE_LATEST";//最近更新
-    public static final String DATA_MOVIE_TYPE_NONE = "DATA_MOVIE_TYPE_NONE"; //默认不属于任何标签
+    public static final String DATA_MOVIE_SELECT_LATEST = "DATA_MOVIE_SELECT_LATEST";//最近更新
+    public static final String DATA_MOVIE_SELECT_NONE = "DATA_MOVIE_SELECT_NONE"; //默认不属于任何标签
+    public static final String DATA_MOVIE_SELECT_GUESS= "DATA_MOVIE_SELECT_GUESS";//热点
 
     public static final String MOVIE_PIC_URL_TEST ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553631228268&di=b84e3a506622b15090d174fe6e77c98d&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2Fn1%2Fg7%2FM03%2F08%2F12%2FrBEHZlB2PdsIAAAAAAA-q-MimnwAABrKQOArdYAAD7D526.jpg";
     public static final String MOVIE_URL_TEST = "http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/16/1989823-102-086-0009.mp4";
-
-     //测试用的电影封面url
-    public static final String MOVIE_PIC_URL_1 = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2619168989,2132540114&fm=26&gp=0.jpg";
-    public static final String MOVIE_PIC_URL_2 = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2986414690,4271707406&fm=26&gp=0.jpg";
-    public static final String MOVIE_PIC_URL_3 = "https://b-ssl.duitang.com/uploads/item/201604/09/20160409111508_vY4nW.jpeg";
-    public static final String MOVIE_PIC_URL_4 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553635586589&di=167a7cff04743a4ba3dd911e2b57c5d6&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140626%2F20140626123205-1641189658.jpg";
-    public static final String MOVIE_PIC_URL_5 = "https://b-ssl.duitang.com/uploads/item/201612/11/20161211131834_5wu3k.thumb.700_0.jpeg";
-    public static final String MOVIE_PIC_URL_6 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553631228268&di=b84e3a506622b15090d174fe6e77c98d&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2Fn1%2Fg7%2FM03%2F08%2F12%2FrBEHZlB2PdsIAAAAAAA-q-MimnwAABrKQOArdYAAD7D526.jpg";
-
 
 }

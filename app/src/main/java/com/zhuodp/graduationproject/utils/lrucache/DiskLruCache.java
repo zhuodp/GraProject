@@ -107,7 +107,7 @@ public final class DiskLruCache implements Closeable {
 
     /*
      * This cache uses a journal file named "journal". A typical journal file
-     * looks like this:
+     * looks icon_guess_what_you_like this:
      *     libcore.io.DiskLruCache
      *     1
      *     100
@@ -919,7 +919,7 @@ public final class DiskLruCache implements Closeable {
             return result.toString();
         }
 
-        /** Set lengths using decimal numbers like "10123". */
+        /** Set lengths using decimal numbers icon_guess_what_you_like "10123". */
         private void setLengths(String[] strings) throws IOException {
             if (strings.length != valueCount) {
                 throw invalidLengths(strings);
