@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,10 +10,99 @@
         android:layout_height="@dimen/app_180dp"
         android:background="@color/blue_E0F0FF"/>
 
+    <LinearLayout
+        android:id="@+id/ll_sort_area"
+        android:layout_below="@id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_sorted_by_type"
+            android:onClick="onSortedBtType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:textSize="@dimen/app_font_size_15"
+            android:text="按电影类型"
+            android:textColor="@color/color_36404A"/>
+
+        <ImageView
+            android:id="@+id/iv_sorted_by_type"
+            android:onClick="onSortedBtType"
+            android:layout_width="@dimen/app_15dp"
+            android:layout_height="@dimen/app_15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_down_menu"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:textColor="@color/color_36404A"
+            android:text="按时间"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/app_15dp"
+            android:layout_height="@dimen/app_15dp"
+            android:src="@drawable/icon_down_menu"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:textColor="@color/color_36404A"
+            android:text="按年份"/>
+
+        <ImageView
+            android:layout_width="@dimen/app_15dp"
+            android:layout_height="@dimen/app_15dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_down_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app_20dp"
+            android:textColor="@color/color_36404A"
+            android:text="按年份"/>
+
+        <ImageView
+            android:layout_width="@dimen/app_16dp"
+            android:layout_height="@dimen/app_16dp"
+            android:src="@drawable/icon_down_menu"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridview_sort_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_sort_area"
+        android:background="@drawable/round_corner_white_25dp_solid"
+        android:layout_marginLeft="@dimen/app_10dp"
+        android:layout_marginRight="@dimen/app_10dp"
+        android:numColumns="4"
+        android:visibility="gone"  />
+
+
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_movie_list"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_below="@id/ll_sort_area"/>
 
-</LinearLayout>
+</RelativeLayout>
 

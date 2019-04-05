@@ -42,12 +42,12 @@
             android:layout_marginLeft="@dimen/app_25dp"/>
 
         <com.youdao.lib.dialogs.util.RoundAngleImageView
-            android:layout_width="@dimen/app_50dp"
-            android:layout_height="@dimen/app_50dp"
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
+            android:layout_marginTop="@dimen/app_25dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/icon_is_favor_movie"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/icon_is_favor_movie"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -79,13 +79,12 @@
             android:layout_marginLeft="@dimen/app_25dp"/>
 
         <com.youdao.lib.dialogs.util.RoundAngleImageView
-            android:layout_width="@dimen/app_50dp"
-            android:layout_height="@dimen/app_50dp"
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/app_40dp"
+            android:layout_marginTop="@dimen/app_28dp"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/icon_user_download"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/icon_user_download"/>
 
     </RelativeLayout>
 

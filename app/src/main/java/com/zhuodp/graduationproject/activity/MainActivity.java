@@ -180,6 +180,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         }
     }
 
+
+
     //用户头像点击事件
     public void onUserPicClick(View view){
         if (BmobUtil.isLogin()){

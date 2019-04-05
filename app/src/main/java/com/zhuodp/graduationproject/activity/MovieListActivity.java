@@ -3,21 +3,30 @@ package com.zhuodp.graduationproject.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.adapter.FilterAdapter;
 import com.zhuodp.graduationproject.adapter.MovieListAdapter;
+import com.zhuodp.graduationproject.adapter.SettingListAdapter;
+import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.helper.RecyclerViewItemClickSupport;
 import com.zhuodp.graduationproject.helper.StaggeredDividerItemDecoration;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,29 +44,48 @@ public class MovieListActivity extends AppBaseActivity {
     @BindView(R.id.recyclerview_movie_list)
     RecyclerView mMovieRecyclerView;
 
+    @BindView(R.id.gridview_sort_list)
+    GridView mGridViewSortMenu;
+
+    @BindView(R.id.tv_sorted_by_type)
+    TextView mTvSortByType;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private MovieListAdapter mMovieListAdapter;
-    private List<Movie> mMovieList;
+    private List<Movie> mMovieList = new ArrayList<>();
 
-    private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE;
-    private String mSearchKey = null;
+    private FilterAdapter mFilterAdapter;
+    private String[] mSortType = new String[]{"热门","剧集","动漫","喜剧","动作","科幻","恐怖","爱情"};
+
+    private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE; //如热门等
+    private String mSearchKey = null;//关键字搜索
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
-        mMovieList = new ArrayList<Movie>();
-        Intent intent = getIntent();
-        if (intent.getStringExtra(Constant.ACTION_MOVIE_SELECT)!=null){
-            mSelectionType =intent.getStringExtra(Constant.ACTION_MOVIE_SELECT);
-        };
-        if (intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH )!= null) {
-            mSearchKey = intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH);
-        }
-        Log.e("debug",mSelectionType);
+        getIntentData();//获取Intent中的数据
         getMovie(this);
 
+        //初始化筛选菜单列表
+        mFilterAdapter =new FilterAdapter(mSortType,"time",getBaseContext());
+        mGridViewSortMenu.setAdapter(mFilterAdapter);
+        mGridViewSortMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(),"点击了"+mSortType[position],Toast.LENGTH_SHORT).show();
+                mTvSortByType.setText(mSortType[position]);
+                mGridViewSortMenu.setVisibility(View.GONE);
+                //TODO 更新电影列表并更新UI
+            }
+        });
+
+    }
+
+    public void onSortedBtType(View view){
+        mGridViewSortMenu.setVisibility(View.VISIBLE);
+        mGridViewSortMenu.bringToFront();
     }
 
     //初始化列表
@@ -120,6 +148,49 @@ public class MovieListActivity extends AppBaseActivity {
                 }
             }
         });
+    }
+
+    private void getIntentData(){
+        Intent intent = getIntent();
+        if (intent.getStringExtra(Constant.ACTION_MOVIE_SELECT)!=null){
+            mSelectionType =intent.getStringExtra(Constant.ACTION_MOVIE_SELECT);
+        };
+        if (intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH )!= null) {
+            mSearchKey = intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH);
+        }
+        Log.e("debug",mSelectionType);
+    }
+
+    //处理筛选栏变化结果，更新UI
+    public void handleMessage(Message msg){
+        switch (msg.what){
+            default:
+                mMovieListAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
+    //封装的Handler用于UI更新，并且防止内存泄漏
+    private static class MyHandler extends Handler{
+
+        private final WeakReference<MovieListActivity> movieListActivityWeakReference;
+
+
+        private MyHandler(MovieListActivity activity) {
+            this.movieListActivityWeakReference = new WeakReference<MovieListActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            final MovieListActivity activity = movieListActivityWeakReference.get();
+            if (activity == null) return ;
+            switch (msg.what){
+                default:
+
+                    break;
+            }
+        }
+
     }
 
 
