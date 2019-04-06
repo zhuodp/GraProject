@@ -34,26 +34,19 @@ public class HomePageFragment extends AppBaseFragment {
 
     private TablayoutFragmentPagerAdapter mTablayoutFragmentPagerAdapter;
 
+    //Banner相关的数据
+    private String[]  mBannerImageUris;
+    private String[] mBannerImageTitle = {"1","2","3","4"};
+
     @BindView(R.id.home_page_tab_layout)
     TabLayout mHomePageTabLayout;
 
     @BindView(R.id.home_page_tab_view_pager)
     ViewPager mHomePageTabViewPager;
 
+    @BindView(R.id.banner_hot_point_tab)
+    Banner mHotPointBanner;
 
-    private String[]  mBannerImageUris ={
-            "https://b-ssl.duitang.com/uploads/item/201601/02/20160102175929_hATXs.jpeg"
-            ,"http://pic14.photophoto.cn/20100227/0036036381162387_b.jpg"
-            ,"http://5b0988e595225.cdn.sohucs.com/images/20180819/b742f087903d4bf7a7668f335106d145.jpeg"
-            ,"http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20180728/14a1daaf28274d5a9f37d92da6e5b67a.jpeg"
-    };
-
-    private String[] mBannerImageTitle = {
-            "1","2","3","4"
-    };
-
-    @BindView(R.id.home_page_banner)
-    Banner mBanner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -73,45 +66,14 @@ public class HomePageFragment extends AppBaseFragment {
     public void onStart(){
         super.onStart();
         //切回界面时开始轮播
-        mBanner.startAutoPlay();
+        mHotPointBanner.startAutoPlay();
     }
 
     @Override
     public void onStop(){
         super.onStop();
         //切出界面时停止轮播
-        mBanner.stopAutoPlay();
-    }
-
-    private void initBanner(){
-        //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
-        //设置图片加载器
-        mBanner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        mBanner.setImages(Arrays.asList(mBannerImageUris));
-        mBanner.setBannerAnimation(Transformer.DepthPage);
-        //设置标题集合（当banner样式有显示title时）
-        mBanner.setBannerTitles(Arrays.asList(mBannerImageTitle));
-        //自动轮播
-        mBanner.isAutoPlay(true);
-        //轮播时间
-        mBanner.setDelayTime(2000);
-        //设置指示器位置
-        mBanner.setIndicatorGravity(BannerConfig.CENTER);
-        //设置Banner的点击事件
-        mBanner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-
-            }
-        });
-
-
-        //开始banner展示
-        mBanner.start();
-
-
+        mHotPointBanner.stopAutoPlay();
     }
 
     private void initTabFragments(){
@@ -150,6 +112,42 @@ public class HomePageFragment extends AppBaseFragment {
         mHomePageTabLayout.getTabAt(1).setText("剧集");
         mHomePageTabLayout.getTabAt(2).setText("电影");
         mHomePageTabLayout.getTabAt(3).setText("动漫");
+    }
+
+    private void initBanner(){
+        //初始化Banner数据源
+        mBannerImageUris  =new String[]{"https://b-ssl.duitang.com/uploads/item/201601/02/20160102175929_hATXs.jpeg"
+                ,"http://pic14.photophoto.cn/20100227/0036036381162387_b.jpg"
+                ,"http://5b0988e595225.cdn.sohucs.com/images/20180819/b742f087903d4bf7a7668f335106d145.jpeg"
+                ,"http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20180728/14a1daaf28274d5a9f37d92da6e5b67a.jpeg"};
+        mBannerImageTitle = new String[]{"1","2","3","4"};
+        //设置banner样式
+        mHotPointBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
+        //设置图片加载器
+        mHotPointBanner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        mHotPointBanner.setImages(Arrays.asList(mBannerImageUris));
+        mHotPointBanner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+        mHotPointBanner.setBannerTitles(Arrays.asList(mBannerImageTitle));
+        //自动轮播
+        mHotPointBanner.isAutoPlay(true);
+        //轮播时间
+        mHotPointBanner.setDelayTime(2000);
+        //设置指示器位置
+        mHotPointBanner.setIndicatorGravity(BannerConfig.CENTER);
+        //设置Banner的点击事件
+        mHotPointBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
+
+
+        //开始banner展示
+        mHotPointBanner.start();
+
     }
 
 

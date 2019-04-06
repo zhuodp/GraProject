@@ -13,15 +13,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.util.RoundAngleImageView;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
+import com.zhuodp.graduationproject.utils.GlideImageLoader;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -95,8 +101,7 @@ public class HotPiontTabFragment extends AppBaseFragment {
     @BindView(R.id.title_guess_movie_3)
     TextView mTvGuessMovie3;
 
-
-
+    //点击电影封面，进入到视频详情页
     @OnClick({R.id.hotpoint_movie_1,R.id.hotpoint_movie_2,R.id.hotpoint_movie_3,R.id.latest_movie_1,R.id.latest_movie_2,R.id.latest_movie_3})
     public void onHotPiontMovieClick(View view){
         Intent intent = new Intent(getActivity(), VideoPlayerActivity.class);
@@ -144,19 +149,6 @@ public class HotPiontTabFragment extends AppBaseFragment {
         startPlayerActivity(targetMovieList,targetMoviePosition);
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        View view = inflater.inflate(R.layout.tab_layout_hot_point_fragment,container,false);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initData();
-    }
-
     @OnClick(R.id.tv_tab_more_hot_point)
     public void onClick4MoreHotPoint(){
         //TODO 利用intent携带分类数据
@@ -176,7 +168,25 @@ public class HotPiontTabFragment extends AppBaseFragment {
         Toast.makeText(getContext(),"查看更多推荐",Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+        View view = inflater.inflate(R.layout.tab_layout_hot_point_fragment,container,false);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+
+
+
+
     private void initView(String TAG){
+        //###############################以下，初始化电影封面图片############################
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)){
             Glide.with(getContext()).load(hotPiontMovies.get(0).getPicUrl()).into(mIvHotPiontMovie1);
             Glide.with(getContext()).load(hotPiontMovies.get(1).getPicUrl()).into(mIvHotPiontMovie2);
@@ -204,11 +214,12 @@ public class HotPiontTabFragment extends AppBaseFragment {
     }
 
     private void initData(){
+        //初始化电影数据
         getMovie(getContext(),Constant.DATA_MOVIE_SELECT_HOT_PIONT);
         getMovie(getContext(),Constant.DATA_MOVIE_SELECT_LATEST);
         getMovie(getContext(),Constant.DATA_MOVIE_SELECT_GUESS);
     }
-
+    //获取并初始化电影相关数据成员
     private void getMovie(Context context,String TAG) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)) {
@@ -245,7 +256,6 @@ public class HotPiontTabFragment extends AppBaseFragment {
     }
 
     private void startPlayerActivity(List<Movie> targetMovieList,int position){
-
         String movieObjectId =targetMovieList.get(position).getObjectId();
         String movieName = targetMovieList.get(position).getMovieName();
         String moviePicUrl = targetMovieList.get(position).getPicUrl();
