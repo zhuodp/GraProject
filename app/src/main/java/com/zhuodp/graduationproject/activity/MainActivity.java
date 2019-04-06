@@ -2,6 +2,7 @@ package com.zhuodp.graduationproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +23,7 @@ import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.fragment.DiscoverPageFragment;
 import com.zhuodp.graduationproject.fragment.HomePageFragment;
@@ -107,6 +108,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         initSettings();
         //默认显示第一个fragment
         initFragments(0);
+        //检测更新APP
+        BmobUtil.queryAppUpdate(MainActivity.this);
     }
 
     @Override
@@ -181,14 +184,24 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     }
 
 
-
     //用户头像点击事件
     public void onUserPicClick(View view){
         if (BmobUtil.isLogin()){
-            Toast.makeText(getBaseContext(),"当前点击操作为跳转到个人页面",Toast.LENGTH_SHORT).show();
-            //TODO 跳转到用户个人页面
-
-            recoverUserInfo(); //初始化抽屉中的用户UI
+            CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+            customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
+            customDialogManager.setAlertDialogTitle("温馨提示");
+            customDialogManager.setAlertDialogPosText("确定");
+            customDialogManager.setAlertDialogNegText("取消");
+            customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {
+                @Override
+                public void onAlertDialogClick() {
+                    //TODO 跳转到用户个人页面
+                    BmobUtil.logout();
+                    recoverUserInfo(); //初始化抽屉中的用户UI
+                }
+            });
+            customDialogManager.setDialogDismissOnTouchOutside(false);
+            customDialogManager.showDialog(getBaseContext());
         }else{
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivityForResult(intent, Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);

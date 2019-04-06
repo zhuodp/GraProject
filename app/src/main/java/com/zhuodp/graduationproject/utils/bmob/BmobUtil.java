@@ -1,31 +1,44 @@
-package com.zhuodp.graduationproject.bmob;
+package com.zhuodp.graduationproject.utils.bmob;
 
-import android.app.ActivityManager;
-import android.app.Person;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.exoplayer2.C;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.activity.MainActivity;
 import com.zhuodp.graduationproject.entity.Movie;
+import com.zhuodp.graduationproject.entity.Update;
 import com.zhuodp.graduationproject.entity.User;
-import com.zhuodp.graduationproject.global.Constant;
+import com.zhuodp.graduationproject.utils.APKVersionCodeUtil;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.logging.Handler;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+
+import static cn.bmob.v3.Bmob.getApplicationContext;
 
 /**
  *   zhuodp 2019/3/29
@@ -238,26 +251,67 @@ public class BmobUtil {
         });
     }
 
-    //更新电影的是否为收藏的属性
-    /*public static void updateMovieFavorState(Context context,String movieObjectId,boolean isFavor){
-        BmobQuery<Movie> bmobQuery = new BmobQuery<>();
-        bmobQuery.getObject(movieObjectId, new QueryListener<Movie>() {
+
+    //查询单条数据
+    public static void queryAppUpdate(Activity activity) {
+        BmobQuery<Update> bmobQuery = new BmobQuery<Update>();
+        bmobQuery.getObject("JTm90002", new QueryListener<Update>() {
             @Override
-            public void done(Movie movie, BmobException e) {
-                movie.setFavor(isFavor);
-                movie.update(new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null){
-                            Toast.makeText(context,"更新成功",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(context,"更新失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            public void done(Update object, BmobException e) {
+                if (e == null) {
+                    String mNewApkUrL = object.getapkUrl();
+                    String mVersionCodeOnServer = object.getVersionCode();
+                    String mVersionNote = object.getText();
+                    System.out.println("APK更新地址：" + mNewApkUrL);
+                    System.out.println("版本号：" + mVersionCodeOnServer);
+                    System.out.println("更新内容" + mVersionNote);
+                    check(mVersionCodeOnServer,activity,mNewApkUrL);
+                } else {
+                    Log.e("App更新检测失败", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                }
             }
         });
-    }*/
+    }
+
+    //判断版本大小
+    private static void check(String codeOnServer,Activity activity,String url) {
+        int localCode = APKVersionCodeUtil.getVersionCode(getApplicationContext()) ;
+        int i = Integer.valueOf(codeOnServer);
+        if (i > localCode) {
+            //Toast.makeText(getApplicationContext(),"需要更新",Toast.LENGTH_SHORT).show();
+            showDialog(activity,url);
+        }else {
+            Toast.makeText(getApplicationContext(),"已是最新版本，无需更新",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static void showDialog(Activity activity,String url) {
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setIcon(R.drawable.icon_clock_latest_movie)//设置标题的图片
+                .setTitle("检查到新版本")//设置对话框的标题
+                .setMessage("旧版本可能已经不能使用，是否进行更新?")//设置对话框的内容
+                //设置对话框的按钮
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        //展示对话框
+                        //showDownloadDialog();
+                        //用自带的下载器下载APK
+                        Intent apkDownloadIntent = new Intent();
+                        apkDownloadIntent.setData(Uri.parse(url));
+                        apkDownloadIntent.setAction(Intent.ACTION_VIEW);
+                        activity.startActivity(apkDownloadIntent);
+                    }
+                }).create();
+        dialog.show();
+    }
 
 
 

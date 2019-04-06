@@ -16,7 +16,7 @@ import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.LoginActivity;
 import com.zhuodp.graduationproject.adapter.SettingListAdapter;
-import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.entity.SettingItem;
 import com.zhuodp.graduationproject.entity.User;

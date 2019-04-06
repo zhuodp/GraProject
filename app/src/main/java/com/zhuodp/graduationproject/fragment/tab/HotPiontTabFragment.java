@@ -2,6 +2,7 @@ package com.zhuodp.graduationproject.fragment.tab;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -175,25 +176,31 @@ public class HotPiontTabFragment extends AppBaseFragment {
         Toast.makeText(getContext(),"查看更多推荐",Toast.LENGTH_SHORT).show();
     }
 
-    private void initView(){
-        Glide.with(getContext()).load(hotPiontMovies.get(0).getPicUrl()).into(mIvHotPiontMovie1);
-        Glide.with(getContext()).load(hotPiontMovies.get(1).getPicUrl()).into(mIvHotPiontMovie2);
-        Glide.with(getContext()).load(hotPiontMovies.get(2).getPicUrl()).into(mIvHotPiontMovie3);
-        Glide.with(getContext()).load(latestMovies.get(0).getPicUrl()).into(mIvLatestMovie1);
-        Glide.with(getContext()).load(latestMovies.get(1).getPicUrl()).into(mIvLatestMovie2);
-        Glide.with(getContext()).load(latestMovies.get(2).getPicUrl()).into(mIvLatestMovie3);
-        Glide.with(getContext()).load(guessMovies.get(0).getPicUrl()).into(mIvGuessMovie1);
-        Glide.with(getContext()).load(guessMovies.get(1).getPicUrl()).into(mIvGuessMovie2);
-        Glide.with(getContext()).load(guessMovies.get(2).getPicUrl()).into(mIvGuessMovie3);
-        mTvTitleHotPiontMovie1.setText(hotPiontMovies.get(0).getMovieName());
-        mTvTitleHotPiontMovie2.setText(hotPiontMovies.get(1).getMovieName());
-        mTvTitleHotPiontMovie3.setText(hotPiontMovies.get(2).getMovieName());
-        mTvLatestMovie1.setText(latestMovies.get(0).getMovieName());
-        mTvLatestMovie2.setText(latestMovies.get(1).getMovieName());
-        mTvLatestMovie3.setText(latestMovies.get(2).getMovieName());
-        mTvGuessMovie1.setText(guessMovies.get(0).getMovieName());
-        mTvGuessMovie2.setText(guessMovies.get(1).getMovieName());
-        mTvGuessMovie3.setText(guessMovies.get(2).getMovieName());
+    private void initView(String TAG){
+        if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)){
+            Glide.with(getContext()).load(hotPiontMovies.get(0).getPicUrl()).into(mIvHotPiontMovie1);
+            Glide.with(getContext()).load(hotPiontMovies.get(1).getPicUrl()).into(mIvHotPiontMovie2);
+            Glide.with(getContext()).load(hotPiontMovies.get(2).getPicUrl()).into(mIvHotPiontMovie3);
+            mTvTitleHotPiontMovie1.setText(hotPiontMovies.get(0).getMovieName());
+            mTvTitleHotPiontMovie2.setText(hotPiontMovies.get(1).getMovieName());
+            mTvTitleHotPiontMovie3.setText(hotPiontMovies.get(2).getMovieName());
+        }
+        if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST)){
+            Glide.with(getContext()).load(latestMovies.get(0).getPicUrl()).into(mIvLatestMovie1);
+            Glide.with(getContext()).load(latestMovies.get(1).getPicUrl()).into(mIvLatestMovie2);
+            Glide.with(getContext()).load(latestMovies.get(2).getPicUrl()).into(mIvLatestMovie3);
+            mTvLatestMovie1.setText(latestMovies.get(0).getMovieName());
+            mTvLatestMovie2.setText(latestMovies.get(1).getMovieName());
+            mTvLatestMovie3.setText(latestMovies.get(2).getMovieName());
+        }
+        if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS)){
+            Glide.with(getContext()).load(guessMovies.get(0).getPicUrl()).into(mIvGuessMovie1);
+            Glide.with(getContext()).load(guessMovies.get(1).getPicUrl()).into(mIvGuessMovie2);
+            Glide.with(getContext()).load(guessMovies.get(2).getPicUrl()).into(mIvGuessMovie3);
+            mTvGuessMovie1.setText(guessMovies.get(0).getMovieName());
+            mTvGuessMovie2.setText(guessMovies.get(1).getMovieName());
+            mTvGuessMovie3.setText(guessMovies.get(2).getMovieName());
+        }
     }
 
     private void initData(){
@@ -216,15 +223,19 @@ public class HotPiontTabFragment extends AppBaseFragment {
             @Override
             public void done(List<Movie> list, BmobException e) {
                 if (e == null) {
-                    for (int i = 0 ;i<=3 ;i ++) {
-                        if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT))
-                            hotPiontMovies.add(new Movie(list.get(i)));
-                        if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST))
-                            latestMovies.add(new Movie(list.get(i)));
-                        if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS))
-                            guessMovies.add(new Movie(list.get(i)));
+                    if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)) {
+                        hotPiontMovies = list;
+                        initView(Constant.DATA_MOVIE_SELECT_HOT_PIONT);
                     }
-                    initView();
+                    if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST)){
+                        latestMovies = list;
+                        initView(Constant.DATA_MOVIE_SELECT_LATEST);
+                    }
+                    if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS)){
+                        guessMovies = list;
+                        initView(Constant.DATA_MOVIE_SELECT_GUESS);
+                    }
+
                     Toast.makeText(context, "电影列表获取成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, TAG+"列表获取失败:" + e.getMessage(), Toast.LENGTH_SHORT).show();

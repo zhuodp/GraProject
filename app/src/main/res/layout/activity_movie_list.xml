@@ -4,56 +4,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/temp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/app_180dp"
-        android:background="@color/blue_E0F0FF"/>
 
     <LinearLayout
         android:id="@+id/ll_sort_area"
-        android:layout_below="@id/temp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_40dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_sorted_by_type"
-            android:onClick="onSortedBtType"
+            android:onClick="onSortedByType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/app_20dp"
+            android:layout_marginLeft="@dimen/app_35dp"
             android:textSize="@dimen/app_font_size_15"
             android:text="按电影类型"
             android:textColor="@color/color_36404A"/>
 
         <ImageView
             android:id="@+id/iv_sorted_by_type"
-            android:onClick="onSortedBtType"
+            android:onClick="onSortedByType"
             android:layout_width="@dimen/app_15dp"
             android:layout_height="@dimen/app_15dp"
             android:scaleType="fitXY"
             android:src="@drawable/icon_down_menu"
             android:layout_gravity="center_vertical"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/app_20dp"
-            android:textColor="@color/color_36404A"
-            android:text="按时间"/>
-
-
-        <ImageView
-            android:layout_width="@dimen/app_15dp"
-            android:layout_height="@dimen/app_15dp"
-            android:src="@drawable/icon_down_menu"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"/>
 
         <TextView
+            android:id="@+id/tv_sorted_by_time"
+            android:onClick="onSortedByTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -62,25 +43,31 @@
             android:text="按年份"/>
 
         <ImageView
+            android:id="@+id/iv_sorted_by_time"
+            android:onClick="onSortedByTime"
             android:layout_width="@dimen/app_15dp"
             android:layout_height="@dimen/app_15dp"
             android:layout_gravity="center_vertical"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/icon_down_menu" />
 
         <TextView
+            android:id="@+id/tv_sorted_by_country"
+            android:onClick="onSortedByCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/app_20dp"
             android:textColor="@color/color_36404A"
-            android:text="按年份"/>
+            android:text="按地区"/>
 
         <ImageView
+            android:id="@+id/iv_sorted_by_country"
+            android:onClick="onSortedByCountry"
             android:layout_width="@dimen/app_16dp"
             android:layout_height="@dimen/app_16dp"
             android:src="@drawable/icon_down_menu"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
 

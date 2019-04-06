@@ -21,12 +21,11 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.global.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 
 public class VideoPlayerActivity extends AppBaseActivity {
 

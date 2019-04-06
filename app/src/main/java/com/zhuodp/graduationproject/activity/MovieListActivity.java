@@ -19,8 +19,6 @@ import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.adapter.FilterAdapter;
 import com.zhuodp.graduationproject.adapter.MovieListAdapter;
-import com.zhuodp.graduationproject.adapter.SettingListAdapter;
-import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.helper.RecyclerViewItemClickSupport;
@@ -41,6 +39,12 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class MovieListActivity extends AppBaseActivity {
 
+    private String TAG = ""; //指示当前点击的是哪一组分类
+
+    private String mSelectedType = "NONE";
+    private String mSelectedTime = "NONE";
+    private String mSlectedCountry = "NONE";
+
     @BindView(R.id.recyclerview_movie_list)
     RecyclerView mMovieRecyclerView;
 
@@ -50,12 +54,22 @@ public class MovieListActivity extends AppBaseActivity {
     @BindView(R.id.tv_sorted_by_type)
     TextView mTvSortByType;
 
+    @BindView(R.id.tv_sorted_by_time)
+    TextView mTvSortByTime;
+
+    @BindView(R.id.tv_sorted_by_country)
+    TextView mTvSortByCountry;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private MovieListAdapter mMovieListAdapter;
     private List<Movie> mMovieList = new ArrayList<>();
 
     private FilterAdapter mFilterAdapter;
-    private String[] mSortType = new String[]{"热门","剧集","动漫","喜剧","动作","科幻","恐怖","爱情"};
+    private String[] mType = new String[]{"全部","热门","剧集","动漫","喜剧","动作","科幻","恐怖","爱情"};
+    private String[] mTime = new String[]{"全部","60年代","70年代","80年代","90年代","2000-2010年","2011~2019年"};
+    private String[] mCountry = new String[]{"全部","中国","韩国","日本","美国","英国","德国","法国"};
+
+
 
     private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE; //如热门等
     private String mSearchKey = null;//关键字搜索
@@ -67,26 +81,36 @@ public class MovieListActivity extends AppBaseActivity {
         setContentView(R.layout.activity_movie_list);
         getIntentData();//获取Intent中的数据
         getMovie(this);
-
-        //初始化筛选菜单列表
-        mFilterAdapter =new FilterAdapter(mSortType,"time",getBaseContext());
-        mGridViewSortMenu.setAdapter(mFilterAdapter);
-        mGridViewSortMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(),"点击了"+mSortType[position],Toast.LENGTH_SHORT).show();
-                mTvSortByType.setText(mSortType[position]);
-                mGridViewSortMenu.setVisibility(View.GONE);
-                //TODO 更新电影列表并更新UI
-            }
-        });
-
     }
 
-    public void onSortedBtType(View view){
-        mGridViewSortMenu.setVisibility(View.VISIBLE);
-        mGridViewSortMenu.bringToFront();
+    public void onSortedByType(View view){
+        if (mGridViewSortMenu.getVisibility()==View.VISIBLE && TAG.equals("TYPE")){
+            mGridViewSortMenu.setVisibility(View.GONE);
+        }else {
+            showGridView("TYPE");
+        }
     }
+
+    public void onSortedByTime(View view){
+        if (mGridViewSortMenu.getVisibility()==View.VISIBLE && TAG.equals("TIME")){
+            mGridViewSortMenu.setVisibility(View.GONE);
+        }else {
+            showGridView("TIME");
+        }
+    }
+
+    public void onSortedByCountry(View view){
+        if (mGridViewSortMenu.getVisibility()==View.VISIBLE && TAG.equals("COUNTRY")){
+            mGridViewSortMenu.setVisibility(View.GONE);
+        }else {
+            showGridView("COUNTRY");
+        }
+    }
+
+
+
+
+
 
     //初始化列表
     private void initRecyclerView(){
@@ -126,8 +150,7 @@ public class MovieListActivity extends AppBaseActivity {
         mMovieRecyclerView.setAdapter(mMovieListAdapter);
     }
 
-
-    //查找电影列表
+    //查找电影列表 (判断是否进行了分类，筛选出合适的电影)
     public void getMovie(Context context) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
         if (!mSelectionType.equals(Constant.DATA_MOVIE_SELECT_NONE)){
@@ -159,6 +182,46 @@ public class MovieListActivity extends AppBaseActivity {
             mSearchKey = intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH);
         }
         Log.e("debug",mSelectionType);
+    }
+
+    private void showGridView(String which){
+        TextView viewToUpdate;
+        String[] dataSet;
+
+        mGridViewSortMenu.setVisibility(View.GONE);
+        if (which.equals("TYPE")){
+            TAG = "TYPE";
+            dataSet = mType;
+            viewToUpdate = mTvSortByType;
+        }else if(which.equals("TIME")){
+            TAG = "TIME";
+            dataSet = mTime;
+            viewToUpdate = mTvSortByTime;
+        }else{
+            TAG = "COUNTRY";
+            dataSet = mCountry;
+            viewToUpdate = mTvSortByCountry;
+        }
+
+        mFilterAdapter =new FilterAdapter(dataSet,"time",getBaseContext());
+        mGridViewSortMenu.setAdapter(mFilterAdapter);
+        mGridViewSortMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                viewToUpdate.setText(dataSet[position]);
+                mGridViewSortMenu.setVisibility(View.GONE);
+
+            }
+        });
+        mGridViewSortMenu.setVisibility(View.VISIBLE);
+        mGridViewSortMenu.bringToFront();
+    }
+
+
+
+    //每次分类完成之后，刷新UI
+    private void refreshUI(){
+
     }
 
     //处理筛选栏变化结果，更新UI

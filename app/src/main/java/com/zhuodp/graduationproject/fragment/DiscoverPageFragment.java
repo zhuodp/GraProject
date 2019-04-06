@@ -12,11 +12,10 @@ import android.widget.Toast;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.CollectionActivity;
-import com.zhuodp.graduationproject.bmob.BmobUtil;
+import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 
 public class DiscoverPageFragment extends AppBaseFragment {
 
