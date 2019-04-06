@@ -14,6 +14,8 @@ public class Movie extends BmobObject {
     private String introduction; //简介
     private String picUrl; //封面url
     private String publishedDate; //上映日期
+    private String country;  //国家
+    private String type;  //电影所属类型
 
 
 
@@ -24,13 +26,15 @@ public class Movie extends BmobObject {
 
     public Movie(){}
 
-    public Movie(String movieName, String[] actors, String publishedDate, String introduction, String picUrl, String selectType){
+    public Movie(String movieName, String[] actors, String publishedDate, String introduction, String picUrl, String selectType,String country,String type){
         this.movieName = movieName;
         this.actors = actors;
         this.introduction = introduction;
         this.publishedDate = publishedDate;
         this.picUrl = picUrl;
         this.selectType = selectType;
+        this.country = country;
+        this.type = type;
     }
 
     public Movie(Movie movie){
@@ -40,6 +44,22 @@ public class Movie extends BmobObject {
         this.publishedDate = movie.publishedDate;
         this.picUrl = movie.picUrl;
         this.selectType = movie.selectType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setSelectType(String selectType) {

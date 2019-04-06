@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_160dp"
         android:background="@color/gray_dfe1e4"
-        android:src="@drawable/user_pic_test"
-        android:scaleType="center"/>
+        android:src="@drawable/bg_discover_page"
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:id="@+id/rl_collection_entry_collection_page"

@@ -41,9 +41,10 @@ public class MovieListActivity extends AppBaseActivity {
 
     private String TAG = ""; //指示当前点击的是哪一组分类
 
-    private String mSelectedType = "NONE";
-    private String mSelectedTime = "NONE";
-    private String mSlectedCountry = "NONE";
+    private String mSelectedType = "全部"; //热门等等
+    private String mSelectedMovieType = "全部";
+    private String mSelectedTime = "全部";
+    private String mSlectedCountry = "全部";
 
     @BindView(R.id.recyclerview_movie_list)
     RecyclerView mMovieRecyclerView;
@@ -80,7 +81,7 @@ public class MovieListActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
         getIntentData();//获取Intent中的数据
-        getMovie(this);
+        getMovie(this,true);
     }
 
     public void onSortedByType(View view){
@@ -109,63 +110,86 @@ public class MovieListActivity extends AppBaseActivity {
 
 
 
+    //参数为true时则为初始化RecyclerView ，参数为false时则为刷新UI
+    private void initRecyclerView(boolean isFistTime){
+        if (isFistTime){
+            mLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+            mMovieListAdapter = new MovieListAdapter(this, mMovieList);
+            mMovieRecyclerView.setLayoutManager(mLayoutManager);
+            int interval = (int)getResources().getDimension(R.dimen.app_5dp);
+            mMovieRecyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this,interval));
+            RecyclerViewItemClickSupport.addTo(mMovieRecyclerView).setOnItemClickListener(new RecyclerViewItemClickSupport.OnItemClickListener() {
+                @Override
+                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                    String movieObjectId = mMovieList.get(position).getObjectId();
+                    String movieName = mMovieList.get(position).getMovieName();
+                    String moviePicUrl = mMovieList.get(position).getPicUrl();
+                    String[] movieActors = mMovieList.get(position).getActors();
+                    String moviePublishDate = mMovieList.get(position).getPublishedDate();
+                    String movieIntro = mMovieList.get(position).getIntroduction();
+                    Log.e("MovieListAc",movieName);
+                    Log.e("MovieListAc",moviePicUrl);
+                    Log.e("MovieListAc",movieActors[0]);
+                    Log.e("MovieListAc",moviePublishDate);
+                    Log.e("MovieListAc",movieIntro);
 
 
+                    Intent intent = new Intent(MovieListActivity.this,VideoPlayerActivity.class);
+                    intent.putExtra(Constant.DATA_MOVIE_OBJECT_ID,movieObjectId);
+                    intent.putExtra(Constant.DATA_MOVIE_NAME,movieName);
+                    intent.putExtra(Constant.DATA_MOVIE_URL,Constant.MOVIE_URL_TEST);//暂时固定死视频的URL TODO 在数据表中加入视频url连接
+                    intent.putExtra(Constant.DATA_USER_PIC_URL,moviePicUrl);
+                    intent.putExtra(Constant.DATA_MOVIE_ACTORS,movieActors);
+                    intent.putExtra(Constant.DATA_MOVIE_PUBLISH_DATE,moviePublishDate);
+                    intent.putExtra(Constant.DATA_MOVIE_INTRO,movieIntro);
+                    startActivity(intent);
+                }
+            });
+            mMovieRecyclerView.setAdapter(mMovieListAdapter);
+        }else{
+            mMovieListAdapter.notifyDataSetChanged();
+        }
 
-    //初始化列表
-    private void initRecyclerView(){
-        mLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-        mMovieListAdapter = new MovieListAdapter(this, mMovieList);
-        mMovieRecyclerView.setLayoutManager(mLayoutManager);
-        int interval = (int)getResources().getDimension(R.dimen.app_5dp);
-        mMovieRecyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this,interval));
-        RecyclerViewItemClickSupport.addTo(mMovieRecyclerView).setOnItemClickListener(new RecyclerViewItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                String movieObjectId = mMovieList.get(position).getObjectId();
-                String movieName = mMovieList.get(position).getMovieName();
-                String moviePicUrl = mMovieList.get(position).getPicUrl();
-                String[] movieActors = mMovieList.get(position).getActors();
-                String moviePublishDate = mMovieList.get(position).getPublishedDate();
-                String movieIntro = mMovieList.get(position).getIntroduction();
-                Log.e("MovieListAc",movieName);
-                Log.e("MovieListAc",moviePicUrl);
-                Log.e("MovieListAc",movieActors[0]);
-                Log.e("MovieListAc",moviePublishDate);
-                Log.e("MovieListAc",movieIntro);
-
-
-                Intent intent = new Intent(MovieListActivity.this,VideoPlayerActivity.class);
-                intent.putExtra(Constant.DATA_MOVIE_OBJECT_ID,movieObjectId);
-                intent.putExtra(Constant.DATA_MOVIE_NAME,movieName);
-                intent.putExtra(Constant.DATA_MOVIE_URL,Constant.MOVIE_URL_TEST);//暂时固定死视频的URL TODO 在数据表中加入视频url连接
-                intent.putExtra(Constant.DATA_USER_PIC_URL,moviePicUrl);
-                intent.putExtra(Constant.DATA_MOVIE_ACTORS,movieActors);
-                intent.putExtra(Constant.DATA_MOVIE_PUBLISH_DATE,moviePublishDate);
-                intent.putExtra(Constant.DATA_MOVIE_INTRO,movieIntro);
-                startActivity(intent);
-            }
-        });
-
-        mMovieRecyclerView.setAdapter(mMovieListAdapter);
     }
 
     //查找电影列表 (判断是否进行了分类，筛选出合适的电影)
-    public void getMovie(Context context) {
+    public void getMovie(Context context,boolean isFirstTime) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
+        //不是热门则显示全部电影
         if (!mSelectionType.equals(Constant.DATA_MOVIE_SELECT_NONE)){
             bmobQuery.addWhereEqualTo("selectType",mSelectionType);
+            Log.e("MovieList","是热门");
         }
+        //从搜索栏跳转过来则显示搜索结果
         if (mSearchKey!=null){
             bmobQuery.addWhereContains("movieName",mSearchKey);
+            Log.e("MovieList","从搜索过来的");
         }
+        //判断是否根据国家进行筛选
+        if (!mSlectedCountry.equals("全部")){
+            bmobQuery.addWhereEqualTo("country",mSlectedCountry);
+            Log.e("MovieList","国家为"+mSlectedCountry);
+        }
+        //判断是否根据时间进行筛选
+        if (!mSelectedTime.equals("全部")){
+            //TODO
+        }
+        //判断是否根据影片类型进行筛选
+        if (!mSelectedMovieType.equals("全部")){
+            bmobQuery.addWhereEqualTo("type",mSelectedMovieType);
+            Log.e("MovieList","类型为"+mSelectedMovieType);
+        }
+
         bmobQuery.findObjects(new FindListener<Movie>() {
             @Override
             public void done(List<Movie> list, BmobException e) {
                 if (e == null) {
                     Toast.makeText(context, "电影列表获取成功", Toast.LENGTH_SHORT).show();
-                    mMovieList = list;
-                    initRecyclerView();
+                    Log.e("MovieList","获取到的列表长度为"+list.size());
+                    //采用下面的方式更新数据集，保证mMovieList的内存地址不变，否则Adapter的notifyDataSetChanged方法会失效
+                    mMovieList.clear();
+                    mMovieList.addAll(list);
+                    initRecyclerView(isFirstTime);
                 } else {
                     Toast.makeText(context, "列表获取失败:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -210,7 +234,17 @@ public class MovieListActivity extends AppBaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 viewToUpdate.setText(dataSet[position]);
                 mGridViewSortMenu.setVisibility(View.GONE);
-
+                if (which.equals("TYPE")){
+                    mSelectedMovieType = dataSet[position];
+                }
+                if (which.equals("TIME")){
+                    mSelectedTime = dataSet[position];
+                }
+                if (which.equals("COUNTRY")){
+                    mSlectedCountry = dataSet[position];
+                }
+                //重新获取匹配的列表（更新UI）
+                getMovie(getBaseContext(),false);
             }
         });
         mGridViewSortMenu.setVisibility(View.VISIBLE);
@@ -218,11 +252,6 @@ public class MovieListActivity extends AppBaseActivity {
     }
 
 
-
-    //每次分类完成之后，刷新UI
-    private void refreshUI(){
-
-    }
 
     //处理筛选栏变化结果，更新UI
     public void handleMessage(Message msg){

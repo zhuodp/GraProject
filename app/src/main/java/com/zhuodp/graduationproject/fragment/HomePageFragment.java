@@ -1,5 +1,6 @@
 package com.zhuodp.graduationproject.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -8,18 +9,23 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
+import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.fragment.tab.AminTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.CollectionTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.HotPiontTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.MovieTabFragment;
+import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.utils.GlideImageLoader;
 
 import java.util.ArrayList;
@@ -27,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class HomePageFragment extends AppBaseFragment {
 
@@ -38,7 +45,7 @@ public class HomePageFragment extends AppBaseFragment {
     private String[]  mBannerImageUris;
     private String[] mBannerImageTitle = {"1","2","3","4"};
 
-    @BindView(R.id.home_page_tab_layout)
+    @BindView(R.id.tab_layout_home_page)
     TabLayout mHomePageTabLayout;
 
     @BindView(R.id.home_page_tab_view_pager)
@@ -46,6 +53,26 @@ public class HomePageFragment extends AppBaseFragment {
 
     @BindView(R.id.banner_hot_point_tab)
     Banner mHotPointBanner;
+
+    @BindView(R.id.iv_all_movies_home_page_fragment)
+    ImageView mBtnAllMovies;
+
+    @OnClick(R.id.area_enter_movie_hub)
+    public void onEnterMovieHub(){
+        Intent intent = new Intent(getActivity(), MovieListActivity.class);
+        intent.putExtra(Constant.ACTION_MOVIE_SELECT,Constant.DATA_MOVIE_SELECT_NONE);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.area_temp1)
+    public void onEnterTemp1(){
+        Toast.makeText(getContext(),"功能尚未开放",Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.area_temp2)
+    public void onEnterTemp2(){
+        Toast.makeText(getContext(),"功能尚未开放",Toast.LENGTH_SHORT).show();
+    }
 
 
     @Override
@@ -75,6 +102,7 @@ public class HomePageFragment extends AppBaseFragment {
         //切出界面时停止轮播
         mHotPointBanner.stopAutoPlay();
     }
+
 
     private void initTabFragments(){
         mTabsFragments = new ArrayList<Fragment>();

@@ -88,9 +88,14 @@ public class DebugActivity extends AppBaseActivity {
                         Movie movie = new Movie();
                         if (i%2==0){
                             movie.setSelectType(Constant.DATA_MOVIE_SELECT_HOT_PIONT);
+                            movie.setCountry("美国");
+                            movie.setType("剧集");
                         }else {
                             movie.setSelectType(Constant.DATA_MOVIE_SELECT_NONE);
+                            movie.setCountry("日本");
+                            movie.setType("恐怖");
                         }
+
                         movie.setObjectId(list.get(i).getObjectId());
                         mResultMovieList.add(movie);
                     }
