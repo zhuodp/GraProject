@@ -57,7 +57,8 @@ public class SettingListAdapter extends BaseAdapter {
             convertView= LayoutInflater.from(context).inflate(R.layout.item_lv_fragment_settings_list,null);
             viewHolder=new ViewHolder();
             viewHolder.itemName =(TextView)convertView.findViewById(R.id.tv_fragment_setting_item);
-            viewHolder.itemImageId =(ImageView)convertView.findViewById(R.id.iv_fragment_setting_item);
+            viewHolder.itemIcon =(ImageView)convertView.findViewById(R.id.iv_fragment_setting_item);
+            viewHolder.itemForwordImage = (ImageView)convertView.findViewById(R.id.iv_forward_icon_fragment_setting_item);
             convertView.setTag(viewHolder);
         }
         else
@@ -67,12 +68,14 @@ public class SettingListAdapter extends BaseAdapter {
         }
 
         viewHolder.itemName.setText(list.get(i).getItemName());
-        viewHolder.itemImageId.setImageResource(list.get(i).getImageId());
+        viewHolder.itemIcon.setImageResource(list.get(i).getImageId());
+        viewHolder.itemForwordImage.setImageResource(list.get(i).getForwardIconId());
         return convertView;
     }
 
     private class ViewHolder {
         public TextView itemName;
-        public ImageView itemImageId;
+        public ImageView itemIcon;
+        public ImageView itemForwordImage;
     }
 }

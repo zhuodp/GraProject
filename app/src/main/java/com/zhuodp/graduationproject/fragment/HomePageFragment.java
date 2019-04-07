@@ -43,7 +43,8 @@ public class HomePageFragment extends AppBaseFragment {
 
     //Banner相关的数据
     private String[]  mBannerImageUris;
-    private String[] mBannerImageTitle = {"1","2","3","4"};
+    private String[] mBannerImageTitle = {"中央已经公布了，含有毒素的八种蔬菜",
+            "经常玩电脑的人有这八种病","百分之99的人都转发了","哈哈哈哈哈哈哈哈哈"};
 
     @BindView(R.id.tab_layout_home_page)
     TabLayout mHomePageTabLayout;
@@ -148,7 +149,6 @@ public class HomePageFragment extends AppBaseFragment {
                 ,"http://pic14.photophoto.cn/20100227/0036036381162387_b.jpg"
                 ,"http://5b0988e595225.cdn.sohucs.com/images/20180819/b742f087903d4bf7a7668f335106d145.jpeg"
                 ,"http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20180728/14a1daaf28274d5a9f37d92da6e5b67a.jpeg"};
-        mBannerImageTitle = new String[]{"1","2","3","4"};
         //设置banner样式
         mHotPointBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
         //设置图片加载器
@@ -168,7 +168,11 @@ public class HomePageFragment extends AppBaseFragment {
         mHotPointBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-
+                switch (position){
+                    default:
+                        Toast.makeText(getContext(),"点击了"+(position+1),Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
 

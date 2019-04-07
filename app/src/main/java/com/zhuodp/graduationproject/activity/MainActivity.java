@@ -151,13 +151,14 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-        } else if (id == R.id.nav_slideshow) {
-        } else if (id == R.id.nav_manage) {
+        if (id == R.id.nav_download) {
+            Toast.makeText(getBaseContext(),"查看本地下载",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_logout) {
+            Toast.makeText(getBaseContext(),"第三方分享",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_settings){
+            initFragments(2);
+        }
+        else if (id == R.id.nav_logout) {
             //退出登陆按钮
             BmobUtil.logout();
             recoverUserInfo();

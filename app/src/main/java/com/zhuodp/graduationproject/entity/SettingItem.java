@@ -8,10 +8,12 @@ package com.zhuodp.graduationproject.entity;
 public class SettingItem {
     private String itemName;
     private int imageId;
+    private int forwardIconId;
 
-    public SettingItem(String name ,int imageId){
+    public SettingItem(String name ,int imageId,int forwardIconId){
         this.itemName = name;
         this.imageId = imageId;
+        this.forwardIconId = forwardIconId;
     }
 
     public String getItemName(){
@@ -20,5 +22,9 @@ public class SettingItem {
 
     public int getImageId(){
         return this.imageId;
+    }
+
+    public int getForwardIconId() {
+        return forwardIconId;
     }
 }

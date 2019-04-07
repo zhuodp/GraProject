@@ -9,8 +9,7 @@
     <RelativeLayout
         android:id="@+id/rl_login_fragment_user_area"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_150dp"
-        android:background="@color/blue_E0F0FF">
+        android:layout_height="@dimen/app_150dp">
 
         <com.zhuodp.graduationproject.utils.view.CircleImageView
             android:id="@+id/circle_iv_user_pic"
@@ -45,20 +44,26 @@
             android:layout_marginTop="@dimen/app_90dp"
             android:textSize="@dimen/app_font_size_13"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_1dp"
-            android:background="@drawable/black_background"
-            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/decor_line_1_setting_page_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_1dp"
+        android:background="@color/gray_dfe1e4"
+        android:layout_below="@id/rl_login_fragment_user_area"
+        android:elevation="@dimen/app_2dp"/>
 
     <ListView
         android:id="@+id/lv_fragment_setting"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_8dp"
         android:layout_marginLeft="@dimen/app_20dp"
+        android:layout_marginRight="@dimen/app_20dp"
         android:divider="@null"
-        android:layout_below="@id/rl_login_fragment_user_area">
+        android:layout_below="@id/decor_line_1_setting_page_fragment">
     </ListView>
 
 

@@ -11,7 +11,7 @@
         android:layout_height="@dimen/app_160dp"
         android:background="@color/gray_dfe1e4"
         android:src="@drawable/bg_discover_page"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"/>
 
     <RelativeLayout
         android:id="@+id/rl_collection_entry_collection_page"
@@ -20,10 +20,11 @@
         android:layout_height="@dimen/app_110dp"
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:background="@drawable/round_corner_pale_green_5dp"
         android:layout_marginTop="@dimen/app_10dp"
-        android:elevation="@dimen/app_4dp">
-
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid">
+<!--
+        android:background="@drawable/round_corner_pale_green_5dp"-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,9 +58,10 @@
         android:layout_height="@dimen/app_110dp"
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:background="@drawable/round_corner_red_5dp"
         android:layout_marginTop="@dimen/app_10dp"
-        android:elevation="@dimen/app_4dp">
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid"><!--
+        android:background="@drawable/round_corner_red_5dp"-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,8 +98,10 @@
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginTop="@dimen/app_10dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:background="@drawable/round_corner_pale_blue_5dp"
-        android:elevation="@dimen/app_4dp">
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid">
+<!--
+        android:background="@drawable/round_corner_pale_blue_5dp"-->
 
         <TextView
             android:layout_width="wrap_content"

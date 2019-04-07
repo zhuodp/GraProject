@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/banner_hot_point_tab"
-        android:layout_marginTop="@dimen/app_8dp"
+        android:layout_marginTop="@dimen/app_10dp"
         android:orientation="horizontal">
 
 
@@ -61,14 +61,14 @@
                 android:layout_width="@dimen/app_30dp"
                 android:layout_height="@dimen/app_30dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/icon_all_movies_2"
+                android:background="@drawable/icon_down_load_home_page"
                 android:elevation="@dimen/app_3dp" />
 
             <TextView
                 android:id="@+id/tv_temp1_home_page_fragment"
                 android:layout_width="@dimen/app_60dp"
                 android:layout_height="wrap_content"
-                android:text="全部电影"
+                android:text="本地电影"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/color_36404A"
                 android:layout_below="@id/iv_temp1_home_page_fragment"
@@ -112,7 +112,7 @@
         android:layout_height="@dimen/app_2dp"
         android:background="@color/gray_dfe1e4"
         android:layout_below="@id/area_nav_buttons_home_page_fragment"
-        android:layout_marginTop="@dimen/app_5dp"/>
+        android:layout_marginTop="@dimen/app_10dp"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_home_page"

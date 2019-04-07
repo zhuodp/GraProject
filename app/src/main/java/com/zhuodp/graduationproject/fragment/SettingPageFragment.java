@@ -102,12 +102,12 @@ public class SettingPageFragment extends AppBaseFragment {
     }
 
     private void initData(){
-        mSettingItems.add(new SettingItem("使用帮助",R.drawable.ic_menu_camera));
-        mSettingItems.add(new SettingItem("关于应用",R.drawable.ic_menu_camera));
-        mSettingItems.add(new SettingItem("意见反馈",R.drawable.ic_menu_camera));
-        mSettingItems.add(new SettingItem("更多应用",R.drawable.ic_menu_camera));
-        mSettingItems.add(new SettingItem("其他设置",R.drawable.ic_menu_camera));
-        mSettingItems.add(new SettingItem("测试入口",R.drawable.ic_menu_manage));
+        mSettingItems.add(new SettingItem("使用帮助",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("关于应用",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("意见反馈",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("更多应用",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("其他设置",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("测试入口",R.drawable.ic_menu_manage,R.drawable.ic_shortcut_arrow_forward));
 
     }
 

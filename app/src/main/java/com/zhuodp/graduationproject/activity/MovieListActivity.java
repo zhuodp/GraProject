@@ -155,6 +155,8 @@ public class MovieListActivity extends AppBaseActivity {
     //查找电影列表 (判断是否进行了分类，筛选出合适的电影)
     public void getMovie(Context context,boolean isFirstTime) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
+        //缓存策略，先尝试从缓存中获取查询结果，无果时再从网络获取
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         //不是热门则显示全部电影
         if (!mSelectionType.equals(Constant.DATA_MOVIE_SELECT_NONE)){
             bmobQuery.addWhereEqualTo("selectType",mSelectionType);
@@ -162,7 +164,7 @@ public class MovieListActivity extends AppBaseActivity {
         }
         //从搜索栏跳转过来则显示搜索结果
         if (mSearchKey!=null){
-            bmobQuery.addWhereContains("movieName",mSearchKey);
+            bmobQuery.addWhereContains("movieName", mSearchKey);
             Log.e("MovieList","从搜索过来的");
         }
         //判断是否根据国家进行筛选

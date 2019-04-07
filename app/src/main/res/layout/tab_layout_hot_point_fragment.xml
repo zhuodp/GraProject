@@ -42,7 +42,7 @@
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/app_font_size_15"
-                android:text="更多热点"
+                android:text="查看更多"
                 android:layout_marginRight="@dimen/app_30dp"
                 android:gravity="center_vertical"/>
 
@@ -71,7 +71,6 @@
                 android:layout_weight="1"
                 android:onClick="onEnterVideoPlayerPage1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
             <com.youdao.lib.dialogs.util.RoundAngleImageView
@@ -82,7 +81,6 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
             <com.youdao.lib.dialogs.util.RoundAngleImageView
@@ -93,14 +91,13 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_30dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title_hot_movie_1"
@@ -157,7 +154,7 @@
             android:layout_height="@dimen/app_25dp"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/app_font_size_15"
-            android:text="更多音乐"
+            android:text="查看更多"
             android:layout_marginRight="@dimen/app_30dp"
             android:gravity="center_vertical"/>
 
@@ -186,7 +183,6 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
             <com.youdao.lib.dialogs.util.RoundAngleImageView
@@ -197,7 +193,6 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
             <com.youdao.lib.dialogs.util.RoundAngleImageView
@@ -208,14 +203,13 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_30dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title_latest_movie_1"
@@ -271,7 +265,7 @@
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/app_font_size_15"
-                android:text="更多其他"
+                android:text="查看更多"
                 android:layout_marginRight="@dimen/app_30dp"
                 android:gravity="center_vertical"/>
 
@@ -297,7 +291,6 @@
                 android:layout_marginLeft="@dimen/app_10dp"
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
-                android:src="@color/blue_4ea0e5"
                 android:scaleType="centerCrop"
                 app:radius="@dimen/app_8dp"/>
 
@@ -308,7 +301,6 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_width="@dimen/app_120dp"
                 android:layout_height="@dimen/app_130dp"
-                android:src="@color/blue_4ea0e5"
                 android:scaleType="centerCrop"
                 app:radius="@dimen/app_8dp"/>
 
@@ -320,14 +312,13 @@
                 android:layout_marginRight="@dimen/app_10dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@color/blue_4ea0e5"
                 app:radius="@dimen/app_8dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_30dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title_guess_movie_1"

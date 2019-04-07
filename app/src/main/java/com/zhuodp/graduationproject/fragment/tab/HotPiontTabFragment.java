@@ -181,32 +181,34 @@ public class HotPiontTabFragment extends AppBaseFragment {
         initData();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
-
-
+    }
 
     private void initView(String TAG){
         //###############################以下，初始化电影封面图片############################
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)){
-            Glide.with(getContext()).load(hotPiontMovies.get(0).getPicUrl()).into(mIvHotPiontMovie1);
-            Glide.with(getContext()).load(hotPiontMovies.get(1).getPicUrl()).into(mIvHotPiontMovie2);
-            Glide.with(getContext()).load(hotPiontMovies.get(2).getPicUrl()).into(mIvHotPiontMovie3);
+            Glide.with(getContext()).load(hotPiontMovies.get(0).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvHotPiontMovie1);
+            Glide.with(getContext()).load(hotPiontMovies.get(1).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvHotPiontMovie2);
+            Glide.with(getContext()).load(hotPiontMovies.get(2).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvHotPiontMovie3);
             mTvTitleHotPiontMovie1.setText(hotPiontMovies.get(0).getMovieName());
             mTvTitleHotPiontMovie2.setText(hotPiontMovies.get(1).getMovieName());
             mTvTitleHotPiontMovie3.setText(hotPiontMovies.get(2).getMovieName());
         }
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST)){
-            Glide.with(getContext()).load(latestMovies.get(0).getPicUrl()).into(mIvLatestMovie1);
-            Glide.with(getContext()).load(latestMovies.get(1).getPicUrl()).into(mIvLatestMovie2);
-            Glide.with(getContext()).load(latestMovies.get(2).getPicUrl()).into(mIvLatestMovie3);
+            Glide.with(getContext()).load(latestMovies.get(0).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvLatestMovie1);
+            Glide.with(getContext()).load(latestMovies.get(1).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvLatestMovie2);
+            Glide.with(getContext()).load(latestMovies.get(2).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvLatestMovie3);
             mTvLatestMovie1.setText(latestMovies.get(0).getMovieName());
             mTvLatestMovie2.setText(latestMovies.get(1).getMovieName());
             mTvLatestMovie3.setText(latestMovies.get(2).getMovieName());
         }
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS)){
-            Glide.with(getContext()).load(guessMovies.get(0).getPicUrl()).into(mIvGuessMovie1);
-            Glide.with(getContext()).load(guessMovies.get(1).getPicUrl()).into(mIvGuessMovie2);
-            Glide.with(getContext()).load(guessMovies.get(2).getPicUrl()).into(mIvGuessMovie3);
+            Glide.with(getContext()).load(guessMovies.get(0).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvGuessMovie1);
+            Glide.with(getContext()).load(guessMovies.get(1).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvGuessMovie2);
+            Glide.with(getContext()).load(guessMovies.get(2).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).error(R.drawable.bg_pic_placeholder).into(mIvGuessMovie3);
             mTvGuessMovie1.setText(guessMovies.get(0).getMovieName());
             mTvGuessMovie2.setText(guessMovies.get(1).getMovieName());
             mTvGuessMovie3.setText(guessMovies.get(2).getMovieName());
@@ -215,17 +217,18 @@ public class HotPiontTabFragment extends AppBaseFragment {
 
     private void initData(){
         //初始化电影数据
-        getMovie(getContext(),Constant.DATA_MOVIE_SELECT_HOT_PIONT);
-        getMovie(getContext(),Constant.DATA_MOVIE_SELECT_LATEST);
-        getMovie(getContext(),Constant.DATA_MOVIE_SELECT_GUESS);
+        getMovie(getContext().getApplicationContext(),Constant.DATA_MOVIE_SELECT_HOT_PIONT);
+        getMovie(getContext().getApplicationContext(),Constant.DATA_MOVIE_SELECT_LATEST);
+        getMovie(getContext().getApplicationContext(),Constant.DATA_MOVIE_SELECT_GUESS);
     }
     //获取并初始化电影相关数据成员
     private void getMovie(Context context,String TAG) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
+        bmobQuery.setLimit(3); //查找数量限制为三个
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)) {
             bmobQuery.addWhereEqualTo("selectType", Constant.DATA_MOVIE_SELECT_HOT_PIONT);
         }else if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST)){
-            bmobQuery.groupby(new String[]{"updatedAt"});
+            bmobQuery.order("-createdAt");//按时间降序
         }else if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS)){
             bmobQuery.groupby(new String[]{"objectId"});
         }
@@ -235,20 +238,29 @@ public class HotPiontTabFragment extends AppBaseFragment {
             public void done(List<Movie> list, BmobException e) {
                 if (e == null) {
                     if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)) {
-                        hotPiontMovies = list;
+                        if (list.size()==0) Log.e("HotPiontTab","热点图片数组为空");
+                        Log.e("HotPointTab","热点图片请求成功");
+                        hotPiontMovies.clear();
+                        hotPiontMovies.addAll(list);
                         initView(Constant.DATA_MOVIE_SELECT_HOT_PIONT);
                     }
                     if (TAG.equals(Constant.DATA_MOVIE_SELECT_LATEST)){
-                        latestMovies = list;
+                        if (list.size()==0) Log.e("HotPiontTab","最近图片数组为空");
+                        Log.e("HotPointTab","最近图片请求成功");
+                        latestMovies.clear();
+                        latestMovies.addAll(list);
                         initView(Constant.DATA_MOVIE_SELECT_LATEST);
                     }
                     if (TAG.equals(Constant.DATA_MOVIE_SELECT_GUESS)){
-                        guessMovies = list;
+                        if (list.size()==0) Log.e("HotPiontTab","猜你喜欢图片数组为空");
+                        Log.e("HotPointTab","猜你喜欢图片请求成功");
+                        guessMovies.clear();
+                        guessMovies.addAll(list);
                         initView(Constant.DATA_MOVIE_SELECT_GUESS);
                     }
-
                     Toast.makeText(context, "电影列表获取成功", Toast.LENGTH_SHORT).show();
                 } else {
+                    //Log.e("HotPiontTab",TAG+" 的列表获取失败，长度为"+list.size()+"，错误信息:"+e.getMessage());
                     Toast.makeText(context, TAG+"列表获取失败:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
