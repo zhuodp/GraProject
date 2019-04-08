@@ -41,10 +41,12 @@ public class MovieListActivity extends AppBaseActivity {
 
     private String TAG = ""; //指示当前点击的是哪一组分类
 
-    private String mSelectedType = "全部"; //热门等等
     private String mSelectedMovieType = "全部";
     private String mSelectedTime = "全部";
-    private String mSlectedCountry = "全部";
+    private String mSelectedCountry = "全部";
+
+    private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE; //如热门等
+    private String mSearchKey = null;//关键字搜索
 
     @BindView(R.id.recyclerview_movie_list)
     RecyclerView mMovieRecyclerView;
@@ -66,20 +68,25 @@ public class MovieListActivity extends AppBaseActivity {
     private List<Movie> mMovieList = new ArrayList<>();
 
     private FilterAdapter mFilterAdapter;
-    private String[] mType = new String[]{"全部","热门","剧集","动漫","喜剧","动作","科幻","恐怖","爱情"};
-    private String[] mTime = new String[]{"全部","60年代","70年代","80年代","90年代","2000-2010年","2011~2019年"};
-    private String[] mCountry = new String[]{"全部","中国","韩国","日本","美国","英国","德国","法国"};
+    private FilterAdapter mMovieTypeAdapter;
+    private FilterAdapter mMovieTimeAdapter;
+    private FilterAdapter mMovieCountryAdapter;
+
+
+    private String[] mType = new String[]{"全部","热门","剧情","动漫","喜剧","动作","科幻","恐怖","爱情","励志","传记"};
+    private String[] mTime = new String[]{"全部","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2003","2002","2001","2000","2000年之前"};
+    private String[] mCountry = new String[]{"全部","中国","韩国","日本","美国","英国","德国","法国","意大利"};
 
 
 
-    private String mSelectionType=Constant.DATA_MOVIE_SELECT_NONE; //如热门等
-    private String mSearchKey = null;//关键字搜索
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+        initGridView();
         getIntentData();//获取Intent中的数据
         getMovie(this,true);
     }
@@ -162,26 +169,23 @@ public class MovieListActivity extends AppBaseActivity {
             bmobQuery.addWhereEqualTo("selectType",mSelectionType);
             Log.e("MovieList","是热门");
         }
-        //从搜索栏跳转过来则显示搜索结果
-        if (mSearchKey!=null){
-            bmobQuery.addWhereContains("movieName", mSearchKey);
-            Log.e("MovieList","从搜索过来的");
-        }
-        //判断是否根据国家进行筛选
-        if (!mSlectedCountry.equals("全部")){
-            bmobQuery.addWhereEqualTo("country",mSlectedCountry);
-            Log.e("MovieList","国家为"+mSlectedCountry);
+        if (!mSelectedCountry.equals("全部")){//判断是否根据国家进行筛选
+            bmobQuery.addWhereEqualTo("country", mSelectedCountry);
+            Log.e("MovieList","国家为"+ mSelectedCountry);
         }
         //判断是否根据时间进行筛选
         if (!mSelectedTime.equals("全部")){
-            //TODO
+            if (!mSelectedTime.equals("2000年之前")){
+                bmobQuery.addWhereEqualTo("publishedDate",mSelectedTime);
+            }else{
+                bmobQuery.addWhereLessThan("publishedDate","2000");
+            }
         }
         //判断是否根据影片类型进行筛选
         if (!mSelectedMovieType.equals("全部")){
             bmobQuery.addWhereEqualTo("type",mSelectedMovieType);
             Log.e("MovieList","类型为"+mSelectedMovieType);
         }
-
         bmobQuery.findObjects(new FindListener<Movie>() {
             @Override
             public void done(List<Movie> list, BmobException e) {
@@ -190,7 +194,17 @@ public class MovieListActivity extends AppBaseActivity {
                     Log.e("MovieList","获取到的列表长度为"+list.size());
                     //采用下面的方式更新数据集，保证mMovieList的内存地址不变，否则Adapter的notifyDataSetChanged方法会失效
                     mMovieList.clear();
-                    mMovieList.addAll(list);
+                    if (mSearchKey!=null){
+                        //从搜索栏跳转过来则显示筛选搜索的内容
+                        Log.e("MovieList","根据搜索关键词筛选后，列表长度为"+list.size());
+                        for (int i = 0 ;i<list.size();i++){
+                            if ((list.get(i).getMovieName().contains(mSearchKey))){  //模糊搜索匹配
+                                mMovieList.add(list.get(i));
+                            }
+                        }
+                    }else{
+                        mMovieList.addAll(list);
+                    }
                     initRecyclerView(isFirstTime);
                 } else {
                     Toast.makeText(context, "列表获取失败:" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -208,6 +222,10 @@ public class MovieListActivity extends AppBaseActivity {
             mSearchKey = intent.getStringExtra(Constant.ACTION_MOVIE_SEARCH);
         }
         Log.e("debug",mSelectionType);
+    }
+
+    private void initGridView(){
+
     }
 
     private void showGridView(String which){
@@ -229,7 +247,7 @@ public class MovieListActivity extends AppBaseActivity {
             viewToUpdate = mTvSortByCountry;
         }
 
-        mFilterAdapter =new FilterAdapter(dataSet,"time",getBaseContext());
+        mFilterAdapter =new FilterAdapter(dataSet,getBaseContext());
         mGridViewSortMenu.setAdapter(mFilterAdapter);
         mGridViewSortMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -238,12 +256,15 @@ public class MovieListActivity extends AppBaseActivity {
                 mGridViewSortMenu.setVisibility(View.GONE);
                 if (which.equals("TYPE")){
                     mSelectedMovieType = dataSet[position];
+                    Log.e("点击事件","设置电影类型为"+dataSet[position]);
                 }
                 if (which.equals("TIME")){
                     mSelectedTime = dataSet[position];
+                    Log.e("点击事件","设置时间为"+dataSet[position]);
                 }
                 if (which.equals("COUNTRY")){
-                    mSlectedCountry = dataSet[position];
+                    mSelectedCountry = dataSet[position];
+                    Log.e("点击事件","设置国家为"+dataSet[position]);
                 }
                 //重新获取匹配的列表（更新UI）
                 getMovie(getBaseContext(),false);
@@ -252,6 +273,11 @@ public class MovieListActivity extends AppBaseActivity {
         mGridViewSortMenu.setVisibility(View.VISIBLE);
         mGridViewSortMenu.bringToFront();
     }
+
+
+
+
+
 
 
 

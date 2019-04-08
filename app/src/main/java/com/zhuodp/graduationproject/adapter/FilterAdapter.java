@@ -14,12 +14,10 @@ public class FilterAdapter extends BaseAdapter {
     private Context context;
     private String[] data;
 
-    private String rankType;
 
-    public FilterAdapter(String[] data,String rankType,Context context){
+    public FilterAdapter(String[] data,Context context){
         super();
         this.data = data;
-        this.rankType = rankType;
         this.context = context;
     }
 

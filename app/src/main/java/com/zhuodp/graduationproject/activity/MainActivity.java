@@ -6,6 +6,8 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -73,7 +75,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.btn_fragment_settings_page)
     GraphicView mBtnFragmentSettingsPage;
 
-
     @OnClick(R.id.btn_fragment_home_page)
     public void onSwitchToHomePage(){
         initFragments(0);
@@ -102,7 +103,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //绑定控件并初始化
+        //绑定控件并初始化UI
         initViews();
         //初始化菜单栏等控件
         initSettings();
@@ -229,12 +230,28 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
     //初始化菜单栏等组件
     private void initSettings(){
+        //设置toolbar
         setSupportActionBar(toolbar);
+        //设置drawer相关
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        //注册抽屉中菜单项的监听
         navigationView.setNavigationItemSelectedListener(this);
+        //重写搜索栏的回车监听事件
+        mEtSearchContent.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
+                    Log.e("MainActivity","onKeyEvent + actionUp");
+                    onClick4SearchMovie();
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        });
     }
 
     //初始化Fragments

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,12 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.activity.MovieListActivity;
+import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.debug.DebugActivity;
+import com.zhuodp.graduationproject.entity.BannerItem;
+import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.fragment.tab.AminTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.CollectionTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.HotPiontTabFragment;
@@ -34,6 +38,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class HomePageFragment extends AppBaseFragment {
 
@@ -42,9 +49,10 @@ public class HomePageFragment extends AppBaseFragment {
     private TablayoutFragmentPagerAdapter mTablayoutFragmentPagerAdapter;
 
     //Banner相关的数据
-    private String[]  mBannerImageUris;
-    private String[] mBannerImageTitle = {"中央已经公布了，含有毒素的八种蔬菜",
-            "经常玩电脑的人有这八种病","百分之99的人都转发了","哈哈哈哈哈哈哈哈哈"};
+    private List<BannerItem> mBannerItems = new ArrayList<>();
+    private List<String> mBannerImageUris = new ArrayList<>();
+    private List<String> mBannerImageTitle = new ArrayList<>();
+
 
     @BindView(R.id.tab_layout_home_page)
     TabLayout mHomePageTabLayout;
@@ -144,42 +152,76 @@ public class HomePageFragment extends AppBaseFragment {
     }
 
     private void initBanner(){
-        //初始化Banner数据源
-        mBannerImageUris  =new String[]{"https://b-ssl.duitang.com/uploads/item/201601/02/20160102175929_hATXs.jpeg"
-                ,"http://pic14.photophoto.cn/20100227/0036036381162387_b.jpg"
-                ,"http://5b0988e595225.cdn.sohucs.com/images/20180819/b742f087903d4bf7a7668f335106d145.jpeg"
-                ,"http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20180728/14a1daaf28274d5a9f37d92da6e5b67a.jpeg"};
-        //设置banner样式
-        mHotPointBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
-        //设置图片加载器
-        mHotPointBanner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        mHotPointBanner.setImages(Arrays.asList(mBannerImageUris));
-        mHotPointBanner.setBannerAnimation(Transformer.DepthPage);
-        //设置标题集合（当banner样式有显示title时）
-        mHotPointBanner.setBannerTitles(Arrays.asList(mBannerImageTitle));
-        //自动轮播
-        mHotPointBanner.isAutoPlay(true);
-        //轮播时间
-        mHotPointBanner.setDelayTime(2000);
-        //设置指示器位置
-        mHotPointBanner.setIndicatorGravity(BannerConfig.CENTER);
-        //设置Banner的点击事件
-        mHotPointBanner.setOnBannerListener(new OnBannerListener() {
+        BmobQuery<BannerItem> bmobQuery = new BmobQuery<BannerItem>();
+        bmobQuery.addWhereEqualTo("selectType",Constant.DATA_MOVIE_SELECT_BANNER);
+        bmobQuery.findObjects(new FindListener<BannerItem>() {
             @Override
-            public void OnBannerClick(int position) {
-                switch (position){
-                    default:
-                        Toast.makeText(getContext(),"点击了"+(position+1),Toast.LENGTH_SHORT).show();
-                        break;
+            public void done(List<BannerItem> list, BmobException e) {
+                if (e == null) {
+                    //不改变内存地址赋值
+                    mBannerItems.clear();
+                    mBannerItems.addAll(list);
+                    //标题和图片列表赋值
+                    for (int i = 0;i<list.size();i++){
+                        mBannerImageUris.add(list.get(i).getPicUrl());
+                        mBannerImageTitle.add(list.get(i).getTitle());
+                    }
+                    //设置banner样式
+                    mHotPointBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
+                    //设置图片加载器
+                    mHotPointBanner.setImageLoader(new GlideImageLoader());
+                    //设置图片集合
+                    mHotPointBanner.setImages(mBannerImageUris);
+                    mHotPointBanner.setBannerAnimation(Transformer.DepthPage);
+                    //设置标题集合（当banner样式有显示title时）
+                    mHotPointBanner.setBannerTitles(mBannerImageTitle);
+                    //自动轮播
+                    mHotPointBanner.isAutoPlay(true);
+                    //轮播时间
+                    mHotPointBanner.setDelayTime(2000);
+                    //设置指示器位置
+                    mHotPointBanner.setIndicatorGravity(BannerConfig.CENTER);
+                    //设置Banner的点击事件
+                    mHotPointBanner.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            jumpToVideoPlayer(position);
+                        }
+                    });
+                    //开始banner展示
+                    mHotPointBanner.start();
+                }
+                else {
+                    Toast.makeText(getContext(),"查询BannerItem项失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    //根据banner点击位置，跳转到对应视频的播放页
+    private void jumpToVideoPlayer(int position){
+        String movieObjectId = mBannerItems.get(position).getObjectId();
+        String movieName = mBannerItems.get(position).getMovieName();
+        String moviePicUrl = mBannerItems.get(position).getPicUrl();
+        String[] movieActors = mBannerItems.get(position).getActors();
+        String moviePublishDate = mBannerItems.get(position).getPublishedDate();
+        String movieIntro = mBannerItems.get(position).getIntroduction();
+        Log.e("MovieListAc",movieName);
+        Log.e("MovieListAc",moviePicUrl);
+        Log.e("MovieListAc",movieActors[0]);
+        Log.e("MovieListAc",moviePublishDate);
+        Log.e("MovieListAc",movieIntro);
 
 
-        //开始banner展示
-        mHotPointBanner.start();
-
+        Intent intent = new Intent(getActivity(), VideoPlayerActivity.class);
+        intent.putExtra(Constant.DATA_MOVIE_OBJECT_ID,movieObjectId);
+        intent.putExtra(Constant.DATA_MOVIE_NAME,movieName);
+        intent.putExtra(Constant.DATA_MOVIE_URL,Constant.MOVIE_URL_TEST);//暂时固定死视频的URL TODO 在数据表中加入视频url连接
+        intent.putExtra(Constant.DATA_USER_PIC_URL,moviePicUrl);
+        intent.putExtra(Constant.DATA_MOVIE_ACTORS,movieActors);
+        intent.putExtra(Constant.DATA_MOVIE_PUBLISH_DATE,moviePublishDate);
+        intent.putExtra(Constant.DATA_MOVIE_INTRO,movieIntro);
+        startActivity(intent);
     }
 
 
