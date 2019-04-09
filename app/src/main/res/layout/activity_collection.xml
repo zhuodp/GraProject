@@ -46,20 +46,21 @@
                     app:layout_collapseMode = "pin">
 
                     <Button
-                        android:layout_height="@dimen/app_25dp"
-                        android:layout_width="@dimen/app_25dp"
+                        android:layout_height="@dimen/app_18dp"
+                        android:layout_width="@dimen/app_18dp"
                         android:background="@drawable/video_back"
                         android:onClick="onClick4Back"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/app_font_size_24"
+                        android:layout_height="@dimen/app_30dp"
+                        android:textSize="@dimen/app_font_size_16"
                         android:textColor="#fff"
                         android:text="我的收藏"
+                        android:gravity="center"
                         android:textStyle="bold"
-                        android:layout_marginLeft="@dimen/app_35dp"/>
+                        android:layout_marginLeft="@dimen/app_15dp"/>
 
 
                 </android.support.v7.widget.Toolbar>

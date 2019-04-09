@@ -18,7 +18,7 @@
             android:layout_marginLeft="@dimen/app_20dp"
             android:layout_marginTop="@dimen/app_20dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/user_pic_test"
+            android:src="@drawable/pic_user_pic_default"
             android:scaleType="centerCrop"
             />
 

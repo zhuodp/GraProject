@@ -1,8 +1,10 @@
 package com.zhuodp.graduationproject.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.icu.text.UnicodeSetSpanner;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +41,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends AppBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    //是否使用特殊的标题栏背景颜色，android5.0以上可以设置状态栏背景色，如果不使用则使用透明色值
+    protected boolean useThemestatusBarColor = true;
+    //是否使用状态栏文字和图标为暗色，如果状态栏采用了白色系，则需要使状态栏和图标为暗色，android6.0以上可以设置
+    protected boolean useStatusBarColor = false;
 
     private HomePageFragment mHomePageFragment;
     private SettingPageFragment mSettingPageFragment;
@@ -103,6 +112,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setStatusBar();
         //绑定控件并初始化UI
         initViews();
         //初始化菜单栏等控件
@@ -211,21 +221,25 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     }
     //点击编辑用户签名
     public void onEditUserSignature(View view){
-        //弹出个性签名修改弹窗
-        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
-        customDialogManager.setDialogType(CustomDialogManager.TYPE_DATA_SETTING_DIALOG);
-        customDialogManager.setDialogDismissOnTouchOutside(true);
-        customDialogManager.setDataSettingButtonText("确认修改");
-        customDialogManager.setDataSettingHint("编辑新的个性签名");
-        customDialogManager.setOnDataSettingDialogListener(CustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM,new CustomDialogManager.OnDataSettingDialogListener() {
-            @Override
-            public void onDataSettingDialogClick(String userSignature) {
-                //确认按钮
-                //TODO 更新UI + 数据库
-                BmobUtil.updateUser(getBaseContext(),userSignature,mTvUserSignature);
-            }
-        });
-        customDialogManager.showDialog(getBaseContext());
+        if (BmobUtil.isLogin()) {
+            //弹出个性签名修改弹窗
+            CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+            customDialogManager.setDialogType(CustomDialogManager.TYPE_DATA_SETTING_DIALOG);
+            customDialogManager.setDialogDismissOnTouchOutside(true);
+            customDialogManager.setDataSettingButtonText("确认修改");
+            customDialogManager.setDataSettingHint("编辑新的个性签名");
+            customDialogManager.setOnDataSettingDialogListener(CustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM, new CustomDialogManager.OnDataSettingDialogListener() {
+                @Override
+                public void onDataSettingDialogClick(String userSignature) {
+                    //确认按钮
+                    //TODO 更新UI + 数据库
+                    BmobUtil.updateUser(getBaseContext(), userSignature, mTvUserSignature);
+                }
+            });
+            customDialogManager.showDialog(getBaseContext());
+        }else {
+            Toast.makeText(getBaseContext(),"请先登陆",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //初始化菜单栏等组件
@@ -334,7 +348,32 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     public void recoverUserInfo(){
         mUserName.setText("未登录");
         mTvUserSignature.setText("未设置个性签名");
-        Glide.with(getBaseContext()).load(R.drawable.user_pic_test).asBitmap().into(mUserPicInDrawer);
+        Glide.with(getBaseContext()).load(R.drawable.pic_user_pic_default).asBitmap().into(mUserPicInDrawer);
+    }
+
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //根据上面设置是否对状态栏单独设置颜色
+            if (useThemestatusBarColor) {
+                getWindow().setStatusBarColor(getResources().getColor(R.color.color_36404A));//设置状态栏背景色
+            } else {
+                getWindow().setStatusBarColor(Color.TRANSPARENT);//透明
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        } else {
+            Toast.makeText(this, "低于4.4的android系统版本不存在沉浸式状态栏", Toast.LENGTH_SHORT).show();
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useStatusBarColor) {
+            //android6.0以后可以对状态栏文字颜色和图标进行修改
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 
 }

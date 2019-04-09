@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="喜欢有道作业宝吗？"
+            android:text="喜欢这款应用吗？"
             android:textSize="@dimen/app_font_size_19"
             android:textColor="@color/color_36404A"
             android:textStyle="bold"

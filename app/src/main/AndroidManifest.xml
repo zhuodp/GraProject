@@ -67,6 +67,9 @@
         <activity android:name=".activity.CollectionActivity"
             android:theme="@style/CollapsingTheme"/>
 
+        <activity android:name=".activity.UserPlayHistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

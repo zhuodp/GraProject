@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/app_10dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:background="@color/color_EBECED"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="@dimen/app_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+
+        <com.youdao.lib.dialogs.util.RoundAngleImageView
+            android:id="@+id/iv_item_pic_history_list"
+            android:layout_width="@dimen/app_100dp"
+            android:layout_height="@dimen/app_120dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="@dimen/app_2dp"
+            app:radius="@dimen/app_15dp"
+            android:src="@drawable/test_image"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_below="@id/iv_item_pic_history_list"
+            android:layout_marginTop="@dimen/app_2dp"
+            android:id="@+id/tv_item_title_history_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_font_size_18"
+            android:layout_centerHorizontal="true"
+            android:text="瑞秋的电影"
+            android:textColor="@color/color_36404A"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/app_0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_item_time_history_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="2019年11月12日 12点" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

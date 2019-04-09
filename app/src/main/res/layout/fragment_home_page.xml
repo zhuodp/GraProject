@@ -9,9 +9,9 @@
         android:id="@+id/banner_hot_point_tab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_160dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginStart="@dimen/app_8dp"
+        android:layout_marginTop="@dimen/app_8dp"
+        android:layout_marginEnd="@dimen/app_8dp"/>
 
     <LinearLayout
         android:id="@+id/area_nav_buttons_home_page_fragment"
@@ -78,7 +78,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/area_temp2"
+            android:id="@+id/area_check_user_history"
             android:layout_width="@dimen/app_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">

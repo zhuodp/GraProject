@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/area_user_info_user_history_activity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_100dp">
+
+        <com.zhuodp.graduationproject.utils.view.CircleImageView
+            android:id="@+id/iv_user_pic_user_history_activity"
+            android:layout_width="@dimen/app_80dp"
+            android:layout_height="@dimen/app_80dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/test_image"/>
+
+        <TextView
+            android:id="@+id/tv_user_name_history_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名"
+            android:textSize="@dimen/app_font_size_20"
+            android:layout_toRightOf="@id/iv_user_pic_user_history_activity"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/app_20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="的播放记录"
+            android:textSize="@dimen/app_font_size_20"
+            android:layout_toRightOf="@id/tv_user_name_history_activity"
+            android:layout_centerVertical="true"
+            />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/area_user_history_title_history_activity"
+        android:layout_below="@id/area_user_info_user_history_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="观看纪录"
+            android:background="@drawable/rectangle_solid_white_2dp"
+            android:textSize="@dimen/app_font_size_16"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="上次观看时间"
+            android:textSize="@dimen/app_font_size_16"
+            android:gravity="center"
+            android:background="@drawable/rectangle_solid_white_2dp"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_history_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/area_user_history_title_history_activity">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

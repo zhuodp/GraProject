@@ -47,8 +47,8 @@
             android:layout_height="@dimen/app_40dp"
             android:layout_marginTop="@dimen/app_25dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/icon_is_favor_movie"/>
+            android:layout_marginRight="@dimen/app_28dp"
+            android:src="@drawable/icon_collection_discover_page"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -84,9 +84,9 @@
             android:layout_width="@dimen/app_40dp"
             android:layout_height="@dimen/app_40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/app_28dp"
+            android:layout_marginTop="@dimen/app_25dp"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/icon_user_download"/>
+            android:src="@drawable/icon_download_discover_page"/>
 
     </RelativeLayout>
 
@@ -121,12 +121,12 @@
             android:textSize="@dimen/app_font_size_13" />
 
         <com.youdao.lib.dialogs.util.RoundAngleImageView
-            android:layout_width="@dimen/app_50dp"
-            android:layout_height="@dimen/app_50dp"
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/app_25dp"
-            android:src="@drawable/user_pic_test" />
+            android:src="@drawable/icon_like_discover_page" />
 
     </RelativeLayout>
 

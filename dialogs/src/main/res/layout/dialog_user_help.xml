@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_half_corners_radius_15_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_20dp"
+        android:textSize="@dimen/app_font_size_22"
+        android:text="使用帮助"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/app_30dp"
+        android:layout_marginRight="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_60dp"
+        android:textSize="@dimen/app_font_size_15"
+        android:text="暂时没有使用帮助。"/>
+
+</RelativeLayout>

@@ -1,8 +1,10 @@
 package com.zhuodp.graduationproject.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.LoginActivity;
 import com.zhuodp.graduationproject.adapter.SettingListAdapter;
+import com.zhuodp.graduationproject.entity.Feedback;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.entity.SettingItem;
@@ -28,6 +32,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
 // TODO  1.设置页面UI优化   2.用户登陆部分的逻辑 （是否能通过bmob实现用户信息存储）
 
@@ -102,12 +108,10 @@ public class SettingPageFragment extends AppBaseFragment {
     }
 
     private void initData(){
-        mSettingItems.add(new SettingItem("使用帮助",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
-        mSettingItems.add(new SettingItem("关于应用",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
-        mSettingItems.add(new SettingItem("意见反馈",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
-        mSettingItems.add(new SettingItem("更多应用",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
-        mSettingItems.add(new SettingItem("其他设置",R.drawable.ic_menu_camera,R.drawable.ic_shortcut_arrow_forward));
-        mSettingItems.add(new SettingItem("测试入口",R.drawable.ic_menu_manage,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("使用帮助",R.drawable.icon_use_help_setting_page,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("关于应用",R.drawable.icon_about_us_setting_page,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("意见反馈",R.drawable.icon_feed_back_setting_page,R.drawable.ic_shortcut_arrow_forward));
+        mSettingItems.add(new SettingItem("测试入口",R.drawable.icon_test_entry_setting_page,R.drawable.ic_shortcut_arrow_forward));
 
     }
 
@@ -117,9 +121,27 @@ public class SettingPageFragment extends AppBaseFragment {
         mSettingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position==5){
-                    Intent intent = new Intent(getActivity(),DebugActivity.class);
-                    startActivity(intent);
+                switch (position){
+                    case 0://使用帮助
+                        showUseHelpDialog();
+                        break;
+                    case 1://关于应用
+                        showAboutDialog();
+                        break;
+                    case 2://意见反馈
+                        if (BmobUtil.isLogin()){
+                            showFeedBackDialog(BmobUtil.getCurrentUser().getObjectId());
+                        }else {
+                            showFeedBackDialog("未登录用户");
+                        }
+
+                        break;
+                    case 3://测试入口
+                        Intent intent = new Intent(getActivity(),DebugActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
                 }
             }
         });
@@ -127,12 +149,68 @@ public class SettingPageFragment extends AppBaseFragment {
 
     //初始化用户信息（若在抽屉中推出，）
     public void recoverUserInfo(){
-        Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mSettingPageUserPic);
-        Glide.with(getContext()).load(R.drawable.user_pic_test).asBitmap().into(mDrawerUserPic);
+        Glide.with(getContext()).load(R.drawable.pic_user_pic_default).asBitmap().into(mSettingPageUserPic);
+        Glide.with(getContext()).load(R.drawable.pic_user_pic_default).asBitmap().into(mDrawerUserPic);
         mUserName.setText(R.string.not_login_tip_1);
         mUserSignature.setText(R.string.not_login_tip_2);
         mDrawerUserName.setText(R.string.not_login_tip_1);
         mDrawerUseSignature.setText(R.string.not_login_tip_2);
+    }
+
+    private void showFeedBackDialog(String userId){
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_FEED_BACK_DIALOG);
+        customDialogManager.setDialogDismissOnTouchOutside(false);
+        customDialogManager.setOnFeedBackDialogListener(CustomDialogManager.TAG_FEED_BACK_DIALOG_GOOD, new CustomDialogManager.OnFeedbackDialogListener() {
+            @Override
+            public void onFeedbackDialogClick() {
+                Feedback feedback= new Feedback(userId,true);
+                feedback.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if (e == null){
+                            Toast.makeText(getContext(),"您的评价我们已经收到，感谢有你",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.e("SettingFragment","评价失败"+e.getMessage());
+                            Toast.makeText(getContext(),"抱歉出错了，请稍后再试",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+        customDialogManager.setOnFeedBackDialogListener(CustomDialogManager.TAG_FEED_BACK_DIALOG_BAD, new CustomDialogManager.OnFeedbackDialogListener() {
+            @Override
+            public void onFeedbackDialogClick() {
+                //差评
+                Feedback feedback= new Feedback(userId,false);
+                feedback.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if (e == null){
+                            Toast.makeText(getContext(),"您的评价我们已经收到，感谢有你",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.e("SettingFragment","评价失败"+e.getMessage());
+                            Toast.makeText(getContext(),"抱歉出错了，请稍后再试",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+        customDialogManager.showDialog(getContext());
+    }
+
+    private void showUseHelpDialog(){
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_USER_HELP);
+        customDialogManager.setDialogDismissOnTouchOutside(true);
+        customDialogManager.showDialog(getContext());
+    }
+
+    private void showAboutDialog(){
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_ABOUT);
+        customDialogManager.setDialogDismissOnTouchOutside(true);
+        customDialogManager.showDialog(getContext());
     }
 
 }

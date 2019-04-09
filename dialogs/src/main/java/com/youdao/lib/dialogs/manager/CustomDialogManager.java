@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 
+import com.youdao.lib.dialogs.activity.AboutDialogActivity;
 import com.youdao.lib.dialogs.activity.AlertDialogActivity;
 import com.youdao.lib.dialogs.activity.AskForLoginActivity;
 import com.youdao.lib.dialogs.activity.CameraTipDialog;
@@ -13,6 +14,7 @@ import com.youdao.lib.dialogs.activity.DataSetttingDialogActivity;
 import com.youdao.lib.dialogs.activity.ExportDialogActivity;
 import com.youdao.lib.dialogs.activity.FeedBackDialog;
 import com.youdao.lib.dialogs.activity.GradeChooseDialogActivity;
+import com.youdao.lib.dialogs.activity.UserHelpDialogActivity;
 
 import java.util.HashMap;
 
@@ -36,6 +38,8 @@ public class CustomDialogManager{
     public static final String TYPE_CAMERA_TIP_DIALOG = "TYPE_CAMERA_TIP_DIALOG";
     public static final String TYPE_FEED_BACK_DIALOG = "TYPE_FEED_BACK_DIALOG";
     public static final String TYPE_ASK_FOR_LOGIN = "TYPE_ASK_FOR_LOGIN";
+    public static final String TYPE_USER_HELP = "TYPE_USER_HELP";
+    public static final String TYPE_ABOUT = "TYPE_ABOUT";
 
     //dialog listener的标签，用于辨别同一界面中的不同按钮
     public static final String TAG_ALERT_DIALOG_POSITIVE = "TAG_ALERT_DIALOG_POSITIVE";
@@ -149,6 +153,12 @@ public class CustomDialogManager{
                     break;
                 case TYPE_ASK_FOR_LOGIN:
                     dialogActivity = new Intent(context, AskForLoginActivity.class);
+                    break;
+                case TYPE_USER_HELP:
+                    dialogActivity = new Intent(context, UserHelpDialogActivity.class);
+                    break;
+                case TYPE_ABOUT:
+                    dialogActivity = new Intent(context, AboutDialogActivity.class);
                     break;
                 default:
                     Toast.makeText(context,"使用showDialog()之前，请设置正确的DialogType",Toast.LENGTH_SHORT).show();

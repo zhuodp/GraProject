@@ -224,6 +224,7 @@ public class HotPiontTabFragment extends AppBaseFragment {
     //获取并初始化电影相关数据成员
     private void getMovie(Context context,String TAG) {
         BmobQuery<Movie> bmobQuery = new BmobQuery<Movie>();
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         bmobQuery.setLimit(3); //查找数量限制为三个
         if (TAG.equals(Constant.DATA_MOVIE_SELECT_HOT_PIONT)) {
             bmobQuery.addWhereEqualTo("selectType", Constant.DATA_MOVIE_SELECT_HOT_PIONT);
@@ -274,11 +275,11 @@ public class HotPiontTabFragment extends AppBaseFragment {
         String[] movieActors = targetMovieList.get(position).getActors();
         String moviePublishDate = targetMovieList.get(position).getPublishedDate();
         String movieIntro = targetMovieList.get(position).getIntroduction();
-        Log.e("hotpiontFragment",movieName);
+        /*Log.e("hotpiontFragment",movieName);
         Log.e("hotpiontFragment",moviePicUrl);
         Log.e("hotpiontFragment",movieActors[0]);
         Log.e("hotpiontFragment",moviePublishDate);
-        Log.e("hotpiontFragment",movieIntro);
+        Log.e("hotpiontFragment",movieIntro);*/
         Intent targetIntent = new Intent(getActivity(),VideoPlayerActivity.class);
         targetIntent.putExtra(Constant.DATA_MOVIE_OBJECT_ID,movieObjectId);
         targetIntent.putExtra(Constant.DATA_MOVIE_NAME,movieName);

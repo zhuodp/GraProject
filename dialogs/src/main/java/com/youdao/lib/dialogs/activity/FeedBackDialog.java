@@ -34,7 +34,7 @@ public class FeedBackDialog extends Activity{
         WindowManager.LayoutParams lp = (WindowManager.LayoutParams) view.getLayoutParams();
         lp.gravity = Gravity.CENTER;
         lp.x = 0;
-        lp.y = (int) getResources().getDimension(R.dimen.app_65dp);
+        lp.y = (int) getResources().getDimension(R.dimen.app_35dp);
         //lp.width = 100;
         //lp.height = 100;
         getWindowManager().updateViewLayout(view, lp);

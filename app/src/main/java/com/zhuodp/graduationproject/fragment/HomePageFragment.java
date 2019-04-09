@@ -19,21 +19,20 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.activity.MovieListActivity;
+import com.zhuodp.graduationproject.activity.UserPlayHistoryActivity;
 import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 import com.zhuodp.graduationproject.adapter.TablayoutFragmentPagerAdapter;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.debug.DebugActivity;
 import com.zhuodp.graduationproject.entity.BannerItem;
-import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.fragment.tab.AminTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.CollectionTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.HotPiontTabFragment;
 import com.zhuodp.graduationproject.fragment.tab.MovieTabFragment;
 import com.zhuodp.graduationproject.global.Constant;
 import com.zhuodp.graduationproject.utils.GlideImageLoader;
+import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -78,9 +77,16 @@ public class HomePageFragment extends AppBaseFragment {
         Toast.makeText(getContext(),"功能尚未开放",Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.area_temp2)
-    public void onEnterTemp2(){
-        Toast.makeText(getContext(),"功能尚未开放",Toast.LENGTH_SHORT).show();
+    //查看用户播放纪录
+    @OnClick(R.id.area_check_user_history)
+    public void onCheckUserHistory(){
+        if (BmobUtil.isLogin()){
+            //TODO 跳转到历史纪录页面
+            Intent intent = new Intent(getActivity(), UserPlayHistoryActivity.class);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getContext(),"登陆后才可查看历史纪录，请先登陆",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -94,8 +100,6 @@ public class HomePageFragment extends AppBaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initTabFragments();
-        initBanner();
-
     }
 
     @Override
@@ -103,6 +107,7 @@ public class HomePageFragment extends AppBaseFragment {
         super.onStart();
         //切回界面时开始轮播
         mHotPointBanner.startAutoPlay();
+        initBanner();
     }
 
     @Override
@@ -153,6 +158,7 @@ public class HomePageFragment extends AppBaseFragment {
 
     private void initBanner(){
         BmobQuery<BannerItem> bmobQuery = new BmobQuery<BannerItem>();
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         bmobQuery.addWhereEqualTo("selectType",Constant.DATA_MOVIE_SELECT_BANNER);
         bmobQuery.findObjects(new FindListener<BannerItem>() {
             @Override
@@ -160,11 +166,13 @@ public class HomePageFragment extends AppBaseFragment {
                 if (e == null) {
                     //不改变内存地址赋值
                     mBannerItems.clear();
+                    mBannerImageTitle.clear();
+                    mBannerImageUris.clear();
                     mBannerItems.addAll(list);
                     //标题和图片列表赋值
-                    for (int i = 0;i<list.size();i++){
-                        mBannerImageUris.add(list.get(i).getPicUrl());
-                        mBannerImageTitle.add(list.get(i).getTitle());
+                    for (int i = 0;i<mBannerItems.size();i++){
+                        mBannerImageUris.add(mBannerItems.get(i).getPicUrl());
+                        mBannerImageTitle.add(mBannerItems.get(i).getTitle());
                     }
                     //设置banner样式
                     mHotPointBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
@@ -190,9 +198,8 @@ public class HomePageFragment extends AppBaseFragment {
                     });
                     //开始banner展示
                     mHotPointBanner.start();
-                }
-                else {
-                    Toast.makeText(getContext(),"查询BannerItem项失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("查询BannerItem项失败",e.getMessage());
                 }
             }
         });

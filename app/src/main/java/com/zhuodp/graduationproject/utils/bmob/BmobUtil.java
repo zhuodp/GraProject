@@ -174,6 +174,8 @@ public class BmobUtil {
         });
     }
 
+
+
     /**
      * 提供旧密码修改密码
      */
@@ -255,6 +257,7 @@ public class BmobUtil {
     //查询单条数据
     public static void queryAppUpdate(Activity activity) {
         BmobQuery<Update> bmobQuery = new BmobQuery<Update>();
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         bmobQuery.getObject("JTm90002", new QueryListener<Update>() {
             @Override
             public void done(Update object, BmobException e) {

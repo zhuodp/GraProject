@@ -21,11 +21,19 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
+import com.zhuodp.graduationproject.entity.User;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.global.Constant;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class VideoPlayerActivity extends AppBaseActivity {
 
@@ -79,7 +87,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
                 mIvLike.setBackgroundResource(R.drawable.icon_not_favor_movie);
                 BmobUtil.removeUserFavor(getBaseContext(),mMovieObjectId);
                 //TODO 删除当前电影到数据库收藏中
-
             }
         }else {
             Toast.makeText(getBaseContext(),"登陆后才可开启收藏功能，请先登陆",Toast.LENGTH_SHORT).show();
@@ -94,7 +101,6 @@ public class VideoPlayerActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video_player);
-
         initData();
         initUI();
         initVideo();
@@ -103,19 +109,21 @@ public class VideoPlayerActivity extends AppBaseActivity {
     private void initData(){
         Intent intent = getIntent();
         if (intent.getExtras().get(Constant.DATA_MOVIE_OBJECT_ID)!=null) mMovieObjectId = intent.getExtras().getString(Constant.DATA_MOVIE_OBJECT_ID);
-        else Log.e("VideoPlayer","id is null");
+        //else Log.e("VideoPlayer","id is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_URL)!=null) mMovieUrl = intent.getExtras().getString(Constant.DATA_MOVIE_URL);
-        else Log.e("VideoPlayer","movieName is null");
+        //else Log.e("VideoPlayer","movieName is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_NAME)!=null) mMovieName = intent.getExtras().getString(Constant.DATA_MOVIE_NAME);
-        else Log.e("VideoPlayer","movieName is null");
+        //else Log.e("VideoPlayer","movieName is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_ACTORS)!=null) mMovieActors = intent.getExtras().getStringArray(Constant.DATA_MOVIE_ACTORS);
-        else Log.e("VideoPlayer","actors is null");
+        //else Log.e("VideoPlayer","actors is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_PIC_URL)!=null) mMoviePicUrl =intent.getExtras().getString(Constant.DATA_MOVIE_URL);
-        else Log.e("VideoPlayer","picUrl is null");
+        //else Log.e("VideoPlayer","picUrl is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_INTRO)!=null) mMovieIntro = intent.getExtras().getString(Constant.DATA_MOVIE_INTRO);
-        else Log.e("VideoPlayer","intro is null");
+        //else Log.e("VideoPlayer","intro is null");
         if (intent.getExtras().get(Constant.DATA_MOVIE_PUBLISH_DATE)!=null) mMoviePublishDate = intent.getExtras().getString(Constant.DATA_MOVIE_PUBLISH_DATE);
-        else Log.e("VideoPlayer","date is null");
+        //else Log.e("VideoPlayer","date is null");
+        //将电影存入历史纪录
+        recordUserMovieHistory();
     }
 
     private void initVideo(){
@@ -253,6 +261,27 @@ public class VideoPlayerActivity extends AppBaseActivity {
         //如果旋转了就全屏
         if (isPlay && !isPause){
             mVideoPlayer.onConfigurationChanged(this,newConfig,orientationUtils,true,true);
+        }
+    }
+
+    //在登陆的情况下将当前用户的播放记录存储到后端User数据表中
+    private void recordUserMovieHistory(){
+        if (BmobUtil.isLogin()){
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+            String timeStamp = formatter.format(new Date(System.currentTimeMillis()));
+            User user = BmobUtil.getCurrentUser();
+            user.addHistory(mMovieObjectId,timeStamp);
+            user.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        Toast.makeText(getBaseContext(),"当前用户历史纪录已更新",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getBaseContext(),"当前历史纪录更新失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Log.e("当前历史纪录更新失败", e.getMessage());
+                    }
+                }
+            });
         }
     }
 

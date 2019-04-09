@@ -24,6 +24,12 @@
         <activity android:name=".activity.AskForLoginActivity"
             android:theme="@style/style_dialog_activity"/>
 
+        <activity android:name=".activity.UserHelpDialogActivity"
+            android:theme="@style/style_dialog_activity"/>
+
+        <activity android:name=".activity.AboutDialogActivity"
+            android:theme="@style/style_dialog_activity"/>
+
 
     </application>
 
