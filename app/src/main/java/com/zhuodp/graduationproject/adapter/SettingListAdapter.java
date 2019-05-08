@@ -51,28 +51,31 @@ public class SettingListAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         View convertView;
-        viewHolder viewHolder;
+        ViewHolder viewHolder;
         if (view == null)
         {
-            convertView= LayoutInflater.from(context).inflate(R.layout.fragment_settings_page_lv_item,null);
-            viewHolder=new viewHolder();
+            convertView= LayoutInflater.from(context).inflate(R.layout.item_lv_fragment_settings_list,null);
+            viewHolder=new ViewHolder();
             viewHolder.itemName =(TextView)convertView.findViewById(R.id.tv_fragment_setting_item);
-            viewHolder.itemImageId =(ImageView)convertView.findViewById(R.id.iv_fragment_setting_item);
+            viewHolder.itemIcon =(ImageView)convertView.findViewById(R.id.iv_fragment_setting_item);
+            viewHolder.itemForwordImage = (ImageView)convertView.findViewById(R.id.iv_forward_icon_fragment_setting_item);
             convertView.setTag(viewHolder);
         }
         else
         {
             convertView=view;
-            viewHolder=(viewHolder)convertView.getTag();
+            viewHolder=(ViewHolder)convertView.getTag();
         }
 
         viewHolder.itemName.setText(list.get(i).getItemName());
-        viewHolder.itemImageId.setImageResource(list.get(i).getImageId());
+        viewHolder.itemIcon.setImageResource(list.get(i).getImageId());
+        viewHolder.itemForwordImage.setImageResource(list.get(i).getForwardIconId());
         return convertView;
     }
 
-    private class viewHolder{
+    private class ViewHolder {
         public TextView itemName;
-        public ImageView itemImageId;
+        public ImageView itemIcon;
+        public ImageView itemForwordImage;
     }
 }

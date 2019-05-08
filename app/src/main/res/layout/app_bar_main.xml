@@ -15,24 +15,49 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#000000"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            android:layout_height="@dimen/app_35dp"
+            android:background="@color/color_36404A"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/app_20dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <!--editText父布局需要拦截默认交点事件-->
+
+                <EditText
+                    android:id="@+id/et_toolbar_search_content"
+                    android:layout_width="@dimen/app_189dp"
+                    android:layout_height="@dimen/app_22dp"
+                    android:hint="输入电影名称进行搜索"
+                    android:textColorHint="@color/color_D6D8DA"
+                    android:textSize="@dimen/app_font_size_15"
+                    android:gravity="left|bottom"
+                    android:paddingLeft="@dimen/app_5dp"
+                    android:textColor="#000"
+                    android:background="#fff"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/cursor_edit_text_app_bar"/>
+
+                <Button
+                    android:id="@+id/btn_toolbar_search"
+                    android:layout_width="@dimen/app_30dp"
+                    android:layout_height="@dimen/app_30dp"
+                    android:background="@drawable/icon_search"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <include
         android:id="@+id/include_content_main"
         layout="@layout/content_main"
         />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </android.support.design.widget.CoordinatorLayout>

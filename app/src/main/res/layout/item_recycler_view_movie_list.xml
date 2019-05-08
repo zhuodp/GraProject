@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.youdao.lib.dialogs.util.RoundAngleImageView
+        android:id="@+id/iv_movie_pic_movie_list"
+        android:layout_width="@dimen/app_100dp"
+        android:layout_height="@dimen/app_120dp"
+        android:src="@color/blue_E0F0FF"
+        android:scaleType="fitXY"
+        app:radius="@dimen/app_5dp"/>
+
+    <TextView
+        android:id="@+id/tv_movie_name_movie_list"
+        android:layout_width="@dimen/app_100dp"
+        android:layout_height="@dimen/app_20dp"
+        android:layout_marginTop="@dimen/app_4dp"
+        android:text="测试"
+        android:textColor="#000"
+        android:gravity="center"
+        android:textSize="@dimen/app_font_size_14"
+        android:layout_below="@id/iv_movie_pic_movie_list" />
+
+</RelativeLayout>

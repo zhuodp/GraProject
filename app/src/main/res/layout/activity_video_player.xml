@@ -20,10 +20,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_player_activity_movie_title"
+                android:id="@+id/tv_player_activity_movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginLeft="@dimen/app_30dp"
+                android:layout_marginTop="@dimen/app_20dp"
                 android:text="标题:Notebook"
                 android:textSize="@dimen/app_font_size_20"
                 android:textStyle="bold"
@@ -31,34 +32,34 @@
 
             <ImageView
                 android:id="@+id/iv_player_video_like"
-                android:layout_width="@dimen/app_30dp"
-                android:layout_height="@dimen/app_30dp"
+                android:layout_width="@dimen/app_25dp"
+                android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/app_10dp"
-                android:background="@color/red_switcher_foreground"/>
+                android:layout_marginRight="@dimen/app_30dp"
+                android:layout_marginTop="@dimen/app_20dp"/>
 
             <TextView
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="@dimen/app_font_size_15"
-                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginLeft="@dimen/app_30dp"
                 android:text="年份:"/>
 
             <TextView
-                android:id="@+id/tv_player_activity_movie_year"
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:id="@+id/tv_player_activity_movie_publish_date"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_15"
-                android:layout_marginLeft="@dimen/app_50dp"
+                android:layout_marginLeft="@dimen/app_70dp"
                 android:text="xxxx年"/>
 
             <TextView
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
 
 
             <TextView
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,46 +83,46 @@
 
 
             <TextView
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_60dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_15"
                 android:textStyle="bold"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginLeft="@dimen/app_30dp"
                 android:text="主演："/>
 
             <TextView
-                android:id="@+id/tv_player_activity_movie_actor"
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:id="@+id/tv_player_activity_movie_actors"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_60dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_15"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/app_50dp"
+                android:layout_marginLeft="@dimen/app_70dp"
                 android:text="瑞秋·麦克亚当斯，娜塔莉·波特曼"/>
 
             <TextView
-                android:layout_below="@+id/tv_player_activity_movie_title"
+                android:layout_below="@+id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_15"
                 android:layout_alignParentLeft="true"
                 android:textStyle="bold"
-                android:layout_marginLeft="@dimen/app_10dp"
+                android:layout_marginLeft="@dimen/app_30dp"
                 android:text="剧情简介："/>
 
             <TextView
                 android:id="@+id/tv_player_activity_move_intro"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/app_400dp"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_18"
-                android:layout_marginLeft="@dimen/app_10dp"
-                android:layout_marginRight="@dimen/app_10dp"
-                android:layout_below="@id/tv_player_activity_movie_title"
+                android:layout_marginLeft="@dimen/app_30dp"
+                android:layout_marginRight="@dimen/app_30dp"
+                android:layout_below="@id/tv_player_activity_movie_name"
                 android:layout_marginTop="@dimen/app_130dp"
                 android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈\n哈哈哈哈/n哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"/>
 

@@ -1,37 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:background="@color/B2_20_trans"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:layout_height="@dimen/app_150dp">
 
-    <com.youdao.lib.dialogs.util.RoundAngleImageView
+    <com.zhuodp.graduationproject.utils.view.CircleImageView
         android:id="@+id/iv_drawer_user_pic"
-        android:layout_width="@dimen/app_80dp"
-        android:layout_height="@dimen/app_80dp"
-        android:src="@color/blue_4ea0e5"
-        app:radius="@dimen/app_20dp" />
+        android:layout_width="@dimen/app_60dp"
+        android:layout_height="@dimen/app_60dp"
+        android:src="@drawable/pic_user_pic_default"
+        android:onClick="onUserPicClick"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="@dimen/app_30dp"/>
+
+
 
     <TextView
-        android:id="@+id/iv_drawer_user_name"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_drawer_user_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="用户名"
+        android:paddingTop="@dimen/app_5dp"
+        android:gravity="center"
+        android:layout_toRightOf="@id/iv_drawer_user_pic"
+        android:layout_alignTop="@id/iv_drawer_user_pic"
+        android:layout_marginTop="@dimen/app_15dp"
+        android:layout_marginLeft="@dimen/app_15dp"
+        android:layout_below="@id/iv_drawer_user_pic"
+        android:text="点击头像登陆"
+        android:textSize="@dimen/app_font_size_16"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_drawer_user_signature"
+        android:layout_below="@id/tv_drawer_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="个性签名"/>
+        android:layout_toRightOf="@id/iv_drawer_user_pic"
+        android:layout_marginLeft="@dimen/app_15dp"
+        android:layout_marginTop="@dimen/app_2dp"
+        android:textSize="@dimen/app_font_size_13"
+        android:textColor="@color/color_848A90"
+        android:gravity="center_vertical"
+        android:text="个性签名未设置"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/decorline_1_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_3dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_dfe1e4"/>
+
+    <Button
+        android:id="@+id/btn_drawer_edit"
+        android:layout_width="@dimen/app_22dp"
+        android:layout_height="@dimen/app_22dp"
+        android:background="@drawable/icon_edit_blue"
+        android:layout_toRightOf="@id/tv_drawer_user_signature"
+        android:layout_alignBottom="@id/tv_drawer_user_signature"
+        android:layout_marginLeft="@dimen/app_5dp"
+        android:onClick="onEditUserSignature"/>
+
+</RelativeLayout>

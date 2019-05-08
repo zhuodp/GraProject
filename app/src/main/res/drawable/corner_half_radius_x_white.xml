@@ -1,0 +1,21 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 填充颜色 -->
+    <solid android:color="@color/color_FFFFFF" />
+    <!-- 边框宽度 -->
+    <!-- 圆角半径 -->
+    <corners
+        android:topRightRadius="@dimen/app_15dp"
+        android:bottomRightRadius="@dimen/app_15dp"/>
+
+    <!-- 边框的颜色和粗细 -->
+    <stroke
+        android:width="@dimen/app_1dp"
+        android:color="#000"
+        />
+
+    <!--<padding
+        android:bottom="@dimen/app_1dp"
+        android:left="@dimen/app_1dp"
+        android:right="@dimen/app_1dp"
+        android:top="@dimen/app_1dp" />-->
+</shape>

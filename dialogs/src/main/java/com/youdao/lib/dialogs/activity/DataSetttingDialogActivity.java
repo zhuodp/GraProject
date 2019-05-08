@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *   ·使用方法见DebugActivity
  */
 public class DataSetttingDialogActivity extends Activity {
-
+    //邮箱格式校验
     private static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
     private EditText mEmailAddress;
@@ -81,15 +81,10 @@ public class DataSetttingDialogActivity extends Activity {
         mSubmitButton.setText(mCustomDialogManager.getDataSettingButtonText());
     }
 
-
+    //点击了确定
     public void onSubmit(View view){
-        //if( 当前格式为邮箱 && 用户输入的内容符合邮箱格式)
-        if (mCustomDialogManager.getDataFormat().equals(mCustomDialogManager.DATA_FORMAT_EMAIL) && isEmail(mEmailAddress.getText().toString())){
-            CustomDialogManager.getInstance().performDataSettingDialogClick(mCustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM,mEmailAddress.getText().toString());
-            finish();
-        }else {
-            Toast.makeText(getApplicationContext(),"邮箱格式不正确",Toast.LENGTH_SHORT).show();
-        }
+        CustomDialogManager.getInstance().performDataSettingDialogClick(mCustomDialogManager.TAG_DATA_SETTING_DIALOG_CONFIRM,mEmailAddress.getText().toString());
+        finish();
     }
 
     /**

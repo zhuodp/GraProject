@@ -1,6 +1,15 @@
 package com.zhuodp.graduationproject.entity;
 
-import cn.bmob.v3.BmobObject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -10,40 +19,55 @@ import cn.bmob.v3.BmobUser;
  *
  */
 public class User extends BmobUser {
-    private String userName="";
-    private String userPassword="";
-    private String userPhoneNumber="";
-    private String userEmail="";
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    private String userPicUrl = "";
+    private String userSignature = "个性签名未设置";
+    private List<String> favorList = new ArrayList<String>(); //用户收藏的电影列表
+    private LinkedList<HistoryItem> history = new LinkedList<HistoryItem>();
+    public List<String> getFavorList() {
+        return favorList;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setFavorList(String[] favorList) {
+        this.favorList = Arrays.asList(favorList);
     }
 
-    public void setUserPhoneNumber(String userPhoneNumber) {
-        this.userPhoneNumber = userPhoneNumber;
+    public void addFavor(String objectId){
+        favorList.add(objectId);
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void removeFavor(String objectId){
+        favorList.remove(favorList.get(favorList.indexOf(objectId)));
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserSignature() {
+        return userSignature;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public void setUserSignature(String userSignature) {
+        this.userSignature = userSignature;
     }
 
-    public String getUserPhoneNumber() {
-        return userPhoneNumber;
+    public void setUserPicUrl(String userPicUrl) {
+        this.userPicUrl = userPicUrl;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserPicUrl() {
+        return userPicUrl;
     }
+
+    public LinkedList<HistoryItem> getHistory() {
+        return history;
+    }
+
+
+    public void addHistory(String movieId,String timeStamp){
+        if (history.size()>20){
+            history.poll();
+            history.offer(new HistoryItem(movieId,timeStamp));
+        }else{
+            history.offer(new HistoryItem(movieId,timeStamp));
+        }
+    }
+
 }

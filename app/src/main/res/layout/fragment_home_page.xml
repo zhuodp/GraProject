@@ -5,35 +5,137 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <com.youth.banner.Banner
-        android:id="@+id/home_page_banner"
+        android:id="@+id/banner_hot_point_tab"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="@dimen/app_160dp"
+        android:layout_marginStart="@dimen/app_8dp"
+        android:layout_marginTop="@dimen/app_8dp"
+        android:layout_marginEnd="@dimen/app_8dp"/>
 
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/home_page_tab_layout"
-        android:layout_below="@id/home_page_banner"
-        android:layout_marginTop="@dimen/app_10dp"
+    <LinearLayout
+        android:id="@+id/area_nav_buttons_home_page_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@color/colorPrimary"
+        android:layout_below="@id/banner_hot_point_tab"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:id="@+id/area_enter_movie_hub"
+            android:layout_width="@dimen/app_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onEnterMovieHub">
+
+            <ImageView
+                android:id="@+id/iv_all_movies_home_page_fragment"
+                android:layout_width="@dimen/app_30dp"
+                android:layout_height="@dimen/app_30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_all_movies_2"
+                android:elevation="@dimen/app_3dp" />
+
+            <TextView
+                android:id="@+id/tv_all_movie_home_page_fragment"
+                android:layout_width="@dimen/app_60dp"
+                android:layout_height="wrap_content"
+                android:text="全部电影"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/color_36404A"
+                android:layout_below="@id/iv_all_movies_home_page_fragment"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/area_temp1"
+            android:layout_width="@dimen/app_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_temp1_home_page_fragment"
+                android:layout_width="@dimen/app_30dp"
+                android:layout_height="@dimen/app_30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_down_load_home_page"
+                android:elevation="@dimen/app_3dp" />
+
+            <TextView
+                android:id="@+id/tv_temp1_home_page_fragment"
+                android:layout_width="@dimen/app_60dp"
+                android:layout_height="wrap_content"
+                android:text="本地电影"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/color_36404A"
+                android:layout_below="@id/iv_temp1_home_page_fragment"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/area_check_user_history"
+            android:layout_width="@dimen/app_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_temp2_home_page_fragment"
+                android:layout_width="@dimen/app_30dp"
+                android:layout_height="@dimen/app_30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_clock_latest_movie"
+                android:elevation="@dimen/app_3dp" />
+
+            <TextView
+                android:id="@+id/tv_temp2_home_page_fragment"
+                android:layout_width="@dimen/app_60dp"
+                android:layout_height="wrap_content"
+                android:text="最近观看"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/color_36404A"
+                android:layout_below="@id/iv_temp2_home_page_fragment"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/decor_line_1_home_page_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_2dp"
+        android:background="@color/gray_dfe1e4"
+        android:layout_below="@id/area_nav_buttons_home_page_fragment"
+        android:layout_marginTop="@dimen/app_10dp"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_home_page"
+        android:layout_below="@id/decor_line_1_home_page_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_5dp"
+        app:tabTextColor="@color/color_36404A"
     />
+
+    <TextView
+        android:id="@+id/decor_line_2_home_page_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_2dp"
+        android:layout_below="@id/tab_layout_home_page"
+        android:background="@color/gray_dfe1e4"
+        android:layout_marginTop="@dimen/app_5dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_page_tab_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/home_page_tab_layout"/>
+        android:layout_below="@id/decor_line_2_home_page_fragment"/>
 
 
 

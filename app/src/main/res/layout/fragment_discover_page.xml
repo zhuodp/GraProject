@@ -1,13 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="发现页"/>
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/iv_header_discover_page"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_160dp"
+        android:background="@color/gray_dfe1e4"
+        android:src="@drawable/bg_discover_page"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_collection_entry_collection_page"
+        android:layout_below="@id/iv_header_discover_page"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_110dp"
+        android:layout_marginLeft="@dimen/app_30dp"
+        android:layout_marginRight="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid">
+<!--
+        android:background="@drawable/round_corner_pale_green_5dp"-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的收藏"
+            android:textSize="@dimen/app_font_size_24"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您收藏的电影将放在这里"
+            android:textSize="@dimen/app_font_size_13"
+            android:layout_marginTop="@dimen/app_59dp"
+            android:layout_marginLeft="@dimen/app_25dp"/>
+
+        <com.youdao.lib.dialogs.util.RoundAngleImageView
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
+            android:layout_marginTop="@dimen/app_25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/app_28dp"
+            android:src="@drawable/icon_collection_discover_page"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_temp1_entry_discover_page"
+        android:layout_below="@id/rl_collection_entry_collection_page"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_110dp"
+        android:layout_marginLeft="@dimen/app_30dp"
+        android:layout_marginRight="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid"><!--
+        android:background="@drawable/round_corner_red_5dp"-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本地下载"
+            android:textSize="@dimen/app_font_size_24"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您下载的电影将放在这里"
+            android:textSize="@dimen/app_font_size_13"
+            android:layout_marginTop="@dimen/app_59dp"
+            android:layout_marginLeft="@dimen/app_25dp"/>
+
+        <com.youdao.lib.dialogs.util.RoundAngleImageView
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/app_25dp"
+            android:layout_marginRight="@dimen/app_25dp"
+            android:src="@drawable/icon_download_discover_page"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_temp2_entry_discover_page"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_110dp"
+        android:layout_below="@id/rl_temp1_entry_discover_page"
+        android:layout_marginLeft="@dimen/app_30dp"
+        android:layout_marginTop="@dimen/app_10dp"
+        android:layout_marginRight="@dimen/app_30dp"
+        android:elevation="@dimen/app_4dp"
+        android:background="@drawable/round_corner_white_25dp_solid">
+<!--
+        android:background="@drawable/round_corner_pale_blue_5dp"-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_25dp"
+            android:text="我的喜欢"
+            android:textSize="@dimen/app_font_size_24"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_25dp"
+            android:layout_marginTop="@dimen/app_59dp"
+            android:text="您收藏的电影将放在这里"
+            android:textSize="@dimen/app_font_size_13" />
+
+        <com.youdao.lib.dialogs.util.RoundAngleImageView
+            android:layout_width="@dimen/app_40dp"
+            android:layout_height="@dimen/app_40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/app_25dp"
+            android:src="@drawable/icon_like_discover_page" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

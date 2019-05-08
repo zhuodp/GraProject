@@ -3,16 +3,18 @@ package com.youdao.lib.dialogs.manager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.print.PrinterId;
 import android.widget.Toast;
 
 
+import com.youdao.lib.dialogs.activity.AboutDialogActivity;
 import com.youdao.lib.dialogs.activity.AlertDialogActivity;
+import com.youdao.lib.dialogs.activity.AskForLoginActivity;
 import com.youdao.lib.dialogs.activity.CameraTipDialog;
 import com.youdao.lib.dialogs.activity.DataSetttingDialogActivity;
 import com.youdao.lib.dialogs.activity.ExportDialogActivity;
 import com.youdao.lib.dialogs.activity.FeedBackDialog;
 import com.youdao.lib.dialogs.activity.GradeChooseDialogActivity;
+import com.youdao.lib.dialogs.activity.UserHelpDialogActivity;
 
 import java.util.HashMap;
 
@@ -35,6 +37,9 @@ public class CustomDialogManager{
     public static final String TYPE_GRADE_CHOOSE_DIALOG = "TYPE_GRADE_CHOOSE_DIALOG";
     public static final String TYPE_CAMERA_TIP_DIALOG = "TYPE_CAMERA_TIP_DIALOG";
     public static final String TYPE_FEED_BACK_DIALOG = "TYPE_FEED_BACK_DIALOG";
+    public static final String TYPE_ASK_FOR_LOGIN = "TYPE_ASK_FOR_LOGIN";
+    public static final String TYPE_USER_HELP = "TYPE_USER_HELP";
+    public static final String TYPE_ABOUT = "TYPE_ABOUT";
 
     //dialog listener的标签，用于辨别同一界面中的不同按钮
     public static final String TAG_ALERT_DIALOG_POSITIVE = "TAG_ALERT_DIALOG_POSITIVE";
@@ -53,6 +58,10 @@ public class CustomDialogManager{
     public static final String TAG_FEED_BACK_DIALOG_GOOD = "TAG_FEED_BACK_DIALOG_GOOD";
     public static final String TAG_FEED_BACK_DIALOG_BAD = "TAG_FEED_BACK_DIALOG_BAD";
     public static final String TAG_FEED_BACK_DIALOG_CANCEL = "TAG_FEED_BACK_DIALOG_CANCEL";
+
+    public static final String TAG_ASK_FOR_LOGIN_DIALOG_LOGIN = "TAG_ASK_FOR_LOGIN_DIALOG_LOGIN";
+    public static final String TAG_ASK_FOR_LOGIN_DIALOG_SIGN_UP = "TAG_ASK_FOR_LOGIN_DIALOG_SIGN_UP";
+    public static final String TAG_ASK_FOR_LOGIN_DIALOG_CANCEL = " TAG_ASK_FOR_LOGIN_DIALOG_CANCEL";
 
 
     //用于数据设置弹窗，表示数据格式的弹窗（如邮箱、电话号码等）,目前只有邮箱格式能用;
@@ -87,6 +96,7 @@ public class CustomDialogManager{
     private HashMap<String,OnDataSettingDialogListener> mDataSettingDialogListeners = new HashMap<String, OnDataSettingDialogListener>();
     private HashMap<String,OnGradeChooseDialogListener> mGradeChooseDialogListeners = new HashMap<String, OnGradeChooseDialogListener>();
     private HashMap<String,OnFeedbackDialogListener> mFeedbackDialogListeners = new HashMap<String, OnFeedbackDialogListener>();
+    private HashMap<String,OnAskForLoginDialogListener> mAskForLoginDialogListeners =  new HashMap<String,OnAskForLoginDialogListener>();
 
     //暂时将Manager类封装单例使用
     @SuppressLint("StaticFieldLeak")
@@ -141,6 +151,15 @@ public class CustomDialogManager{
                 case TYPE_FEED_BACK_DIALOG:
                     dialogActivity = new Intent(context,FeedBackDialog.class);
                     break;
+                case TYPE_ASK_FOR_LOGIN:
+                    dialogActivity = new Intent(context, AskForLoginActivity.class);
+                    break;
+                case TYPE_USER_HELP:
+                    dialogActivity = new Intent(context, UserHelpDialogActivity.class);
+                    break;
+                case TYPE_ABOUT:
+                    dialogActivity = new Intent(context, AboutDialogActivity.class);
+                    break;
                 default:
                     Toast.makeText(context,"使用showDialog()之前，请设置正确的DialogType",Toast.LENGTH_SHORT).show();
                     break;
@@ -171,6 +190,10 @@ public class CustomDialogManager{
     //反馈页面弹窗
     public void setOnFeedBackDialogListener(String tag,OnFeedbackDialogListener onFeedbackDialogListener){
         mFeedbackDialogListeners.put(tag,onFeedbackDialogListener);
+    }
+
+    public void setOnAskForLoginDialogListener(String tag ,OnAskForLoginDialogListener onAskForLoginDialogListener){
+        mAskForLoginDialogListeners.put(tag,onAskForLoginDialogListener);
     }
 
 
@@ -211,6 +234,12 @@ public class CustomDialogManager{
         }
     }
 
+    public void performAskForLoginDialogListener(String tag,String account,String password){
+        if (mAskForLoginDialogListeners.get(tag)!=null){
+            mAskForLoginDialogListeners.get(tag).onAskForLoginClick(account,password);
+        }
+    }
+
     //不同风格弹窗监听
     //AlertDialog类型
     public interface AlertDialogListener {
@@ -231,6 +260,10 @@ public class CustomDialogManager{
     //反馈弹窗
     public interface OnFeedbackDialogListener{
         void onFeedbackDialogClick();
+    }
+
+    public interface OnAskForLoginDialogListener{
+        void onAskForLoginClick(String account,String password);
     }
 
 
@@ -334,6 +367,9 @@ public class CustomDialogManager{
             mGradeChooseDialogListeners.clear();
         }else if(dialogType == TYPE_FEED_BACK_DIALOG){
             mFeedbackDialogListeners.clear();
+        }else if (dialogType == TYPE_ASK_FOR_LOGIN){
+            mAskForLoginDialogListeners.clear();
         }
     }
+
 }
