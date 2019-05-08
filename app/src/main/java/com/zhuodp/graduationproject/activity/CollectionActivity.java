@@ -38,11 +38,14 @@ public class CollectionActivity extends AppBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO 优化UI
         setContentView(R.layout.activity_collection);
-        getMovie(getBaseContext());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMovie(getBaseContext());
+    }
 
     //初始化列表
     private void initRecyclerView(){

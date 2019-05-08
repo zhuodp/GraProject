@@ -164,8 +164,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         int id = item.getItemId();
         if (id == R.id.nav_download) {
             Toast.makeText(getBaseContext(),"查看本地下载",Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_share) {
-            Toast.makeText(getBaseContext(),"第三方分享",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_settings){
             initFragments(2);
         }
@@ -201,7 +199,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         if (BmobUtil.isLogin()){
             CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
             customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
-            customDialogManager.setAlertDialogTitle("温馨提示");
+            customDialogManager.setAlertDialogTitle("用户登出");
+            customDialogManager.setAlertDialogContent("点击确定按钮即可退出登陆");
             customDialogManager.setAlertDialogPosText("确定");
             customDialogManager.setAlertDialogNegText("取消");
             customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {

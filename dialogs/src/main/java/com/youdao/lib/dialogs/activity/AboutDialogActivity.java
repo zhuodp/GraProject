@@ -24,7 +24,7 @@ public class AboutDialogActivity extends BaseDialogActivity {
         overridePendingTransition(R.anim.slide_in_bottom,R.anim.slide_out_bottom);
         setContentView(R.layout.dialog_about);
         mVersion = findViewById(R.id.tv_version_dialog_about);
-        mVersion.setText(getVerName(getBaseContext()));
+        mVersion.setText("版本号："+getVerName(getBaseContext()));
     }
 
     // 设置弹窗出现的位置，即DecorView在PhoneWindow里的位置

@@ -1,6 +1,7 @@
 package com.zhuodp.graduationproject.utils;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -48,6 +49,5 @@ public class GlideImageLoader extends ImageLoader {
         ImageView imageView = new ImageView(context);
         return imageView;
     }
-
 
 }

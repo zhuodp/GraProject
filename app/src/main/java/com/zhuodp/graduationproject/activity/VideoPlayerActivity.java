@@ -1,6 +1,7 @@
 package com.zhuodp.graduationproject.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class VideoPlayerActivity extends AppBaseActivity {
     private boolean isPlay = false;
     //表示当前“标记为喜欢”按钮的状态
     private boolean isMyFavorMovie = false;
+    private boolean isMyFavorMovieUpdateSuccess;
 
     @BindView(R.id.video_player_activity)
     StandardGSYVideoPlayer mVideoPlayer;
@@ -78,14 +80,10 @@ public class VideoPlayerActivity extends AppBaseActivity {
     public void onLikeMovie(){
         if (BmobUtil.isLogin()){
             if (!isMyFavorMovie){
-                isMyFavorMovie = true;
-                mIvLike.setBackgroundResource(R.drawable.icon_is_favor_movie);
                 //TODO 增加当前当前到数据库收藏中
-                BmobUtil.addUserFavor(getBaseContext(),mMovieObjectId);
+                addUserFavor(getBaseContext(),mMovieObjectId);
             }else {
-                isMyFavorMovie = false;
-                mIvLike.setBackgroundResource(R.drawable.icon_not_favor_movie);
-                BmobUtil.removeUserFavor(getBaseContext(),mMovieObjectId);
+                removeUserFavor(getBaseContext(),mMovieObjectId);
                 //TODO 删除当前电影到数据库收藏中
             }
         }else {
@@ -283,6 +281,44 @@ public class VideoPlayerActivity extends AppBaseActivity {
                 }
             });
         }
+    }
+
+    private void addUserFavor(Context context, String movieObjectId){
+        User user = BmobUser.getCurrentUser(User.class);
+        user.addFavor(movieObjectId);
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null){
+                    Toast.makeText(context,"添加喜欢成功",Toast.LENGTH_SHORT).show();
+                    isMyFavorMovie = true;
+                    mIvLike.setBackgroundResource(R.drawable.icon_is_favor_movie);
+                }else {
+                    Toast.makeText(context,"添加喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void removeUserFavor(Context context,String movieObjectId){
+        User user = BmobUser.getCurrentUser(User.class);
+        if (user.getFavorList().contains(movieObjectId)) {
+            user.removeFavor(movieObjectId);
+        }
+        Log.e("当前用户的喜欢列表长度为：", String.valueOf(user.getFavorList().size()));
+
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null){
+                    isMyFavorMovie = false;
+                    mIvLike.setBackgroundResource(R.drawable.icon_not_favor_movie);
+                    Toast.makeText(context,"移除喜欢成功",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"移除喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

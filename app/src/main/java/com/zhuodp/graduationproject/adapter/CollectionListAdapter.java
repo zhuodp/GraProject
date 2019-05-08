@@ -35,7 +35,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
         myViewHolder.movieName.setText(mMovieList.get(position).getMovieName());
-        Glide.with(mContext).load(mMovieList.get(position).getPicUrl()).into(myViewHolder.moviePic);
+        Glide.with(mContext).load(mMovieList.get(position).getPicUrl()).placeholder(R.drawable.bg_pic_placeholder).into(myViewHolder.moviePic);
     }
 
     @Override

@@ -14,8 +14,8 @@ import butterknife.Unbinder;
 public class AppBaseFragment extends Fragment {
     //ButterKnife 绑定使用
     private Unbinder unbinder;
-    @Nullable
 
+    @Nullable
     @Override
     public void  onViewCreated(View view,@Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this,view);

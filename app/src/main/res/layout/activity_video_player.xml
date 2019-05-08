@@ -36,7 +36,7 @@
                 android:layout_height="@dimen/app_25dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/app_30dp"
-                android:layout_marginTop="@dimen/app_15dp"/>
+                android:layout_marginTop="@dimen/app_20dp"/>
 
             <TextView
                 android:layout_below="@+id/tv_player_activity_movie_name"
@@ -118,7 +118,7 @@
             <TextView
                 android:id="@+id/tv_player_activity_move_intro"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/app_400dp"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/app_font_size_18"
                 android:layout_marginLeft="@dimen/app_30dp"
                 android:layout_marginRight="@dimen/app_30dp"

@@ -12,12 +12,6 @@
         android:text="关于应用"
         android:layout_centerHorizontal="true"/>
 
-    <ImageView
-        android:layout_width="@dimen/app_50dp"
-        android:layout_height="@dimen/app_50dp"
-        android:src="@color/color_EBECED"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/app_80dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +19,8 @@
         android:textSize="@dimen/app_font_size_20"
         android:text="GraProject"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/app_150dp"/>
+        android:layout_marginTop="@dimen/app_100dp"/>
+
 
     <TextView
         android:id="@+id/tv_version_dialog_about"
@@ -33,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="版本号："
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/app_180dp"/>
+        android:layout_marginTop="@dimen/app_150dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +36,7 @@
         android:gravity="left"
         android:layout_marginLeft="@dimen/app_30dp"
         android:layout_marginRight="@dimen/app_30dp"
-        android:layout_marginTop="@dimen/app_218dp"
+        android:layout_marginTop="@dimen/app_200dp"
         android:textSize="@dimen/app_font_size_16"
         android:text="@string/dialog_about_content"/>
 

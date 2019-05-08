@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zhuodp.graduationproject"
-        minSdkVersion 25
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -62,5 +62,4 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     //基于ijkPlayer的封装库
     implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
-
 }

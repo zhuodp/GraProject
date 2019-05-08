@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
+import com.youdao.lib.dialogs.manager.CustomDialogManager;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.entity.Update;
@@ -220,38 +221,6 @@ public class BmobUtil {
         });
     }
 
-    public static void addUserFavor(Context context,String movieObjectId){
-        User user = BmobUser.getCurrentUser(User.class);
-        user.addFavor(movieObjectId);
-        user.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null){
-                    Toast.makeText(context,"添加喜欢成功",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context,"添加喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    public static void removeUserFavor(Context context,String movieObjectId){
-        User user = BmobUser.getCurrentUser(User.class);
-        user.removeFavor(movieObjectId);
-        for (int i = 0;i<user.getFavorList().size();i++){
-            Log.e("favorlist"+i,user.getFavorList().get(i));
-        }
-        user.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null){
-                    Toast.makeText(context,"移除喜欢成功",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context,"移除喜欢失败"+e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
 
     //查询单条数据
@@ -289,31 +258,29 @@ public class BmobUtil {
     }
 
     private static void showDialog(Activity activity,String url) {
-        AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setIcon(R.drawable.icon_clock_latest_movie)//设置标题的图片
-                .setTitle("检查到新版本")//设置对话框的标题
-                .setMessage("旧版本可能已经不能使用，是否进行更新?")//设置对话框的内容
-                //设置对话框的按钮
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton("更新", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //展示对话框
-                        //showDownloadDialog();
-                        //用自带的下载器下载APK
-                        Intent apkDownloadIntent = new Intent();
-                        apkDownloadIntent.setData(Uri.parse(url));
-                        apkDownloadIntent.setAction(Intent.ACTION_VIEW);
-                        activity.startActivity(apkDownloadIntent);
-                    }
-                }).create();
-        dialog.show();
+        CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+        customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
+        customDialogManager.setDialogDismissOnTouchOutside(false);
+        customDialogManager.setAlertDialogTitle("检测到新版本应用");
+        customDialogManager.setAlertDialogContent("旧版本可能已经不能使用，是否进行更新？");
+        customDialogManager.setAlertDialogPosText("立刻更新");
+        customDialogManager.setAlertDialogNegText("下次再说");
+        customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {
+            @Override
+            public void onAlertDialogClick() {
+                //展示对话框
+                //showDownloadDialog();
+                //用自带的下载器下载APK
+                Intent apkDownloadIntent = new Intent();
+                apkDownloadIntent.setData(Uri.parse(url));
+                apkDownloadIntent.setAction(Intent.ACTION_VIEW);
+                activity.startActivity(apkDownloadIntent);
+            }
+        });
+        customDialogManager.showDialog(getApplicationContext());
+
+
+
     }
 
 
