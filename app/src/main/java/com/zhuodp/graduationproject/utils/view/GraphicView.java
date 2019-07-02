@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.zhuodp.graduationproject.R;
 
 /**
- *  自定义View
+ *  自定义View ：样式为 “上图下文”
  *
  */
 public class GraphicView extends RelativeLayout {

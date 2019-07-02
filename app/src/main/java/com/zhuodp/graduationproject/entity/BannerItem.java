@@ -2,6 +2,9 @@ package com.zhuodp.graduationproject.entity;
 
 import cn.bmob.v3.BmobObject;
 
+/**
+ *  BannerItem ： 主页广告轮播布局中，单个条目的数据实体类
+ */
 public class BannerItem extends BmobObject {
 
     private String movieName; //电影名

@@ -1,5 +1,4 @@
 package com.zhuodp.graduationproject.adapter;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,9 @@ import com.zhuodp.graduationproject.entity.SettingItem;
 
 import java.util.List;
 
+/**
+ *  设置列表的适配器
+ */
 public class SettingListAdapter extends BaseAdapter {
 
     private Context context;

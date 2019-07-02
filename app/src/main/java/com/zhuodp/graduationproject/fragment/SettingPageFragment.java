@@ -1,6 +1,5 @@
 package com.zhuodp.graduationproject.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
-import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.LoginActivity;
 import com.zhuodp.graduationproject.adapter.SettingListAdapter;
@@ -34,9 +32,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-
-// TODO  1.设置页面UI优化   2.用户登陆部分的逻辑 （是否能通过bmob实现用户信息存储）
-
+/**
+ *  设置页对应的Fragment；
+ */
 public class SettingPageFragment extends AppBaseFragment {
 
     private List<SettingItem> mSettingItems = new ArrayList<SettingItem>();

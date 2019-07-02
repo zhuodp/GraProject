@@ -2,7 +2,6 @@ package com.zhuodp.graduationproject.fragment.tab;
 
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,11 +22,9 @@ import com.zhuodp.graduationproject.activity.MovieListActivity;
 import com.zhuodp.graduationproject.activity.VideoPlayerActivity;
 import com.zhuodp.graduationproject.entity.Movie;
 import com.zhuodp.graduationproject.global.Constant;
-import com.zhuodp.graduationproject.utils.GlideImageLoader;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;

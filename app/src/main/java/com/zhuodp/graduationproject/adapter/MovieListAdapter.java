@@ -18,6 +18,10 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+/**
+ *   影视库列表的适配器
+ *
+ */
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyViewHolder>{
 
     private Context mContext;

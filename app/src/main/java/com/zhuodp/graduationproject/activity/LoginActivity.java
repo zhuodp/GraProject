@@ -1,4 +1,8 @@
 package com.zhuodp.graduationproject.activity;
+/**
+ *  用户Activity
+ *  在点击了立即注册之后，会调用setContentView切换布局进入注册页
+ */
 
 import android.content.Context;
 import android.content.Intent;

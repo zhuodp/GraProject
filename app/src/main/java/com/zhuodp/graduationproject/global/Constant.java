@@ -1,5 +1,10 @@
 package com.zhuodp.graduationproject.global;
 
+/**
+ *  Constant类：
+ *   1.用于存放各种全局数据，例如Intent传输数据时的Key等等
+ *
+ */
 public class Constant {
 
     //指示各种状态 1~100

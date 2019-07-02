@@ -41,6 +41,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 主页对应的Fragment
+ */
 public class HomePageFragment extends AppBaseFragment {
 
     private List<Fragment> mTabsFragments;

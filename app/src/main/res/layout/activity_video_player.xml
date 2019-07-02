@@ -13,7 +13,7 @@
     <ScrollView
         android:layout_below="@id/video_player_activity"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_300dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"

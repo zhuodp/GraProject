@@ -2,7 +2,6 @@ package com.zhuodp.graduationproject.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
-import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.entity.User;
@@ -168,9 +166,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             initFragments(2);
         }
         else if (id == R.id.nav_logout) {
-            //退出登陆按钮
-            BmobUtil.logout();
-            recoverUserInfo();
+            userLogout();
         }
         drawer.closeDrawer(GravityCompat.START);
         return false;
@@ -196,27 +192,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
     //用户头像点击事件
     public void onUserPicClick(View view){
-        if (BmobUtil.isLogin()){
-            CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
-            customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
-            customDialogManager.setAlertDialogTitle("用户登出");
-            customDialogManager.setAlertDialogContent("点击确定按钮即可退出登陆");
-            customDialogManager.setAlertDialogPosText("确定");
-            customDialogManager.setAlertDialogNegText("取消");
-            customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {
-                @Override
-                public void onAlertDialogClick() {
-                    //TODO 跳转到用户个人页面
-                    BmobUtil.logout();
-                    recoverUserInfo(); //初始化抽屉中的用户UI
-                }
-            });
-            customDialogManager.setDialogDismissOnTouchOutside(false);
-            customDialogManager.showDialog(getBaseContext());
-        }else{
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivityForResult(intent, Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
-        }
+        userLogout();
     }
     //点击编辑用户签名
     public void onEditUserSignature(View view){
@@ -340,6 +316,30 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
             mTvUserSignature.setText(currentUser.getUserSignature());
         }else{
             recoverUserInfo();
+        }
+    }
+
+    private void userLogout(){
+        if (BmobUtil.isLogin()){
+            CustomDialogManager customDialogManager = CustomDialogManager.getInstance();
+            customDialogManager.setDialogType(CustomDialogManager.TYPE_ALTERE_DIALOG);
+            customDialogManager.setAlertDialogTitle("用户登出");
+            customDialogManager.setAlertDialogContent("点击确定按钮即可退出登陆");
+            customDialogManager.setAlertDialogPosText("确定");
+            customDialogManager.setAlertDialogNegText("取消");
+            customDialogManager.setAlertDialogListener(CustomDialogManager.TAG_ALERT_DIALOG_POSITIVE, new CustomDialogManager.AlertDialogListener() {
+                @Override
+                public void onAlertDialogClick() {
+                    //TODO 跳转到用户个人页面
+                    BmobUtil.logout();
+                    recoverUserInfo(); //初始化抽屉中的用户UI
+                }
+            });
+            customDialogManager.setDialogDismissOnTouchOutside(false);
+            customDialogManager.showDialog(getBaseContext());
+        }else{
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivityForResult(intent, Constant.RESULT_CODE_FOR_LOGIN_ACTIVITY_USER_INFO);
         }
     }
 

@@ -15,6 +15,11 @@ import com.zhuodp.graduationproject.entity.Movie;
 
 import java.util.List;
 
+/**
+ * CollectionListAdapter 用户收藏列表的适配器
+ *
+ */
+
 public class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.MyViewHolder> {
 
     private Context mContext;

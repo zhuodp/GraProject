@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.zhuodp.graduationproject.R;
 
+/**
+ *  FilterAdapter  影视库中筛选栏的适配器
+ *
+ */
 public class FilterAdapter extends BaseAdapter {
 
     private Context context;

@@ -8,6 +8,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
 
+/**
+ *   装饰器类
+ *   用于配置影视库的三列式RecyclerView的样式和布局
+ */
 
 public class StaggeredDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Context context;

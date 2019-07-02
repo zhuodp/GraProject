@@ -5,6 +5,9 @@ import android.view.View;
 
 import com.zhuodp.graduationproject.R;
 
+/**
+ *  RecyclerView 条目点击事件的支持类
+ */
 
 public class RecyclerViewItemClickSupport {
     private final RecyclerView mRecyclerView;

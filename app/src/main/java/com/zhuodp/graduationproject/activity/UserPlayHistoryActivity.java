@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
-import com.zhuodp.graduationproject.adapter.CollectionListAdapter;
 import com.zhuodp.graduationproject.adapter.HistoryListAdapter;
 import com.zhuodp.graduationproject.entity.HistoryItem;
 import com.zhuodp.graduationproject.entity.Movie;
@@ -20,14 +19,17 @@ import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.utils.view.CircleImageView;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
 import butterknife.BindView;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 
+/**
+ *  UserPlayHistoryActivity  用户播放历史纪录展示页面
+ *  主要布局为RecyclerView
+ *  主要工作为 从后端数据库取出当前用户的播放记录并展示在列表中。
+ */
 public class UserPlayHistoryActivity extends AppBaseActivity {
 
     private LinkedList<HistoryItem> mUserHistoryList;

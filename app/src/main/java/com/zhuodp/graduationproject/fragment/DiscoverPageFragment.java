@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.CollectionActivity;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
@@ -17,6 +16,9 @@ import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 发现页对应的Fragment
+ */
 public class DiscoverPageFragment extends AppBaseFragment {
 
     @BindView(R.id.rl_collection_entry_collection_page)
