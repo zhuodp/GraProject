@@ -70,6 +70,9 @@
         <activity android:name=".activity.UserPlayHistoryActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".debug.TestMvpActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

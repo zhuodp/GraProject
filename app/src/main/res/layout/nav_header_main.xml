@@ -7,8 +7,8 @@
 
     <com.zhuodp.graduationproject.utils.view.CircleImageView
         android:id="@+id/iv_drawer_user_pic"
-        android:layout_width="@dimen/app_80dp"
-        android:layout_height="@dimen/app_80dp"
+        android:layout_width="@dimen/app_50dp"
+        android:layout_height="@dimen/app_50dp"
         android:src="@drawable/pic_user_pic_default"
         android:onClick="onUserPicClick"
         android:layout_centerVertical="true"
@@ -26,7 +26,6 @@
         android:gravity="center"
         android:layout_toRightOf="@id/iv_drawer_user_pic"
         android:layout_alignTop="@id/iv_drawer_user_pic"
-        android:layout_marginTop="@dimen/app_15dp"
         android:layout_marginLeft="@dimen/app_20dp"
         android:layout_below="@id/iv_drawer_user_pic"
         android:text="点击头像登陆"

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.zhuodp.graduationproject.Base.AppBaseFragment;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.activity.CollectionActivity;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;

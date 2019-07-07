@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.youdao.lib.dialogs.manager.CustomDialogManager;
+import com.zhuodp.graduationproject.Base.AppBaseActivity;
 import com.zhuodp.graduationproject.R;
 import com.zhuodp.graduationproject.utils.bmob.BmobUtil;
 import com.zhuodp.graduationproject.entity.User;

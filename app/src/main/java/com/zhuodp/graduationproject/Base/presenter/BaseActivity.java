@@ -3,9 +3,10 @@ package com.zhuodp.graduationproject.Base.presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.BaseAdapter;
 
-public abstract class BaseActivity<V,T extends BasePresenter<V>> extends Activity {
+public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppCompatActivity {
 
     public String TAG = getClass().getSimpleName() + "";
 
